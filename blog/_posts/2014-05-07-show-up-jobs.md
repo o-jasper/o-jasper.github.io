@@ -128,3 +128,5 @@ i am of the opinion that it should do 2/3.
 
 With RANDAO, i reckon (1) is the best way to go by far. Other contracts depend
 on it, and it doesnt involve many people directly.
+
+*Added note*, for the record, this is all open to discussion, of course!
