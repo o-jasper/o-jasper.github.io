@@ -2,7 +2,7 @@
 layout: post
 title:  "Proof of Reserve and voting"
 date:   2014-05-08 18:00
-categories: DHT, Ethereum contracts
+categories: Proof of reserve, Kraken, Ethereum contracts, Ethereum
 ---
 
 <p style="color:gray"> (This was taken from

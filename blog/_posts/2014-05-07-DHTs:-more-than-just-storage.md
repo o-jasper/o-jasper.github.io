@@ -2,7 +2,7 @@
 layout: post
 title:  "DHTs: more than just storage"
 date:   2014-05-08 18:00
-categories: DHT, Ethereum contracts
+categories: DHT, Ethereum contracts, Ethereum
 ---
 
 [Distributed Hash Table](https://en.wikipedia.org/wiki/Distributed_hash_table)
@@ -21,6 +21,9 @@ the blockchain 2) change what it shows it.
 
 This means that contracts choose can force themselves to have particular data on
 their URL, from which follows that particular javascript doing its thing.
+
+A big caveit is that users dont change their browsers to alter how the
+javascript is shown.
 
 ## Uses
 
