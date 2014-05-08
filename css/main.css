@@ -17,12 +17,10 @@ body {
 
 h1,h2{
   text-indent:10%;
-//  font-size: 150%;
   margin-bottom: 1em; }
 
 h3, h4, h5, h6 { text-indent:5%; }
 
-h1 { margin-bottom: 1em; }
 p { margin: 1em 0; }
 
 a         { color: #00a; }
