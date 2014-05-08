@@ -1,9 +1,13 @@
-(This was taken from
-[a forum post i made](https://forum.ethereum.org/discussion/863/proof-of-reserve-for-voting)
-with only a slight addition at the end.)
+---
+layout: post
+title:  "Proof of Reserve and voting"
+date:   2014-05-08 18:00
+categories: DHT, Ethereum contracts
+---
 
-# Proof of Reserve and voting
-
+<p style="color:gray"> (This was taken from
+<a href="https://forum.ethereum.org/discussion/863/proof-of-reserve-for-voting">forum post i made</a>
+with only a slight addition at the end.)</p>
 Say you have a DAO, like a 'corporation' with stocks, a co-op, or
 full-on democracy. Now you have a vote.. Now suddenly, millions of
 people have to do a transaction?!

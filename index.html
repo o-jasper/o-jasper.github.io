@@ -1,3 +1,12 @@
-This place still needs some work. 
+---
+layout: default
+title: Jaspers blog about Ethereum and everything
+---
 
-However, there are already a <a href="blog/">few postings</a>.
+<div id="home">
+  <ul class="posts">
+    {% for post in site.posts %}
+      <li><span>{{ post.date | date_to_string }}</span> &raquo; <a href="{{ post.url }}">{{ post.title }}</a></li>
+    {% endfor %}
+  </ul>
+</div>

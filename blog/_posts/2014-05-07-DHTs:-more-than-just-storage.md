@@ -1,4 +1,9 @@
-# DHTs: more than just storage
+---
+layout: post
+title:  "DHTs: more than just storage"
+date:   2014-05-08 18:00
+categories: DHT, Ethereum contracts
+---
 
 [Distributed Hash Table](https://en.wikipedia.org/wiki/Distributed_hash_table)
 we will assume the with the DHT you get a file by naming it by its checksum,
@@ -19,7 +24,7 @@ their URL, from which follows that particular javascript doing its thing.
 
 ## Uses
 
-## Publishing DAOs
+### Publishing DAOs
 
 For a publishing DAO: force itself to a layout, with articles and
 advertisements. Potential advertisers check that they like the layout,
@@ -38,7 +43,7 @@ is estimated to be valuable or authored by particular people, and reward
 based on that. Most ambitiously, even a system where how everything derives
 from everything else and who authored it may be possible.
 
-## Forcing Entities to admit things
+### Forcing Entities to admit things
 
 A company may claim its product is good, and put that up to some kind of judge,
 say that of the customers. The layout is forced again, so if the customers
