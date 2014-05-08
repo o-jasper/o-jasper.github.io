@@ -16,8 +16,8 @@ be the case when:
 
 * The labour *must not* risk large amounts of wealth, or risk life. This will
   likely require a 'fixed' position as in a qualification, although i suppose
-  many DAOs may accept the same qualifications; Just a job needs a diploma,
-  doesnt mean it will involve fixed positions.
+  many DAOs may accept the same qualifications; Just because a job needs a 
+  diploma, doesnt mean it will involve fixed positions.
 
 * Design so bad labour inputs cant hurt the system. This might work by:
   + Identifying labour as good, and passing along value to those contributors.
@@ -25,7 +25,7 @@ be the case when:
 
 * A reputation system limits damage that can be done.
 
-* The thing is typically opertune to particular people, or they do not do it
+* The thing is typically opportune to particular people, or they do not do it
   somewhat spontaneously. For instance because they're in the right place at the
   right time, or because statistically you always get someone to respond,
   or time/location doesnt matter. For they have something on their mind, like
@@ -36,7 +36,7 @@ Even though this post got a bit too long, it does not nearly cover the entire
 idea. Note that i am not sure on the feasibility of these, not in the near term,
 anyway.
 
-### Opertune: Rideshares, 'Mechanical Turk'
+### Opportune: Rideshares, 'Mechanical Turk'
 Taking people and stuff along with you to places near the route you are going
 anyway already, where time is not critical but location is. Estimating ability
 to carry and, using some sort or reputation and/or stake system is needed.
@@ -59,7 +59,7 @@ determining 'derivativeness'.
 Income is a separate problem, for instance a publish DAO could use
 [DHT methods](http://o-jasper.github.io/blog/2014/05/08/DHTs%3A-more-than-just-storage.html) to prove it is showing advertisements, advertisers ask to buy the spots, and the
 highest paying get them. Authors would have be able to vote on whether 
-advertisementss are abusive. Another source of income could be donations.
+advertisements are abusive. Another source of income could be donations.
 
 Approaches using DHT may not entirely neccessary Advertisers could simply 'patrol'
 the pages and value the according to how consistently ads are placed.
@@ -68,7 +68,7 @@ In the context of
 [package repositories](https://tao.epm.io//entries/2014/introducing-ethereum-package-manager.html),
 an idea i heard from Casey Kuhlmann was that you can use the combination of name
 registries that help hold on to a name, loyalty between open source developpers
-to credit their dependencies to create a payment system.
+to credit their dependencies to create a system where donations are passed along.
 
 ### Using stake: RANDAO
 
