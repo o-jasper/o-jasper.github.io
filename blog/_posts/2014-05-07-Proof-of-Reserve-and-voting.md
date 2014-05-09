@@ -52,7 +52,7 @@ If a vote is written down as a 'double show', this can also be challenged.
 
 I would categorize this as 'Truth or Punish'. As opposed to the
 'Truth or Invalid' approach of regular the blockchain. 
-I think you could even based a
+I think you could even base a
 [merged mining blockchain](https://forum.ethereum.org/discussion/comment/3924/#Comment_3924)
 on this idea.
 
