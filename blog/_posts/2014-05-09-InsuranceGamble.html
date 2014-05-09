@@ -1,0 +1,135 @@
+---
+layout: post
+title:  "Insurance considerations"
+date:   2014-05-09 15:00
+---
+<p>Consider an action where failure implies you get <span class="math">F</span>(<span class="math">&lt;0</span>) and success <span class="math">S</span>(<span class="math">&gt;0</span>),
+you think the probability of success is <span class="math">p</span>.. You think the average is:</p>
+
+<blockquote class="math">
+<table><tr><td></td><td>Failure</td> <td>Success</td> <td>Average</td> </tr>
+<tr> <td style="visibility:hidden">Gambler</td> <td>F</td> <td>S</td> <td>(1-p)F + pS</td><td>= p(S-F) + F</td></table>
+</blockquote>
+
+
+<p>Now there is someone willing to bet, he believes that the probability is
+infact <span class="math">q</span>. He offers compensation if it fails <span class="math">C</span>, but he wants <span class="math">&beta;C</span>
+if it succeeds.</p>
+
+<blockquote class="math">
+<table><tr> <td></td> <td>Failure</td> <td>Success</td> <td>Average</td> </tr>
+<tr><td>You</td> <td>F+C</td> <td>S-&beta;C</td>
+<td>(1-p)(F+C) + p(S-&beta;C)</td><td> =  p(S-F-C(1+&beta;)) + F + C</td> </tr>
+<tr><td>Gambler</td> <td>-C</td> <td>&beta;C</td> 
+<td>-(1-q)C + q&beta;C</td><td>= qC(1+&beta;) - C</td></tr>
+</table>
+</blockquote>
+
+
+<p>Now You will accept if you will do better than earlier;</p>
+
+<blockquote class="math">
+   p(S-F-C(1+&beta;)) + F + C &ge; p(S-F) + F <br><br>
+     
+   -pC(1+&beta;) + C &ge; 0 <br><br>
+     
+   &beta; &le; 1/p -1
+</blockquote>
+
+
+<p>So the payout of success and failure; <span class="math">S</span>, <span class="math">F</span> dont matter! In general can add
+whatever you want and it doesnt matter. It is just a bet? So why do just bet for
+stuff like insurance?</p>
+
+<p>Three reasons come to mind:</p>
+
+<ol>
+<li><p>Our utility(wellbeing) is not linear with the amount of money we own.
+<span class="math">U(F)</span> and <span class="math">U(S)</span> are much further apart than <span class="math">F</span> and <span class="math">S</span>.
+But <span class="math">U(F+C)</span> and <span class="math">U(S-&beta;C)</span>.. Infact we can approximate;
+<blockquote class="math">
+   U(F+C) - U(S-&beta;C) &asymp; U'(F+C)&sdot;(F + C - S + &beta;C)
+</blockquote><br/>
+This aswel makes this calculation still work as the approximation is linear
+and the factor doesnt matter for the analysis. So the bet is in a sense a
+side issue.</p></li>
+<li><p>The mechanisms in which someone else bets that way indicates someone else has
+trust in -for instance- a vendor.</p></li>
+<li><p>You are particularly aware of the risks and deals and their probability.</p></li>
+</ol>
+
+
+<p>Of course, in the current world, insurers are often large institutions and their
+many bets even out.</p>
+
+<p>It can also be investment, where <span class="math">C</span> is given beforehand.
+This implies that it can be used as stake. After all, if a contract(like RANDAO)
+requires ethers as stake, and a gambler trusts you would not lose that stake,
+he can make a deal. If you fail, his belief in you will decrease; that would be
+the what is at stake for you.</p>
+
+<h2>The gambler side</h2>
+
+<p>The gambler, assume he wants some profit; <span class="math">E</span></p>
+
+<blockquote class="math">
+   qC(1+&beta;) - C &ge; E <br><br>
+
+   &beta; &ge; (E/C +1)/q -1
+</blockquote>
+
+
+<p>But then we notice that the profit motive shows itself as an apparent probability;
+<span class="math">q' = q/(E/C + 1)</span> as the gambler can change the two accordingly, there is
+not point to the freedom; we choose <span class="math">E=0</span> and note that probability is only
+apparent.</p>
+
+<p>A deal is possible if <span class="math">1/p -1 &ge; &beta; &ge; (E/C +1)/q -1</span>.</p>
+
+<h2>Many gamblers</h2>
+
+<p>From many gamblers, the best deal is from one with the highest
+(Apparent)probability, he will be able to demand the smallest payment. Perhaps,
+however, he doesnt have enough money, or doesnt want to risk at those probabilities
+that much money. Here this would be again because of nonlinearity of utility, but
+also because the probability of failure may be dependent on the amount.</p>
+
+<p>If we assume we have the comprehensive list of gamblers, after a gambler is
+depleted, you can go to the next one with a lower <span class="math">q</span>.</p>
+
+<p>We presumably can find these gamblers within a system in Ethereum. Mind that
+finding them being possibly client-side massively increases the ability to
+search without using gas. You search client-side, and then just tell the
+contracts where to go to convince it.</p>
+
+<p>Note that the estimation of probability may not also feel that way to the user.
+For instance, if the bet is about the ability of a web shop to deliver, the user
+might see prices based on what the bets are wrt insuring the transaction. The
+user simply bets by accepting the price.</p>
+
+<h2>Stabilizing gambler income</h2>
+
+<p>The gambler expects on average factor on the input ethers per unit time. However
+depending on the number of bets and their dependence, actual results can vary.
+He could insure himself against it, or predict some growth use a Contract for
+a difference where people may bet it is more.</p>
+
+<p>Of course, the insurance and contract for a difference may largely be the same
+thing.</p>
+
+<h2>In relation to reputation networks</h2>
+
+<p>Actions can be deals between people, or even a single person. The estimated
+probability can depend on what those people are like.</p>
+
+<p>So there is a relation to reputation, this can two ways;</p>
+
+<ol>
+<li><p>The reputation network is used to estimate the probabilities. And people
+handling it take their consequences based on failing deals.</p></li>
+<li><p>Working backward from the probabilities to reputation. Oppositely,
+the insurance builds the reputation system. This one is likely much harder.</p></li>
+</ol>
+
+
+<p>Of course, there is much more to be said about this topic.</p>

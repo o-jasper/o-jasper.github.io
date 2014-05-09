@@ -27,6 +27,8 @@ a         { color: #00a; }
 a:hover   { color: #000; }
 a:visited { color: #a0a; }
 
+td{padding:0.1em 0.5em}
+
 /*****************************************************************************/
 /*
 /* Home
@@ -46,6 +48,9 @@ a:visited { color: #a0a; }
   font-family: Monaco, "Courier New", monospace;
   font-size: 80%;
 }
+
+.math{font-weight:bold}
+blockquote{margin-left:2em}
 
 /*****************************************************************************/
 /*
