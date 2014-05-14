@@ -5,19 +5,25 @@ date:   2014-05-08 18:00
 categories: DHT, Ethereum contracts, Ethereum
 ---
 
-[Distributed Hash Table](https://en.wikipedia.org/wiki/Distributed_hash_table)
-we will assume the with the DHT you get a file by naming it by its checksum,
-and files cannot be removed if they already exist, and there is at least one
-party interested in them.
+<p class="small_note">article has been edited for clarity</p>
+
+[Distributed Hash Tables](https://en.wikipedia.org/wiki/Distributed_hash_table)
+are distributed data storage systems like bittorrent.
+We will assume that with some DHT you get a file by naming it by its checksum,
+and files cannot be removed or changed if they already exist, and there is at
+least one party interested in them.
 
 This has far reaching implications: 
 
 A contract can control its page via a Name Registry. As it is arbitrary code,
-it can also be *limited* to the extent it can choose/change the reference
-in the name registry.
+it can also be *limited* to the extent it can change the reference
+in the name registry. Because of the assumption, the file cannot change either.
+Just like domain names currently, the name registry is what people use to link to
+things. So what is behind those links is the image that belongs to that contract.
 
 Furthermore, javascript on the page can 1) look at the consensus data in
-the blockchain 2) change what it shows it.
+the blockchain 2) change what it shows it. POC 5 has already implemented
+[javascript bindings](https://github.com/ethereum/cpp-ethereum/wiki/PoC-5-JS-Bindings).
 
 This means that contracts choose can force themselves to have particular data on
 their URL, from which follows that particular javascript doing its thing.
@@ -39,7 +45,7 @@ works!) on the web, this is one end of the 'Earning from Authorship' problem.
 
 The other end is attracting and rewarding authors! This is still an open
 problem. One solution is simply to do a co-op and gather people with some 
-agreement over who does/controls/earns wha.
+agreement over who does/controls/earns what.
 
 But wiki-DAO or functional code may have a particular way where the content,
 is estimated to be valuable or authored by particular people, and reward
@@ -49,8 +55,8 @@ from everything else and who authored it may be possible.
 ### Forcing Entities to admit things
 
 A company may claim its product is good, and put that up to some kind of judge,
-say that of the customers. The layout is forced again, so if the customers
-say NAY, it aint true.
+for instance, the customers. The layout can be forced to show the actual 
+customers opinion.
 
 In the context of Democracy-DAO, a government can literally be forced to make
 certain statements on their own public websites.
