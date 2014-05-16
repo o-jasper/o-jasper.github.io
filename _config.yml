@@ -2,3 +2,4 @@ name: Blog about Ethereum and everything else
 markdown: redcarpet
 pygments: true
 include: [/moot/]
+markdown_ext: markdown,mkdown,mkdn,mkd,md

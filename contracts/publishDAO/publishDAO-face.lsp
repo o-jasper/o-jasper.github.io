@@ -48,45 +48,43 @@
           (return @0x20)
         })
       (if (= (calldataload 0) "spotcontract") ;Contract at that spot.
-          (return @@(calldataload  1)))
+          (return @@(+ (calldataload 1) 0x10)))
   })
   
-;Sender may send entire lists of commands for lower weight.
-  (if (and (= (sender) OWNER) (> (calldatasize) 0))
-  {
-  [j] 0x0
-  (for () (< (+ @j 2) (calldatasize)) () ()
-  
-      (if (and (> (- (calldatasize) @j) 2) (= (calldataload @j) "set"))
+;Sender may send entire lists of commands for lower transaction fee.
+  (if (= (sender) OWNER)
+   {
+      (if (and (= (calldatasize) 3) (= (calldataload 0) "set"))
        {
-          [i] (+ (calldataload (+ @j 1)) 0x10)
+          [i] (+ (calldataload 1) 0x10)
           [0x10] "set"
           (call @@@i (callvalue) (- (gas) 21) 0x10 0x10 0x30 0x10)
           
           (if (= @0x30 "deny")  ;Deal is not in a place where it may change.
               (return))
           
-          [[@i]] (calldataload (+ @j 2))  ;Successfully changed deal.
-          [j] (+ @j 3)
-        }
+          [[@i]] (calldataload 2)  ;Successfully changed deal.
+        })
     ;Set top level address. All must agree.
-          (if (> (- (calldatasize) @j) 1)
-              (if (= (calldataload 0) "set_addr")
-                {
-                  [i] 0x10
-                  [0x30] "set_addr"
-                  (for () (not (= @@@i 0)) [i] (+ @i 0x10)
-                       {(call @@@i (callvalue) (- (gas) 21) 0x30 0x10 0x40 0x10)
-                       (if (= @0x40 "deny")
-                           (return))
-                       })
-                  [[0x00]] (calldataload 0)
-                  [j] (+ @j 2)
-                  } ;"discontinue" to tell that it is no longer required.
-                  {
-                  [0x30] (calldataload 1)
-                  (call (calldataload 0) (- (gas) 21) 0x30 0x10 0 0)
-                  [j] (+ @j 2)
-                }))))
-  })
+      (if (= (calldatasize) 2)
+        {
+        (if (= (calldataload 0) "set_addr")
+            {
+            [i] 0x10
+            [0x30] "set_addr"
+            (for () (not (= @@@i 0)) [i] (+ @i 0x10)
+              {  (call @@@i (callvalue) (- (gas) 21) 0x30 0x10 0x40 0x10)
+                  (if (= @0x40 "deny")
+                      (return "deny"))
+                  })
+            [[0x00]] (calldataload 1)
+            (return "accept")
+            }))
+     ;Send some message/value somewhere. (vague, yes)
+      (if (> (calldatasize) 2)
+       {
+          [0x30] (calldataload 2)
+          (call (calldataload 0) (calldataload 1) (- (gas) 21) 0x30 0x10 0 0)
+        })
+      })
 }

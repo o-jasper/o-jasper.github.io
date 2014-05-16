@@ -1,2 +1,1 @@
-Possibly WIP Ethereum contracts
-
+Possibly WIP Ethereum contracts.

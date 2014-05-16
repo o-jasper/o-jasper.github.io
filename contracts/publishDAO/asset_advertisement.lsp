@@ -18,7 +18,7 @@
        ;Note that this doesnt do anything in the contract, so anyone is allowed. 
        (if (and (or (= (calldataload 0) "set") (= (calldataload 0) "set_addr"))
                 (or (> (number) @@0x20) ;Expired.
-                    (< @bal @need))) ;Didnt pay enough.
+                    (< @bal @need))) ;Didnt pay enough, lost right to deny.
             (return "accept")
             (return "deny"))
        ;Poke for payment.
@@ -30,16 +30,12 @@
             (call @@0x00 (* RATE @n) (- (gas) 21) 0 0 0 0)
             })
 
-       ;Take out all you can.
+       ;Advertiser taking out all he can.
        (if (and (= (sender) @0x30) (= (calldataload 0) "extract")
                 (> @bal (+ @need STAKE)))
          (call @0x30 (- @bal @need STAKE) (- (gas) 21) 0 0 0 0))
 
-       ;End contract.
-       (if 
-
-       ;PubDAO requests an contract address, and that contract address may
-       ; do stuff with this contract.
+       ;PubDAO requests an action to that has more control over the contract.
        (if (or (= (sender) @@0x00) (= (sender) @@0x30))
          { ;Non-accepted suggestion already there, by other party.
            (if (and @@0x40 @@0x50 (not (= (sender) @0x50)))
@@ -59,19 +55,22 @@
 
     (if (and (= (sender) @@0x40) (not @@0x50))  ;Accepted action talking.
       {  ;Change the expiration data or stop it.
-         (if (and (> (calldatasize) 1)  (= (calldataload 0) "expiry"))
-           { (if (= (calldatasize) 2)
-                  {  [[0x20]] (calldataload 1) }
-                  {  [[0x20]] 0 })
+         (if (and (= (calldatasize) 2)  (= (calldataload 0) "expiry"))
+           { [[0x20]] (calldataload 1)
              (stop)
             })
+         ;End the action.
+         (if (and (= (calldatasize) 1) (= (calldataload 0) "end_action"))
+           { [[0x40]] 0
+             (stop)
+             })
       })
     
     ;Suicide it.
     (if (and (= (calldatasize) 1) (= (calldataload 0) "suicide")
              (or (and (= (sender) @@0x40) (not @@0x50)) ;By action contract.
                  (and (= (sender) @@0x30) (> (number) @@0x20)))) ;Expired and owner.
-      {  
+      {  ;Pay what is due and send rest back.
          (call @0x00 (* RATE (- (number) @@0x10)) (- (gas) 21) 0 0 0 0)
          (suicide @0x30)
       })
