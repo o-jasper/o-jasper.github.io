@@ -2,10 +2,12 @@
 <title>Test publishDAO POC</title>
 <script src="pubDAO.js"></script>
 </head> <body>
-<table><tr><td><iframe width="800" height="300" id="top"></iframe></td>
-           <td><iframe height="300" id="corner"></iframe></td></tr>
-       <tr><td><iframe width="800" height="10000" id="article"></iframe></td> 
-           <td><iframe height="10000" id="right"></iframe></td></tr>
+
+<!-- seamless -->
+<table><tr><td><iframe scrolling="no" width="800" height="300" id="top"></iframe></td>
+           <td><iframe scrolling="no" height="300" id="corner"></iframe></td></tr>
+       <tr><td><iframe scrolling="no" width="800" height="10000" id="article"></iframe></td> 
+           <td><iframe scrolling="no" height="10000" id="right"></iframe></td></tr>
 </table>
 <!-- Might want to put a list of other entries here. -->
 <script>fill_entries();</script>
