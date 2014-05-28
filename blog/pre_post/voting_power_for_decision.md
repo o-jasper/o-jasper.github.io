@@ -1,26 +1,27 @@
 In the latest DAO design jam, we discussed voting systems, and how to make
 decisions. It was good, but a bit less focussed than i'd like.
 
-For every decision there is a vote, even if it is from a single
-person. The question is how much voting power is needed for a decision. 
-I reckon it is affected by the following:
+Every decision is sort-of a vote, it is just from a single person. The question
+is how much voting power is needed for a decision. I reckon it is affected by
+the following:
 
-#### (1) **utility of outcome**
-I think the utility is sub-linear relative to units of money, and other assets.
+#### (1) **Utility of outcome**
+I think the utility is sub-linear relative to units of money or other assets.
 If utility is some function `U(A)` where `A` is an amount.
 
-More important is is that of diminishing returns. Even if you have a lot, you
-might not want to spend much on an issue/investment, because it would simply not
-improve the outcome.
-
 A simple model is a set cost and binary outcome with probability `p` is
-a result with `B` for bad, `G` for good and initially `I` you need
+a result with `B` for bad, `G` for good and initially `I`. Then you need
 `p < (U(G) &minus; U(I)) / (U(G) &minus; U(B))`. Where `U` is the sublinear function with
 `U'(x)>0`.
 
 If you look at that model with `U(x)=x`, you see a problem that the absolute
-values dont matter, which does not make sense. The diminishing results and
-sublinearity cover.
+values dont matter, which does not make sense. Sublinearity doesnt explain it,
+because the function will be approximately linear given small values relative to
+the total.
+
+The reason this happens is that investing more into something, you get
+diminishing returns from the extra investments. By investing more 
+`B` decreases but `G` doesnt incraese much more.
 
 #### (2) Chance of stolen private keys and 'betrayal'
 Higher levels of stake increases the chance that stolen private keys, for
@@ -33,10 +34,10 @@ People that are first to try take some risk with the DO/DAO assets arent the
 ones that should.
 
 #### (4) Voting frequently shouldnt increase your effective voting power
-However, not voting much should only accumulate to some point.
-
-Part of the reason is  that if someone makes multiple decisions, the 
-failure/success of them cannot assumed to be independent.
+However, not voting much should only accumulate to some point. This is not only
+from the point of view it doesnt give you more power, it is also that if someone
+makes multiple decisions, the failure/success of them cannot assumed to be
+independent, so the distribution is wider than independent decisions.
 
 #### (5) Getting decisions through should not be overly hard
 Of course, this is largely a trade-off between security, efficiency of people
