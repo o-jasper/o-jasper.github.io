@@ -117,8 +117,8 @@ that the voter is wrong *or* that somethings else happened. I.e.
     p = P(Wrong &cup; Other) = P(Wrong) + P(Other) &minus; P(Wrong &cap; Other)<br>
     p = p<sub>w</sub> + p<sub>o</sub> &minus; p<sub>w</sub>&sdot;p<sub>o</sub>
 </pre>
-Where we assumed the two are independent. You can only pass along the bit of
-your vote that is given by your mind, not your loyalty or private key.
+Where it is assumed the two are independent. You can only pass along the bit
+of your vote that is given by your mind, not your loyalty or private key.
 
 Instead of using <code>p<sup>n</sup></code>, we keep track of 
 <code>p<sub>w</sub><sup>n</sup></code> that way instead;
@@ -142,7 +142,8 @@ correct about anything.
 
 ## Caveits of this discussion
 Suggestions are welcome, also wholly different approaches. I tried not being
-ad-hoc, but that isnt a prerequisite, but it should try to be simple initially.
+ad-hoc, but that isnt a prerequisite, but imho it should try to be simple
+initially.
 
 The voting mechanism in the competition case is completely open. The 'simple'
 approach may cause spoiler effects, but i tend to think it is adequate for
@@ -154,9 +155,9 @@ who knows what. A DO/DAO might have different stakeholders and knowledgables on
 different topics, so it is possible to give people different voting power about
 different things.
 
-The discussion of this approach discussion also doesnt handle:
+More can be said on for instance:
 
-* Voting having effect on voting powers.
+* Decisions having effect on voting powers.
 * Reviews of decisions.
 * The role of communication. I suppose there could be a 'second voting power'
   about bringing up 'mandatory' discussions/responses.
