@@ -10,6 +10,7 @@ default: ../_posts/2014-05-09-InsuranceGamble.html ../_drafts/2014-05-28-voting_
 
 ../_drafts/2014-05-28-voting_power_for_decision.md: voting_power_for_decision.md
 	cp voting_power_for_decision_header $@; \
+	mkdir ../_drafts/
 	markdown $< | $(MCONV) >> $@
 
 %.html: %.md

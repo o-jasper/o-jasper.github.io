@@ -21,7 +21,7 @@ the total.
 
 The reason this happens is that investing more into something, you get
 diminishing returns from the extra investments. By investing more 
-`B` decreases but `G` doesnt incraese much more.
+`B` decreases but `G` doesnt increase much more.
 
 #### (2) Chance of stolen private keys and 'betrayal'
 Higher levels of stake increases the chance that stolen private keys, for
@@ -67,14 +67,14 @@ then, the value of the things decided about itself is also hard to estimate.
    
 `U` can be dependent on the current state. For instance for a 'conservative'
 `U`, any possibly lowering value is taken as very negative, making it very
-risk averse. However, i think this does not make sense, there are *reasons*
-for being conservative in cases, whereas building it into `U` means you just
-presume it.
+risk averse. However, in my opinion this does not make sense; there are
+*reasons* for being conservative in cases, whereas building it into `U` 
+means you just presume it.
 
 Three reasons being those diminishing returns, and ability
 to assess choices, and managing culture/ability in expansion.
 
-#### (2) Voting that pay just yourself isnt possible, &le;2 deciders
+#### (2) Voting that pay just yourself isnt possible, &ge;2 deciders
 Of course big changes may necessarily affect the voters themselves
 directly, so those are allowed, however for smaller ones, you should have to
 convince someone else.
