@@ -66,7 +66,7 @@ The gambler, assume he wants some profit; `E`
 <blockquote class="math">
    qC(1+&beta;) - C &ge; E <br><br>
 
-   &beta; &ge; (E/C +1)/q -1
+   &beta; &ge; (E/C +1)/q -1 = 1/q' - 1
 </blockquote>
 
 But then we notice that the profit motive shows itself as an apparent probability;
@@ -74,7 +74,7 @@ But then we notice that the profit motive shows itself as an apparent probabilit
 not point to the freedom; we choose `E=0` and note that probability is only
 apparent.
 
-A deal is possible if `1/p -1 &ge; &beta; &ge; (E/C +1)/q -1`.
+A deal is possible if: `1/p -1 &ge; &beta; &ge; 1/q' -1`
 
 ## Many gamblers
 From many gamblers, the best deal is from one with the highest
