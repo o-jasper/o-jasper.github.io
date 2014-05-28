@@ -93,7 +93,7 @@ approaches to compete, and then the winner is the one that passes through the
 main rule with the highest <code>&sum;n</code>. (possibly there is an automatic
 notification when this happens)
 
-This is triggered if below is true, were the decision accepted:
+This is triggered if below becomes true if the decision were accepted:
 <pre>
 &exist; n &le; remaining: p<sup>n</sup> &lt; (U(I + &beta;r&sdot;n) &minus; U(I))/(U(I + &beta;r&sdot;n) 
 &minus; U(I &minus; r&sdot;n))
