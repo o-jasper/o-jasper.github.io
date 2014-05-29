@@ -10,9 +10,10 @@ I think the utility is sub-linear relative to units of money or other assets.
 If utility is some function `U(A)` where `A` is an amount.
 
 A simple model is a set cost and binary outcome with probability `p` is
-a result with `B` for bad, `G` for good and initially `I`. Then you need
-`p < (U(G) &minus; U(I)) / (U(G) &minus; U(B))`. Where `U` is the sublinear function with
-`U'(x)>0`.
+a result with `B` for bad, `G` for good and initially `I`. A rational agent
+decides to go for a decision if:
+`p < (U(G) &minus; U(I)) / (U(G) &minus; U(B))`. 
+Where `U` is the sublinear function with `U'(x)>0`.
 
 If you look at that model with `U(x)=x`, you see a problem that the absolute
 values dont matter, which does not make sense. Sublinearity doesnt explain it,
@@ -37,7 +38,7 @@ ones that should.
 However, not voting much should only accumulate to some point. This is not only
 from the point of view it doesnt give you more power, it is also that if someone
 makes multiple decisions, the failure/success of them cannot assumed to be
-independent, so the distribution is wider than independent decisions.
+independent, so the distribution of outcomes wider.
 
 #### (5) Getting decisions through should not be overly hard
 Of course, this is largely a trade-off between security, efficiency of people
@@ -55,7 +56,13 @@ power `n` corresponding to a 'probability to be wrong':
 <code>p<sup>n</sup></code> then the equation is used to decide:(same as above)
 
 <pre>
-    p<sup>&sum;n</sup> &lt; (U(I+&beta;C) &minus; U(I)) / (U(I+&beta;C) &minus; U(I&minus;C))
+<table><tr><td>
+p<sup>&sum;n</sup> &lt;
+</td><td>
+<span class="nom"><span class="lin">(</span>U(I + &beta;C) &minus; U(I)<span class="lin">)</span></span><span
+class="lin">/</span>
+<span class="den">U(I + &beta;C) &minus; U(I &minus; C)</span>
+</td></tr></table>
 </pre>
 
 That does not completely describe it though, as it doesnt take care of all
@@ -72,9 +79,10 @@ risk averse. However, in my opinion this does not make sense; there are
 means you just presume it.
 
 Three reasons being those diminishing returns, and ability
-to assess choices, and managing culture/ability in expansion.
+to assess choices, and managing culture/ability in expansion. Some do relate to
+the state, for instance if more people are involved 'low on funds' is more money.
 
-#### (2) Voting that pay just yourself isnt possible, &ge;2 deciders
+#### (2) Voting that pay just yourself isnt possible, &ge;2 voters
 Of course big changes may necessarily affect the voters themselves
 directly, so those are allowed, however for smaller ones, you should have to
 convince someone else.
@@ -95,8 +103,12 @@ notification when this happens)
 
 This is triggered if below becomes true if the decision were accepted:
 <pre>
-&exist; n &le; remaining: p<sup>n</sup> &lt; (U(I + &beta;r&sdot;n) &minus; U(I))/(U(I + &beta;r&sdot;n) 
-&minus; U(I &minus; r&sdot;n))
+<table><tr><td>&exist; n &le; remaining: p<sup>n</sup> &lt;</td>
+<td>
+<span class="nom"><span class="lin">(</span>U(I + &beta;r&sdot;n) &minus; U(I)<span class="lin">)</span></span><span
+class="lin">/</span>
+<span class="den">U(I + &beta;r&sdot;n) &minus; U(I &minus; r&sdot;n)</span>
+</td></tr></table>
 </pre>
 Of course 'do nothing' should be an option in such a election of choices.
 
@@ -114,7 +126,7 @@ keys.
 However, i feel the need to compensate nevertheless. `p` being the probability
 that the voter is wrong *or* that somethings else happened. I.e.
 <pre>
-    p = P(Wrong &cup; Other) = P(Wrong) + P(Other) &minus; P(Wrong &cap; Other)<br>
+    p = P(Wrong &cup; Other) = P(Wrong) + P(Other) &minus; P(Wrong &cap; Other)<br><br>
     p = p<sub>w</sub> + p<sub>o</sub> &minus; p<sub>w</sub>&sdot;p<sub>o</sub>
 </pre>
 Where it is assumed the two are independent. You can only pass along the bit
@@ -125,7 +137,9 @@ Instead of using <code>p<sup>n</sup></code>, we keep track of
 <pre>
     p<sup>n</sup> &rarr; p<sub>w</sub><sup>n</sup> + p<sub>o</sub> &minus; p<sub>w</sub><sup>n</sup>&sdot;p<sub>o</sub>
 </pre>
-And multiply these numbers from different people together.
+And multiply these numbers from different people together. If
+<code>p<sub>o</sub></code> becomes limiting, security might be improved, maybe
+some background checks to warrant an increase.
 
 ### Many parameters
 The above approach needs to figure out quite a few parameters and functions;
@@ -138,12 +152,15 @@ is at a point approximately linear and `p=0.5` and someone has vothing strength
 to do that action.(except the <code>&ge;2</code> rule)
 So `p` cant quite be the probability a person is wrong in this approach, unless
 you give people too much power, or think they are ridiculously unlikely to be
-correct about anything.
+correct about anything. It really is just a cumulative voting power `n`, and
+each sort of decision needing some amount, and there is interpretation with
+probabilities. (though it comes out a lot when you modify it for 
+<code>p<sub>o</sub></code>.
 
 ## Caveits of this discussion
 Suggestions are welcome, also wholly different approaches. I tried not being
-ad-hoc, but that isnt a prerequisite, but imho it should try to be simple
-initially.
+ad-hoc, but that isnt a prerequisite, imho an approach should either start from
+principles or be simple.
 
 The voting mechanism in the competition case is completely open. The 'simple'
 approach may cause spoiler effects, but i tend to think it is adequate for
