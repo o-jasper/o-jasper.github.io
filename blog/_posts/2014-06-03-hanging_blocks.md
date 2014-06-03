@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Hanging blocks"
-date:   2014-06-03 02:00
+date:   2014-06-03 18:20
 categories: Ethereum, hanging blocks, Blockchain, scalability
 ---
 
@@ -25,7 +25,8 @@ through a list, and the nearest to next one is allowed to create the block.
 
 #### 'Proving' that the block data is available
 If the files are not being shared, people *cannot* point out invalid facts in
-said files as below. To ensure it is available, there is a vote about it.
+said files as discussed in the next paragraph. To ensure it is available,
+there is a vote about it.
 
 This is why a system where people have stake is necessary, otherwise it is
 not possible to defend against many fake accounts.
@@ -37,13 +38,9 @@ combination of chunks, as proven to be in a block with Merkle paths, are shown
 to be invalid. The hanging block contract logic would contain the ability to
 check this.
 
-If the size of a block is **n** it costs **&propto;log(n)** length of path to
-prove a chunk is in there, plus the size of the chunk itself.
-
-As said earlier, makers of blocks put something at stake that can be taken away
-as punishment. One way to view it is that this is 'Truth or Punish'(and discard 
-after) whereas the 'normal' blockchain uses 'Truth or Discard'. There should
-also be a reward for pointing out invalid transactions.
+The size of the transaction to do so, if the hanging has size **n**, is
+**&propto;log(n)** -the length of path to prove a chunk is in there-, plus
+the size of the chunk itself.
 
 ## What can you do with it?
 You can do *anything* with it where you can use a few chunks that are not
@@ -67,15 +64,16 @@ previous change of state. We need to check two things:
 2. End state reported is wrong: This is the requirement at **&dagger;**, and it
    can easily be checked by the client and verified to be wrong by the hanging
    block contract, by providing the two relevant blocks.
-
-   That the hanging block contract needs to know **f** could be limiting.
+   
+   Of course, **f** needs to be available to the Ethereum contract one way or
+   another.
 
 The program here is limited by the entire state needing to be offered up to
 to the hanging block contract. So this state cannot be too large. Furthermore,
 barring things like cryptographic commitments, the different programs running
 on the hanging blocks cannot interact.
 
-To try fix this, you could easily allow contracts to depend both their own and
+This can easily be fixed by allowing contracts to depend both their own and
 other contracts' state, and simply have more backward state connections that
 need to be checked to be correct, and can be shown to be wrong if needed.
 
@@ -86,25 +84,26 @@ it is just the same process as proving invalidity, except the chunk is send
 to the other contract. So it is somewhat limited, but useful interactions are
 possible.
 
-The depth of a chunk doesnt increase security the same way as mining, but the
+The 'depth' of a chunk doesnt increase security the same way as mining, but the
 passing of time improves the chance that inconsistencies were reported, and
-decreases the chance that a vote to take it down will take place.
+decreases the chance that a vote to consider it missing will take place.
 
 ## Final notes
 *Amazingly*, if you look at the above, you can see that this does not actually
-require all full nodes to compute everything. But it does require *a lot* of
-clients ensuring availability of the data, and *some* clients checking
-everything, and reporting invalid actions.
+require all full nodes to compute everything about the hanging blocks. But it
+does require *a lot* of clients responding to inavailability the data by voting
+the block to be missing, and *some* clients checking everything, and reporting
+invalid actions.
 
-It is not quite clear what the implications are, or if i made a mistake. If it is
-a good idea, likely the best approach is to try figure out how to make 
-developing for hanging blocks similar to developing for Ethereum itself, so
-if people know how to do the one, they can do the other.
+It is not quite clear what the implications are, or if i am missing some
+problems. If it is a good idea, likely the best approach is to try figure 
+out how to make developing for hanging blocks similar to developing for Ethereum
+itself, so if people know how to do the one, they can do the other.
 
-The Merkle tree does not need to be all explicit in memory/harddisk. For
-instance, the client could keep track of the state like Ethereum, and just
-calculate the intermediate states as needed.
-(Essentially, this just compresses it)
+The data the Merkle tree are about do not need to be all explicit in
+memory/harddisk. For instance, the client could keep track of the state like
+Ethereum, and just calculate the intermediate states as needed. (Essentially,
+this just compresses it)
 
 Furthermore, considering not everything needs to be run, you might not even need
 all the data either, just the checksum of other parts the merkle tree on some
