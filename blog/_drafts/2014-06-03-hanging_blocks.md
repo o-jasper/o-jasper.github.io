@@ -5,6 +5,8 @@ date:   2014-06-03 02:00
 categories: Ethereum, hanging blocks, Blockchain, scalability
 ---
 
+<img src="/blog/parts/hanging_blocks.png">
+
 Hanging blocks are essentially like blocks on a blockchain, but instead, they
 register a [Merkle root](https://en.wikipedia.org/wiki/Merkle_tree) in an
 Ethereum contract, and promise the corresponding file was made available.
@@ -97,7 +99,7 @@ everything, and reporting invalid actions.
 It is not quite clear what the implications are, or if i made a mistake. If it is
 a good idea, likely the best approach is to try figure out how to make 
 developing for hanging blocks similar to developing for Ethereum itself, so
-people are around that know how to do it.
+if people know how to do the one, they can do the other.
 
 The Merkle tree does not need to be all explicit in memory/harddisk. For
 instance, the client could keep track of the state like Ethereum, and just
@@ -105,9 +107,9 @@ calculate the intermediate states as needed.
 (Essentially, this just compresses it)
 
 Furthermore, considering not everything needs to be run, you might not even need
-all the data either, just the checksum of the merkle tree on some sides. 
-However, due to the need for those votes, *most* of the clients will need to be
-able to tell when any part of it is not available, because a vote to falsely
-claim everything is available needs to be countered. Of course you might
+all the data either, just the checksum of other parts the merkle tree on some
+branches. However, due to the need for those votes, *most* of the clients will
+need to be able to tell when any part of it is not available, because a vote to
+falsely claim everything is available needs to be countered. Of course you might
 try have a "raise the alarm if a bit can't be found", but an attack of spamming
 such alarms would have to be ineffective in that case aswel.
