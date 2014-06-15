@@ -1,0 +1,13 @@
+
+Hmm, right.. dont really know how to go into it further other than saying
+ somewhat more general stuff about security.. There are three independent
+ implementations, it's open source and reviewers will be hired. Suppose 
+we should go and try look at the different methods and see if we see anything.
+
+Also note that
+ <a href="https://github.com/ethereum/cpp-ethereum/blob/develop/libethereum/VM.h"><code>cpp-ethereum/libethereum/VM.h</code></a> uses <code>VM::require</code> to check
+ the number of things on the stack all the time. Suppose the object that 
+is the stack <code>u256s m_stack</code> needs to be correct too. It is
+ currently a <code>std::vector<u256></code>.
+
+About correctness, i think it is a matter of ensuring the compilers are correct. Then it is much easier to read the contracts themselves. I have also been arguing for 'transaction firewalls' that allow for both some(not intended to do all) testing and checking whether a transaction will do the intended result in simulation. That said, i think @gavofyork‌ (Gavin Wood) has good approaches to that himself he linked to <a href="https://en.wikipedia.org/wiki/B-Method">B-Method</a>, havent learned it yet, but it sounds good. For the testing part, if the 'Abstract machine' is understandable, and can be used to check the thing, it is better. But i dont see it being applied to software that provides transactions, like the <a href="https://github.com/ethereum/cpp-ethereum/wiki/PoC-5-JS-Bindings">POC 5 JS bindings</a>.. Even if you could do it for that too, there is no limit to what kinds of programs may want to make transactions for the user, and you can't force the B method onto the entire world.
