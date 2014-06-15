@@ -3,19 +3,16 @@
 Consider a bet where failure implies you get `F`(`<`) and success `S`(`>0`),
 you think the probability of success is `p`.. You think the average is:
 
-<table style="font-weight:bold"><tr> <td>Failure</td> <td>Success</td> <td>Average</td> </tr>
-<tr> <td>F</td> <td>S</td> <td>(1-p)F + pS</td><td>= p(S-F) + F</td></table>
+       Failure       Success    Average
+         F             S          (1-p)F + pS = p(S-F) + F
 
 Now there is someone willing to bet, he believes that the probability is
 infact `q`. He offers compensation if it fails `C`, but he wants `&beta;C`
 if it success
-
-<table style="font-weight:bold"><tr> <td></td> <td>Failure</td> <td>Success</td> <td>Average</td> </tr>
-<tr><td>You</td> <td>F+C</td> <td>S-&beta;C</td>
-<td>(1-p)(F+C) + p(S-&beta;C)</td><td> =  p(S-F-C(1+&beta;)) + F + C</td> </tr>
-<tr><td>Gambler</td> <td>-C</td> <td>&beta;C</td> 
-<td>-(1-q)C + q&beta;C</td><td>= qC(1+&beta;) - C</td></tr>
-</table>
+    
+               Failure    Success        Average
+         You     F+C        S-&beta;C      (1-p)(F+C) + p(S-&beta;C)  =  p(S-F-C(1+&beta;)) + F + C
+       Gambler   -C         &beta;C        -(1-q)C + q&beta;C         =  qC(1+&beta;) - C
 
 Now You will accept if you will do better than earlier;
 
