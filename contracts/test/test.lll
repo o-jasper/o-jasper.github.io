@@ -1,0 +1,15 @@
+; Simple contract with conditional for testing purposes.
+
+{
+ [[0x20]] 0x00BEEF
+ (return 0 (lll {
+   [[0]] (+ @@0 1)
+   [0x00] 1111
+   [0x20] 2222
+   [0x40] 3333
+   (if (= (calldataload 0) 2)
+     { (return 0x00 32) }
+     { (return 0x20 32) })
+   (return 0x40 32)
+  } 0))
+}
