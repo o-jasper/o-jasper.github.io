@@ -18,9 +18,9 @@ class TestAssurance:
     def __init__(self, owner=ALICE):
         self.owner = owner
         self.sim = Simulator(founders)
-        # The contract.
-        code = compile_serpent('assurance_contract.se')
-        self.contract = self.sim.load_contract(owner, code) # Alice is recipient.
+        # The eth_ent.
+        code = compile_serpent('assurance_ent.se')
+        self.eth_ent = self.sim.load_contract(owner, code) # Alice is recipient.
 
         assert self.storage(0) == int(owner.address, 16)
         assert self.storage(1) == int(owner.address, 16)
@@ -29,10 +29,10 @@ class TestAssurance:
         assert self.storage(4) == 5
 
     def tx(self, fr, v=0, d=[]):
-        return self.sim.tx(fr, self.contract, v, d)
+        return self.sim.tx(fr, self.eth_ent, v, d)
 
     def storage(self, index):
-        return self.sim.get_storage_data(self.contract, index)
+        return self.sim.get_storage_data(self.eth_ent, index)
 
     def status(self):
         return "open"
