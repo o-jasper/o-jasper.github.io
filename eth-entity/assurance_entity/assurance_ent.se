@@ -15,7 +15,7 @@ code:
             r = contract.storage[1]
             msg(tx.gas - 21, r, 0, 'success')
             suicide(r)  // Not sure if it receives a message, hence the message.
-            stop()  // Collected enough!
+            stop()
         else: //Too little paid.
             refund = 1
     

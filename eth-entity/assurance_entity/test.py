@@ -42,7 +42,7 @@ class TestAssurance:
 
     def expect_refunded(self):
         for v in founders:  # Check if money back modulo gas.
-            assert INITIAL - founders[v] < max_gas_cost
+            assert INITIAL - founders[v] < max_gas_cost #WRONG
         print("NOTE: think it refunded.")
         
     def contribute(self, who, v):  # Contribute.
