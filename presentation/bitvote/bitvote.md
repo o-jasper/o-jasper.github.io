@@ -1,5 +1,8 @@
 ---
 layout: note
+title:  "Bitvote presentation"
+date:   2014-07-19 16:00
+categories: 
 ---
 
 # SOPA
