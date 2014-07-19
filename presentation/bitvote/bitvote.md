@@ -1,16 +1,15 @@
 
 # SOPA
 
-* SOPA blackout; not Google and Wikipedia
+SOPA blackout; not just Google and Wikipedia,
 
-* A lot of people organizing caused Wikipedia to blackout and Google to merely
-  turn the background black.
+People had to promote it a lot to get there
 
 # Loudness of signal
 
-In essence this is a vote by loudness. Largely it was spamming ('twitter storm')
+essentially a vote by loudness. Largely it was spamming ('twitter storm')
   
-It is inefficient and not necessary proportional to the user.
+inefficient and not necessary proportional, i.e. ""
 
 This loudness can be represented by a simple number, how much do you care about
 this thing?
@@ -19,7 +18,9 @@ this thing?
 
 What does the solution look like, functionally? 
 
-* Everyone get one vote hour per hour.
+* Every**one** get **one** vote hour per hour &rarr;
+  + needs keep track of how much vote&sdot;time users have and subjects got.
+  + needs one person per account.
 
 * If you want to be loud, just spend a lot of votehours on something.
 
@@ -50,6 +51,37 @@ This can be done with an Ethereum contract.
 Ethereum comes with a browser. It has Javascript that can get data from the
 Ethereum contract and send transactions for voting.
 
-...diagram, JS in browser...
+<img src="browser_contract.svg">
 
-That is how we(and others) can make interfaces to .
+interfaces from arbitrary pages are possible
+
+# Ethereum contract diagram
+
+... Diagram ...
+
+# Open problems
+
+* Large numbers of users;
+  
+  Whereas Ethereum can be useful in an ecosystem, Bitvote needs to scale.
+  
+  Currently no real solution(perhaps hanging blocks) just things that help.
+  
+* One per ID:
+  
+  + Computer-hard things
+  
+  + Synchronized computer-hard actions that the contract is somehow aware of.
+
+    Peak demand makes it harder to fool.
+    
+  + Reputation system where people indicate each other and 'detectives' with
+    enough reputation can challenge people having multiple IDs.
+    
+  Note that this is something other things might also want; 'UBI coin'
+  ('socialcoin')
+
+# To summarize
+
+
+# Questions/Responses from the audience
