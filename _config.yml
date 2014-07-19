@@ -1,5 +1,5 @@
-name: Blog about Ethereum and everything else
+name: about Ethereum and everything else
 markdown: redcarpet
 pygments: true
-include: [/moot/]
+include: [/notes/]
 markdown_ext: markdown,mkdown,mkdn,mkd,md
