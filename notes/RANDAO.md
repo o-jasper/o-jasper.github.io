@@ -5,8 +5,7 @@ date:   2014-07-19 16:00
 categories: Ethereum contracts, Ethereum, Random, RANDAO
 ---
 
-Yeah it is totally a problem the way dennys lotto does it. I think we basically
-solved the problem;(though the solution isnt coded and tested well yet)
+Here is the evolution of the problem of random values in Ethereum:
 
 1. Denny's lottos approach, use future hashes of blocks. These are psuedorandom,
    but the problem is that miners know which they have when they get a block. 
