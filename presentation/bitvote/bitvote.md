@@ -33,9 +33,11 @@ What does the solution look like, functionally?
 
 ## What it looks like
 
-... show interface(demo) ...
+<img src="screen.png">
 
 ## Button
+
+<button width=100%><br><img src="bitvote_logo_small.png"> + 10 hours</button>
 
 ... show .. idea for button that goes onto a page ...
 

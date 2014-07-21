@@ -7,5 +7,5 @@ default: approach1.png browser_contract.png index.html
 %.html: %.md
 	markdown $< > $@
 
-index.html: convert.sh bitvote.md
+index.html: convert.sh bitvote.md prep.html post.html
 	sh convert.sh
