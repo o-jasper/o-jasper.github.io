@@ -39,9 +39,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.285566"
-     inkscape:cx="268.85183"
-     inkscape:cy="73.950607"
+     inkscape:zoom="1.4763922"
+     inkscape:cx="438.23081"
+     inkscape:cy="69.217413"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -95,13 +95,13 @@
          y="152.94527"
          id="tspan2991">browser</tspan></text>
     <rect
-       style="fill:none;stroke:#000000;stroke-width:1.5;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       style="fill:none;stroke:#000000;stroke-width:1.63712823;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
        id="rect2993"
-       width="42.954323"
-       height="21.477161"
-       x="102.33236"
-       y="164.85004"
-       ry="2.9033296" />
+       width="46.881157"
+       height="23.440578"
+       x="101.04626"
+       y="163.56393"
+       ry="3.1687486" />
     <text
        xml:space="preserve"
        style="font-size:18.38318634px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
@@ -112,18 +112,7 @@
          sodipodi:role="line"
          id="tspan2999"
          x="103.03227"
-         y="181.27376">html</tspan></text>
-    <text
-       xml:space="preserve"
-       style="font-size:21.29879761px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
-       x="153.3504"
-       y="181.77312"
-       id="text3001"
-       sodipodi:linespacing="125%"><tspan
-         sodipodi:role="line"
-         x="153.3504"
-         y="181.77312"
-         id="tspan3005">css</tspan></text>
+         y="181.27376">html  css</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:20.8561573px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
@@ -139,14 +128,6 @@
          x="96.063606"
          y="254.0459"
          id="tspan3013" /></text>
-    <rect
-       style="fill:none;stroke:#000000;stroke-width:1.5;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
-       id="rect2993-0"
-       width="38.690483"
-       height="21.477158"
-       x="151.66179"
-       y="164.98557"
-       ry="2.9033296" />
     <rect
        style="fill:none;stroke:#000000;stroke-width:1.5;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
        id="rect3037"
@@ -177,45 +158,49 @@
     <text
        xml:space="preserve"
        style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
-       x="489.54605"
-       y="110.79006"
+       x="492.41971"
+       y="103.60593"
        id="text3076"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan3078"
-         x="489.54605"
-         y="110.79006">Ethereum</tspan></text>
+         x="492.41971"
+         y="103.60593">Ethereum</tspan><tspan
+         sodipodi:role="line"
+         x="492.41971"
+         y="153.60593"
+         id="tspan3017">state</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
-       x="498.47937"
-       y="195.65662"
+       style="font-size:33.84735107px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="509.35559"
+       y="201.51877"
        id="text3080"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan3082"
-         x="498.47937"
-         y="195.65662">bitvote</tspan><tspan
+         x="509.35559"
+         y="201.51877">bitvote</tspan><tspan
          sodipodi:role="line"
-         x="498.47937"
-         y="245.65662"
+         x="509.35559"
+         y="243.82796"
          id="tspan3084">contract</tspan></text>
     <rect
        style="fill:none;stroke:#000000;stroke-width:1.5;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
        id="rect3086"
-       width="212.61305"
-       height="122.38651"
-       x="485.07938"
-       y="149.20334"
+       width="212.61307"
+       height="107.06035"
+       x="484.12149"
+       y="160.21901"
        ry="19.740034" />
     <path
-       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow1Lend)"
-       d="m 484.8378,173.94865 c -78.08266,-3.96549 -103.177,-4.63332 -143.39375,22.59858 -39.91074,27.02468 -23.84228,16.13381 -30.10416,20.33754"
+       style="fill:none;stroke:#000000;stroke-width:1.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow1Lend);stroke-miterlimit:4;stroke-dasharray:none"
+       d="m 483.87992,183.5275 c -78.08266,-3.96549 -102.21912,-14.21217 -142.43587,13.01973 -39.91074,27.02468 -23.84228,16.13381 -30.10416,20.33754"
        id="path3090"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="csc" />
     <path
-       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow1Lend)"
+       style="fill:none;stroke:#000000;stroke-width:1.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow1Lend);stroke-miterlimit:4;stroke-dasharray:none"
        d="m 310.15549,258.33886 c 173.71234,-2.52673 173.71234,-2.52673 173.71234,-2.52673"
        id="path3092"
        inkscape:connector-curvature="0" />
@@ -260,5 +245,13 @@
          id="tspan3116"
          x="356.85556"
          y="284.21286">(vote)</tspan></text>
+    <rect
+       style="fill:none;stroke:#000000;stroke-width:1.63712823;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect2993-1"
+       width="38.075916"
+       height="23.440582"
+       x="152.63477"
+       y="163.38232"
+       ry="3.1687486" />
   </g>
 </svg>
