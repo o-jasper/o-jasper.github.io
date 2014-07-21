@@ -15,7 +15,7 @@ essentially a vote by loudness. Largely it was 'spamming' ('twitter storm')
   
 inefficient and not necessary proportional (astroturf)
 
-can vehemence of belief/demands be presented by something less than 'loudness'?
+can the 'will of the people' be presented by something less than 'loudness'?
 
 ## An Idea
 
@@ -61,30 +61,29 @@ interfaces from arbitrary pages are possible because of this
 
 <img src="approach1.svg">
 
-## Open problems
+## Open problem: Scalibility
 
-* **Scalability, because:**
++ More people implies more voting weight
 
-  + More people implies more voting weight
-
-  + cant say ‘tough luck’ when contract excution too expensive
++ cant say ‘tough luck’ when contract excution too expensive
   
-  Ethereum working on it, some ideas that help.
-    
-* **One per ID. Ideas:**
-  
-  + Do computer-hard things.
-  
-  + Synchronized computer-hard actions that the contract is somehow aware of.
+Ethereum working on it, some ideas that help.
 
-    Peak demand makes it harder to fool.
-    
-  + Reputation system-like approaches.
-    
-  Note that this is something other things might also want; 'UBI coin'
-  ('socialcoin')
+## Open problem: One per ID
 
-* **Ethereum browser popularity**
+Each person should only be able to get one second per second.
+
+Not finished, but ideas:
+
+* Do computer-hard things.
+  
+* Synchronized computer-hard actions that the contract is somehow aware of.
+
+  Peak demand makes it harder to fool.
+    
+* Reputation system-like approaches.
+    
+Note that this is something other things might also want; 'UBI coin'('socialcoin')
 
 ## To summarize
 
@@ -147,3 +146,5 @@ interfaces from arbitrary pages are possible because of this
   
   anyone is free to develop ways to get data from and send transactions too
   Ethereum contracts.
+
+* We have a wiki on [bitvote.github.io/wiki](https://bitvote.github.io/wiki).
