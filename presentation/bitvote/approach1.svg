@@ -151,9 +151,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="2.236268"
-     inkscape:cx="253.63664"
-     inkscape:cy="223.1865"
+     inkscape:zoom="1.8160016"
+     inkscape:cx="308.2602"
+     inkscape:cy="231.8049"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -263,14 +263,14 @@
     <text
        xml:space="preserve"
        style="font-size:15.68090343px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
-       x="85.789474"
-       y="114.51359"
+       x="119.37976"
+       y="135.98933"
        id="text5179"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan5181"
-         x="85.789474"
-         y="114.51359">vote</tspan></text>
+         x="119.37976"
+         y="135.98933">vote</tspan></text>
     <path
        style="fill:none;stroke:#000000;stroke-width:2.34172034;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
        d="m 299.66555,228.62079 c 0.69465,-29.52683 -13.09378,-35.46547 -21.44022,-36.30249 -30.95528,-3.10436 -4.42019,-54.84345 -28.72689,-51.80864 -19.47209,2.43118 -24.58103,-15.24823 -21.51233,-24.99883 5.90791,-18.772113 -18.66536,-26.321338 -33.05739,-19.818391 -10.88786,4.919611 -3.74122,-36.977848 -7.42765,-37.297625"
@@ -610,16 +610,16 @@
     <text
        xml:space="preserve"
        style="font-size:22.47252274px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#808080;fill-opacity:1;stroke:none;font-family:Sans"
-       x="-110.0814"
+       x="-115.03734"
        y="93.665039"
        id="text4023"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan4025"
-         x="-110.0814"
+         x="-115.03734"
          y="93.665039">Ethereum</tspan><tspan
          sodipodi:role="line"
-         x="-110.0814"
+         x="-115.03734"
          y="121.75569"
          id="tspan3079">  state</tspan></text>
     <path
@@ -631,14 +631,18 @@
     <text
        xml:space="preserve"
        style="font-size:15.68090343px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
-       x="34.656631"
-       y="87.949379"
+       x="9.3262558"
+       y="89.05069"
        id="text5179-4"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan5181-3"
-         x="34.656631"
-         y="87.949379">ask status</tspan></text>
+         x="9.3262558"
+         y="89.05069">look at</tspan><tspan
+         sodipodi:role="line"
+         x="9.3262558"
+         y="108.65182"
+         id="tspan3082">status</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"

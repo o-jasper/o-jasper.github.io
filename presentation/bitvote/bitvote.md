@@ -3,43 +3,54 @@
 
 <img src="bitvote_logo.png">
 
-## SOPA
+## What and why
 
-SOPA blackout; not just Google and Wikipedia,
+* a voting ecosystem for the future of the internet
 
-People had to promote it a lot to get there
+* one second per second
 
-## Loudness of signal
+* the internet needs protecting 
 
-essentially a vote by loudness. Largely it was 'spamming' ('twitter storm')
+<!-- vs SOPA for network neutrality, legal attack against 
+
+* existing democratic structures are inadiquate
+
+  + too local
   
-inefficient and not necessary proportional (astroturf)
+  + often ineffective / poorly representative -->
 
-can the 'will of the people' be presented by something less than 'loudness'?
+## What we do now/before
+
+* essentially a vote by loudness. Largely it was 'spamming'
+  ('twitter storm' in SOPA)
+  
+* inefficient and not necessary proportional (astroturf)
+
+* can the 'will of the people' be presented by something that is less 'loudness'?
+
+<!--<small style="color:#BBB">Still thank the EFF and co for what good they do get quietly!</small> (distracting)-->
 
 ## An Idea
 
-What does the solution look like, functionally? 
+* Everyone gets vote-time, i.e. one second per second &rArr; need to:
+  + how vote&sdot;time do voters and votes have
+  + have one person - one ID
 
-* Everyone gets vote-time, i.e. one second per second
-  + need keep track of how much vote&sdot;time users have and subjects got.
-  + need one person per account.
-
-* If you care about a topic particularly, spend more vote-hours on it.
+* If you care about a topic particularly, spend more vote-hours on it
 
 * Topics cover any subject matter. Usually represented with a link.
   (random example)
-  + http://https://www.march-against-monsanto.com
+  + [http://https://www.march-against-monsanto.com](http://https://www.march-against-monsanto.com)
 
 ## What it looks like
 
-<img src="screen.png">
+<a href="http://bitvote.github.io/"><img src="screen.png"></a>
 
-## Button
+## 'on-flow'; Button
 
-<button width=100%><br><img src="bitvote_logo_small.png"> + 10 hours</button>
+<button width=100%><table style="text-align:center"><tr><td><br><img src="bitvote_logo_small.pang"></td></tr><tr><td>+ 10 hours</td></tr></table></button>
 
-... show .. idea for button that goes onto a page ...
+<button><table><tr><td style="vertical-align:middle"><br><img style="vertical-align:middle;image-orientation:90deg;width:50%" src="bitvote_logo_small.png"></td><td style="vertical-align:middle">+ 10 hours</td></tr></table></button>
 
 ## Need for **de**centralization
 
@@ -95,8 +106,27 @@ Note that this is something other things might also want; 'UBI coin'('socialcoin
   + Large numbers of users &rArr; scalability
   + One person per ID
 
+## Thanks to
+
+* Aaron Bale who came with the idea, and has good ideas on the non-technical side.
+
+  Also for helping me 
+
+* Ethereum!
+
+* Joris Bontje (Pikapay) for hosting this.
+
 ## Questions/Responses from the audience
 <img src="bitvote_logo.png">
+
+## Appendix: notes
+
+* The browser will likely not be the only way;
+  
+  anyone is free to develop ways to get data from and send transactions too
+  Ethereum contracts.
+
+* We have a wiki on [bitvote.github.io/wiki](https://bitvote.github.io/wiki).
 
 ## Appendix: Scaling
 
@@ -140,11 +170,6 @@ Note that this is something other things might also want; 'UBI coin'('socialcoin
 
 * Some other that i could easily have missed.
 
-## Appendix: notes
+## More
 
-* The browser will likely not be the only way;
-  
-  anyone is free to develop ways to get data from and send transactions too
-  Ethereum contracts.
-
-* We have a wiki on [bitvote.github.io/wiki](https://bitvote.github.io/wiki).
+* Deck.js presentatie: [imakewebthings.com/deck.js/](http://imakewebthings.com/deck.js/)
