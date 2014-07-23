@@ -3,24 +3,25 @@
 
 <img src="pics/bitvote_logo.png">
 
+## What the internet used to be
+
+* Wide open to new companies
+
+* Wide open to new blogs etcetera
+
+* Optimistic
+
+## What it has become and is in danger of becoming
+
+* Television 2.0
+
+* Panopticon
+
+* Seeing... and manipulating!
+
 ## What and why
 
 <img src="pics/whw.svg">
-<!--
-* a voting ecosystem for the future of the internet
-
-* one second per second
-
-* the internet needs protecting 
--->
-
-<!-- vs SOPA for network neutrality, legal attack against 
-
-* existing democratic structures are inadiquate
-
-  + too local
-  
-  + often ineffective / poorly representative -->
 
 <small style="color:#888">(inspired from http://www.ted.com/talks/simon_sinek_how_great_leaders_inspire_action)</small>
 
