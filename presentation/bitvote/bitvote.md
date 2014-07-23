@@ -21,7 +21,7 @@
 
 ## What and why
 
-<img src="pics/whw.svg">
+<img src="pics/why_how_what.svg">
 
 <small style="color:#888">(inspired from http://www.ted.com/talks/simon_sinek_how_great_leaders_inspire_action)</small>
 
