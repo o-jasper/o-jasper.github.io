@@ -66,7 +66,12 @@ Otherwise:
 
 <img src="browser_contract.svg">
 
-interfaces from arbitrary pages are possible because of this
+interfaces from arbitrary pages are possible any page can
+access the contract state and send transactions
+
+## Ethereum contract recap
+
+<img src="contract_recap.svg">
 
 ## Ethereum contract diagram
 
@@ -84,7 +89,7 @@ Ethereum working on it, some ideas that help.
 
 Each person should only be able to get one second per second.
 
-Not finished, but ideas:
+Not solid, but ideas:
 
 * Do computer-hard things.
   
