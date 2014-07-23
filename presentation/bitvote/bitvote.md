@@ -1,15 +1,18 @@
 
 ## Bitvote
 
-<img src="bitvote_logo.png">
+<img src="pics/bitvote_logo.png">
 
 ## What and why
 
+<img src="pics/whw.svg">
+<!--
 * a voting ecosystem for the future of the internet
 
 * one second per second
 
 * the internet needs protecting 
+-->
 
 <!-- vs SOPA for network neutrality, legal attack against 
 
@@ -19,12 +22,17 @@
   
   + often ineffective / poorly representative -->
 
+<small style="color:#888">(got this from http://www.ted.com/talks/simon_sinek_how_great_leaders_inspire_action)</small>
+
+
 ## What we do now/before
 
 * essentially a vote by loudness. Largely it was 'spamming'
   ('twitter storm' in SOPA)
   
-* inefficient and not necessary proportional (astroturf)
+* inefficient 
+
+* insecure against manipulation (astroturf)
 
 * can the 'will of the people' be presented by something that is less 'loudness'?
 
@@ -44,13 +52,13 @@
 
 ## What it looks like
 
-<a href="http://bitvote.github.io/"><img src="screen.png"></a>
+<a href="http://bitvote.github.io/"><img src="pics/screen.png"></a>
 
 ## 'on-flow'; Button
 
-<button width=100%><table style="text-align:center"><tr><td><br><img src="bitvote_logo_small.pang"></td></tr><tr><td>+ 10 hours</td></tr></table></button>
+<button width=100%><table style="text-align:center"><tr><td><br><img src="pics/bitvote_logo_small.pang"></td></tr><tr><td>+ 10 hours</td></tr></table></button>
 
-<button><table><tr><td style="vertical-align:middle"><br><img style="vertical-align:middle;image-orientation:90deg;width:50%" src="bitvote_logo_small.png"></td><td style="vertical-align:middle">+ 10 hours</td></tr></table></button>
+<button><table><tr><td style="vertical-align:middle"><br><img style="vertical-align:middle;image-orientation:90deg;width:50%" src="pics/bitvote_logo_small.png"></td><td style="vertical-align:middle">+ 10 hours</td></tr></table></button>
 
 ## Need for **de**centralization
 
@@ -64,18 +72,18 @@ Otherwise:
 
 ## Ethereum
 
-<img src="browser_contract.svg">
+<img src="pics/browser_contract.svg">
 
 interfaces from arbitrary pages are possible any page can
 access the contract state and send transactions
 
 ## Ethereum contract recap
 
-<img src="contract_recap.svg">
+<img src="pics/contract_recap.svg">
 
 ## Ethereum contract diagram
 
-<img src="approach1.svg">
+<img src="pics/approach1.svg">
 
 ## Open problem: Scalibility
 
@@ -122,7 +130,7 @@ Note that this is something other things might also want; 'UBI coin'('socialcoin
 * Joris Bontje (Pikapay) for hosting this.
 
 ## Questions/Responses from the audience
-<img src="bitvote_logo.png">
+<img src="pics/bitvote_logo.png">
 
 ## Appendix: notes
 

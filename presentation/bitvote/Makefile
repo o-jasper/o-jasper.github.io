@@ -1,5 +1,5 @@
 
-default: approach1.png browser_contract.png index.html
+default: index.html
 
 %.png: %.svg
 	convert -trim $< $@ 
