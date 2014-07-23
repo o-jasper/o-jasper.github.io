@@ -22,7 +22,7 @@
   
   + often ineffective / poorly representative -->
 
-<small style="color:#888">(got this from http://www.ted.com/talks/simon_sinek_how_great_leaders_inspire_action)</small>
+<small style="color:#888">(inspired from http://www.ted.com/talks/simon_sinek_how_great_leaders_inspire_action)</small>
 
 
 ## What we do now/before
@@ -54,9 +54,9 @@
 
 <a href="http://bitvote.github.io/"><img src="pics/screen.png"></a>
 
-## 'on-flow'; Button
+## Button that is in the flow of internet use
 
-<button width=100%><table style="text-align:center"><tr><td><br><img src="pics/bitvote_logo_small.pang"></td></tr><tr><td>+ 10 hours</td></tr></table></button>
+<button width=100%><table style="text-align:center"><tr><td><br><img src="pics/bitvote_logo_small.png"></td></tr><tr><td>+ 10 hours</td></tr></table></button>
 
 <button><table><tr><td style="vertical-align:middle"><br><img style="vertical-align:middle;image-orientation:90deg;width:50%" src="pics/bitvote_logo_small.png"></td><td style="vertical-align:middle">+ 10 hours</td></tr></table></button>
 
