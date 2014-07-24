@@ -19,12 +19,21 @@
 
 * Seeing... and manipulating!
 
+## xkcd on facebook
+
+<img src="pics/research_ethics.png">
+
+I mean, it&#39;s not like we could just demand to see the code that&#39;s governing our lives. What right do we have to poke around in Facebook&#39;s private affairs like that
+
+<small style="color:#888">(https://xkcd.com/1390/)</small>
+
 ## What and why
 
 <img src="pics/why_how_what.svg">
 
 <small style="color:#888">(inspired from http://www.ted.com/talks/simon_sinek_how_great_leaders_inspire_action)</small>
 
+https://xkcd.com/1390/
 
 ## What we do now/before
 
@@ -78,11 +87,13 @@ Otherwise:
 interfaces from arbitrary pages are possible any page can
 access the contract state and send transactions
 
-## Ethereum contract recap
+## More technical bit
+
+## Ethereum contracts recap
 
 <img src="pics/contract_recap.svg">
 
-## Ethereum contract diagram
+## The Bitvote contract diagram
 
 <img src="pics/approach1.svg">
 
@@ -90,7 +101,7 @@ access the contract state and send transactions
 
 + More people implies more voting weight
 
-+ cant say ‘tough luck’ when contract excution too expensive
++ cant say ‘tough luck’ when contract execution too expensive
   
 Ethereum working on it, some ideas that help.
 
@@ -102,11 +113,11 @@ Not solid, but ideas:
 
 * Do computer-hard things.
   
-* Synchronized computer-hard actions that the contract is somehow aware of.
-
-  Peak demand makes it harder to fool.
+  + Synchronizing to make faking harder.
     
-* Reputation system-like approaches.
+* Reputation network -like approaches
+
+  + 'Detectives' point out doubles and 'punishing' nodes that vouched for it
     
 Note that this is something other things might also want; 'UBI coin'('socialcoin')
 
