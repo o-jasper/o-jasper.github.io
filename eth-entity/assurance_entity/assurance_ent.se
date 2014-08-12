@@ -2,34 +2,34 @@
 // 'kickstarter'/indiegogo like.
 
 init:
-    contract.storage[0] = msg.sender
-    contract.storage[1] = msg.sender
-    contract.storage[2] = 10
-    contract.storage[3] = 20000
-    contract.storage[4] = 5
+    contract.storage[0x00] = msg.sender
+    contract.storage[0x20] = msg.sender
+    contract.storage[0x40] = 10
+    contract.storage[0x60] = 20000
+    contract.storage[0x80] = 0xa0
 code:
     refund = 0  // Note: less than optimal.. Better if there was a refund function..
     
-    if block.number > contract.storage[2]: //Ran out of time.
-        if contract.balance > contract.storage[3]: //More than enough paid.
-            r = contract.storage[1]
+    if block.number > contract.storage[0x40]: //Ran out of time.
+        if contract.balance > contract.storage[0x60]: //More than enough paid.
+            r = contract.storage[0x20]
             msg(tx.gas - 21, r, 0, 'success')
             suicide(r)  // Not sure if it receives a message, hence the message.
             stop()
         else: //Too little paid.
             refund = 1
     
-    if msg.sender == contract.storage[0]: //Owner telling it to refund.
+    if msg.sender == contract.storage[0x00]: //Owner telling it to refund.
         if msg.datasize == 1 and msg.data[0] == "refund":
             refund = 1
         else:
             stop()
         stop()
     else:  //Someone paying to it. (Adding to list)
-        i = contract.storage[4]
+        i = contract.storage[0x80]
         contract.storage[i]     = msg.sender
-        contract.storage[i + 1] = msg.value
-        contract.storage[4] = i + 2
+        contract.storage[i + 0x20] = msg.value
+        contract.storage[0x80] = i + 0x40
         stop()
 
     if refund: //Refunding.
@@ -37,6 +37,6 @@ code:
         while (contract.storage[i]):
             send(contract.storage[i], contract.storage[i+1])
             i = i + 2
-        // NOTE: at this point _MUST_ have i == contract.storage[4]
-        suicide(contract.storage[0])
+        // NOTE: at this point _MUST_ have i == contract.storage[0x80]
+        suicide(contract.storage[0x00])
         stop()

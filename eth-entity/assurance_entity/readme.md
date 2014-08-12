@@ -12,3 +12,9 @@ Assurance Ethereum entity.
 
 * Anything occuring after the deadline sends the funds to the project if
   success, and refunds otherwise.
+
+# TODO
+
+* Test.. actually get to run.
+
+* Ensure cant attack by making tiny contributions, *later* costing too much gas.

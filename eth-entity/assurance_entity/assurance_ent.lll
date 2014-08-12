@@ -1,0 +1,32 @@
+; Pays out if funds are reached, otherwise refunds.
+; 'kickstarter'/indiegogo like.
+
+{
+ [[0x00]] (sender)
+ [[0x20]] (sender)  ; Receiver on fund.
+ [[0x40]] 10
+ [[0x60]] 20000
+ [[0x80]] 0xa0
+ 
+ (return 0 (lll {
+    (if (> (number) @@0x40) ;Out of time.
+      (when (> (balance (address)) @@0x60)  ;Funded.
+        { [0x20] @@0x20
+          [0x40] "success"
+          (call (- (gas) 100) @0x20 0 0x40 0x20 0 0)
+          (suicide @0x20)
+          (stop) ;should stop.
+         }) ; Otherwise: too little paid, refund.
+      (unless (= (sender) @@0x40) ;If not owner telling to refund.
+        {  ;NOTE: can be made twice as storage-efficient by using unused bits of the addresses?
+         [0x20] @@0x80
+         [[@0x20]]           (sender)
+         [[(+ @0x20 0x20)]]  (value)
+         [[0x80]] (+ @0x20 0x40)
+         (stop)
+         })) ;Otherwise: owner telling it to refund.
+      [0x20] @@0x80
+      (for {[0] 5} (< @0 @0x20) {[0] (+ @0 0x32)}
+           (call 1000 (sload 0) @@(+ @0 0x20) 0 0 0 0))
+    } 0))
+}
