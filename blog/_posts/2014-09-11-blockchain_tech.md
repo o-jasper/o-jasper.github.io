@@ -16,8 +16,8 @@ The blockchain contains two important parts:
 One important part of validity is that based of
 [public key cryptography](https://en.wikipedia.org/wiki/Public-key_cryptography).
 This allows each user to have an particular 'account', by showing that they have
-a secret piece of data, without revealing it. It is then considered invalid if
-the users does not show he has the secret piece of data.
+a secret piece of data, without revealing it.(signing data) It is then considered
+invalid if the users does not show he has the secret piece of data.
 <sup>(4)</sup>
 
 ### Example Validity for just-a-cryptocurrency
@@ -122,7 +122,8 @@ It is valid if:
 * The list of transactions is correct. (Could use the above rules, but to pay
   for mining, you need an additional rule)
   
-Note that this approach is simplified, it leaves behind opertunities.<sup>(3)</sup>
+Note that this approach is simplified, there are opertunities that allow for
+more features.<sup>(3)</sup>
 
 ### 'Simulated mining' Proof of Stake(PoS)
 Proof of Work requires a lot of computation as its mechanism. However, there is
@@ -194,7 +195,8 @@ Cant help myself but mention some possible improvements on the simple example.
   combination of both to be best.(PoS weaknesses shouldnt be underestimated..)
 
 Really, taking the improvements seems to move it toward what Ethereum currently
-is. Also, i am not 100% on how Ethereum rewinds it state at this point.
+is. Also, i dont entirely understand on how Ethereum rewinds it state at this
+point.
 
 ## Conclusion
 
