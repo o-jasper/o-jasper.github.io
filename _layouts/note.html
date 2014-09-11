@@ -1,13 +1,14 @@
 ---
 layout: default
 ---
-<h2><span class="meta">{{ page.date | date_to_string }}</span> {{ page.title }}</h2>
 
 <div class="header">
   <span style="color:gray; text-indent:20%;">Jasper den Oudens</span>
   <h1 class="title"><a href="/">notes {{ site.name }}</a></h1>
   <hr>
 </div>
+
+<h2><span class="meta">{{ page.date | date_to_string }}</span> {{ page.title }}</h2>
 
 <div class="post">
 {{ content }}
