@@ -2,7 +2,7 @@
 layout: post
 title:  "The core Blockchain idea"
 date:   2014-09-11 16:20
-categories: Blockchain
+categories: blockchain, satoshi, hash function
 ---
 
 The blockchain contains two important parts:
