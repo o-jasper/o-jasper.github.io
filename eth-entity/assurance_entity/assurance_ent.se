@@ -1,42 +1,68 @@
 // Pays out if funds are reached, otherwise refunds.
 // 'kickstarter'/indiegogo like.
 
+// NOTE: would be nice to suicide with return value and message sending?
+
 init:
     contract.storage[0x00] = msg.sender
-    contract.storage[0x20] = msg.sender
+    contract.storage[0x20] = msg.sender //Recipient of true result.
     contract.storage[0x40] = 10
-    contract.storage[0x60] = 20000
-    contract.storage[0x80] = 0xa0
+    contract.storage[0x60] = 20000  // Amount needed.
+    contract.storage[0x80] = 0xC0
+    contract.storage[0xA0] = 30000  // Max amount we can deal with.
 code:
     refund = 0  // Note: less than optimal.. Better if there was a refund function..
     
-    if block.number > contract.storage[0x40]: //Ran out of time.
-        if contract.balance > contract.storage[0x60]: //More than enough paid.
-            r = contract.storage[0x20]
-            msg(tx.gas - 21, r, 0, 'success')
-            suicide(r)  // Not sure if it receives a message, hence the message.
-            stop()
-        else: //Too little paid.
-            refund = 1
+    if msg.datasize == 1:
+        if msg.data[0] == "balance":
+            return(contract.balance)
+        if msg.data[0] == "endblock":
+            return(contract.storage[0x40])
+        if msg.data[0] == "min":
+            return(contract.storage[0x60])
+        if msg.data[0] == "max":
+            return(contract.storage[0xA0])
+        if msg.data[0] == "cnt":
+            return((contract.storage[0x80] - 0xC0)/0x40)
     
-    if msg.sender == contract.storage[0x00]: //Owner telling it to refund.
-        if msg.datasize == 1 and msg.data[0] == "refund":
-            refund = 1
-        else:
-            stop()
-        stop()
-    else:  //Someone paying to it. (Adding to list)
-        i = contract.storage[0x80]
-        contract.storage[i]     = msg.sender
-        contract.storage[i + 0x20] = msg.value
-        contract.storage[0x80] = i + 0x40
-        stop()
+    if block.number > contract.storage[0x40]: //Ran out of time.
+        if msg.value > 0:
+            msg(tx.gas - 100, msg.sender, msg.value, "too late")
+
+        if contract.balance > contract.storage[0x60]: //More than enough paid.
+            msg(tx.gas - 100, contract.storage[0x20], contract.balance, "funded")
+            //suicide(r)  // Not sure if it receives a message, hence the message.
+            return("funded")
+        else: //Too little paid.
+            refund = 2
+    
+    if !refund:
+        if msg.sender == contract.storage[0x00]: //Owner telling it to refund.
+            if msg.datasize == 1 and msg.data[0] == "refund":
+                refund = 1
+        else:  //Someone paying to it. (Adding to list)
+            // Over what we want to accept.
+            // (NOTE: balance at this point already got the value)
+            if contract.balance > contract.storage[0xA0]:
+                msg(tx.gas - 100, msg.sender, msg.value, "overpaid")
+                return("overpaid" ) //(and refunded)
+            i = contract.storage[0x80]
+            contract.storage[i]     = msg.sender
+            contract.storage[i + 0x20] = msg.value
+            contract.storage[0x80] = i + 0x40
+            return("paid")
 
     if refund: //Refunding.
-        i = 5
-        while (contract.storage[i]):
-            send(contract.storage[i], contract.storage[i+1])
-            i = i + 2
+        i = 0xC0
+        t = contract.storage[0x80]
+        while i < t //contract.storage[i]:
+            msg(tx.gas - 100, contract.storage[i], contract.storage[i + 0x20], "")
+            i = i + 0x40
         // NOTE: at this point _MUST_ have i == contract.storage[0x80]
-        suicide(contract.storage[0x00])
-        stop()
+        // suicide(contract.storage[0x00])
+        if refund == 2:
+            return("underfunded")
+        if refund == 1:
+            return("refunded")
+        return("refunded, unknown")
+    return("error?!")
