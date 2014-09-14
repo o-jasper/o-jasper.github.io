@@ -1,0 +1,43 @@
+// Possibly foolish grudge-based escrow.
+//
+// * Creation is offer by merchant. Cancelable. as long as not accepted.
+//    initial balance(endowment) is merchant stake.
+// * A customer accepting. It is totally open to customers.
+// * Release by customer.
+
+init:
+    contract.storage[0x00] = msg.sender  // Merchant
+    // 0x20 total customer.
+    // 0x40 customer gets back.
+    // 0x60 customer address.
+code:
+    if msg.sender == contract.storage[0x00] && contract.storage[0x60] == 0:
+        if msg.datasize == 2:
+            contract.storage[0x20] = msg.data[0]  // Set the price.
+            contract.storage[0x40] = msg.data[1]  // And customer holding side.
+            return("price changed")
+        return("pointless?")
+
+    if contract.storage[0x20] == 0: // No offer by merchant yet.
+        return("no offer yet")
+
+    customer = contract.storage[0x60]:
+    if customer == 0:
+        // Customer coming in.
+        if contract.balance < contract.storage[0x20]:  // Not paying enough.
+            msg(tx.gas - 100, msg.sender, msg.value, "insufficient")
+            return("insufficient")
+        // Sufficient, give customer releasing control.
+        contract.storage[0x60] = msg.sender
+        return("bought")
+
+    //Customer releasing funds both ways.
+    if msg.sender == customer:
+        msg(tx.gas - 100, msg.sender, contract.storage[0x40], "getback")
+        msg(tx.gas - 100, contract.storage[0x00], contract.balance, "payment")
+        contract.storage[0x20] = 0  // Reset stuff.
+        contract.storage[0x40] = 0
+        contract.storage[0x60] = 0
+        return("released")
+
+    return("stranger")
