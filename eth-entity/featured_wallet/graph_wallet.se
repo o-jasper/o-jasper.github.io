@@ -1,0 +1,130 @@
+// Idea is that a single contract handles a lot of wallets.
+// Wallets can refer to each other in proving verifying hashes.
+// Each wallet uses a small proxy contract so they get different addresses.
+//
+// Note that ethers are shared. Also, it seems like this approach might be gas-expensive.
+//
+// TODO using the storage as key/value thing isnt working?!
+
+// UNFINISHED/UNTESTED
+
+shared:
+    HALFWAY = 340282366920938463463374607431768211456
+    cmd_change = HALFWAY*"change"
+    cmd_hash   = HALFWAY*"hash" 
+
+    // All relative changes.
+    p_verify_hash = 0x00
+    p_amount = 0x20
+    p_proxy = 0x40
+    p_movtime = 0x60
+    p_verify_n = 0x80
+    p_verify_from = 0xA0
+
+    wallet_len = 16*0x20  // Dont make the verifiers list longer than 9
+init:
+    
+code:
+    if msg.datasize == 0 :
+        return("need arguments")
+
+    offset = wallet_len*msg.sender  // Whole amounts against attacks when changing.
+    if contract.storage[offset + p_proxy] == 0:
+        return("no wallet")
+
+    // If have max spendable, checks on it.
+    movtime = contract.storage[offset + p_movtime]
+    info = contract.storage[offset + p_amount]
+    if info:
+        allowed = (info/HALFWAY)*(block.timestamp - movtime)
+        
+        if allowed > info%HALFWAY:  // Enforce a maximum.
+            allowed = info%HALFWAY:
+            movtime = block.timestamp - msg.data[0]/(info/HALFWAY)
+            
+        if msg.data[0] > allowed && msg.data[0] < HALFWAY:
+            return("weakest-key over-rate")
+    
+    arr = array(msg.datasize)  // Encode the data.
+    i = 0
+    while i < msg.datasize:
+        arr[i] = msg.data[i]
+        i = i + 1
+    
+    from = contract.storage[offset + p_verify_from]  //Check verifiers.
+    if from != 0:
+        hash = sha3(arr, 0x20*(msg.datasize-1)):
+        i = offset + p_verify_from
+        n = contract.storage[offset + p_verify_n] % HALFWAY
+        if n == 0: // All others must agree.
+            while from != 0:
+                if contract.storage[from + p_verify_hash] != hash:
+                    return("not all verifiers")
+                i = i + 0x20
+                from = contract.storage[i]
+        else:  // N out of M.
+            while from:
+                if contract.storage[from + p_verify_hash] != hash:
+                    n = n - 1
+                if n == 0:
+                    return("not enough verifiers")
+                i = i + 0x20
+                from = contract.storage[i]
+    // At this point all checks passed.
+
+    //Change a lower-security address.
+    // TODO screwed here: cannot tell if index is not messing around.
+    if msg.data[0] == cmd_change:
+        if msg.datasize != 4:
+            return("changing needs four args")
+        level = contract.storage[offset + p_verify_n] / HALFWAY
+        
+        if msg.data[1] < HALFWAY:
+            return("doesnt look like address")
+        if msg.sender == msg.data[0]:
+            return("cant change self")
+
+        offset_changed = wallet_len*msg.data[0]
+        if contract.storage[offset_changed + p_verify_n] / HALFWAY > level:
+            return("outranked or equal rank")
+        if msg.data[2]/HALFWAY >= level:
+            return("cant change level higher/equal to own")
+        
+        if info:  // If have spending limits, you're giving them away.
+            if msg.data[1] == 0 || info/HALFWAY > msg.data[1]/HALFWAY || info%HALFWAY > msg.data[1]%HALFWAY:
+                return("too high spending limits")
+            // You get less to spend. (NOTE: start changing things after all checks pass.)
+            contract.storage[offset + p_amount] = info - msg.data[1]
+            contract.storage[offset_changed + p_amount] = contract.storage[offset_changed + p_amount] + msg.data[1]
+        
+        contract.storage[offset_changed + p_verify_n] = msg.data[2]
+        contract.storage[offset_changed + p_movtime] = block.timestamp
+        // TODO that _has_ to be a new one?!...
+        // maybe need special list of proxies, and you *must* make a new one.
+        //contract.storage[offset_changed + p_proxy] = block.timestamp
+        return("changed")
+    
+//    p_amount = 0x20
+    p_proxy = 0x40
+//    p_movtime = 0x60
+//    p_verify_n = 0x80
+//    p_verify_from = 0xA0
+
+    if msg.data[0] == cmd_move: //Change own address.
+        
+    
+    // Set hashes allowing a particular tx.
+    if msg.data[0] == cmd_hash:
+        if msg.datasize != 2:
+            return("set hash needs two args")
+        contract.storage[offset + p_verify_hash] = msg.data[1]
+        return("set hash")
+
+    if msg.data[0] > HALFWAY:
+        return("not a command?!")
+
+    if info: // Update the amount spendable.
+        contract.storage[offset + p_movtime] = movtime + msg.data[0]/(info/HALFWAY)
+    //Weakest is via the contract self.(probably most often, save on gas)
+    msg(contract.storage[offset + p_proxy], tx.gas-100, msg.data[0], msg.datasize - 1, arr[1:])
+    return("sent")

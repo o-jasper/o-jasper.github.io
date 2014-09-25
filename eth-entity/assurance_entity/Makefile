@@ -1,8 +1,10 @@
 
-default: test
+default: test assurance_ent.se.evm
 
-test: assurance_ent.lll.evm test.py
-	python2 test.py
+test: test_cases
+
+test_cases:
+	python2 cases.py
 
 %.lll.evm: %.lll
 	lllc -x $< > $@

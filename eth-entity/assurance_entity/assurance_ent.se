@@ -24,6 +24,10 @@ code:
             return(contract.storage[0xA0])
         if msg.data[0] == "cnt":
             return((contract.storage[0x80] - 0xC0)/0x40)
+
+    if msg.datasize == 2:
+        if msg.data[0] == "funder":
+            contract.storage[msg.data[1]]
     
     if block.number > contract.storage[0x40]: //Ran out of time.
         if msg.value > 0:

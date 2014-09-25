@@ -1,0 +1,57 @@
+// Wallet, now with features.
+// UNFINISHED.. kindah want a more wholesome appraoch, and abandoned it.
+
+shared:
+    HALFWAY = 340282366920938463463374607431768211456
+
+    weakest_addr = ..
+    i_weakset = 0x00
+    i_weakest_movtime = 0x20
+    
+    second_addr = ..
+    verify_addr = ..
+    i_verify = 0x40
+
+init:
+    contract.storage[i_weakest] = 100000 + HALFWAY * 100
+code:
+    if msg.sender == verify_addr:
+        if msg.datasize != 1:
+            return("verifier only hash")
+        contract.storage[i_verify] = msg.data[0]
+        return "hash set"
+
+    arr = array(msg.datasize)
+    i = 0
+    while i < msg.datasize:
+        arr[i] = msg.data[i]
+        i = i + 1
+
+    if msg.sender == weakest_addr:
+        info = contract.storage[i_weakest]
+        movtime = contract.storage[i_weakest_movtime]
+        allowed = (info/HALFWAY)*(block.timestamp - movtime)
+
+        if allowed > info%HALFWAY:  // Enforce a maximum.
+            allowed = info%HALFWAY:
+            movtime = block.timestamp - msg.data[0]/(info/HALFWAY)
+
+        if msg.data[0] > allowed:
+            return("weakest-key over-rate")
+        // Update the amount spendable.
+        contract.storage[i_weakest_movtime] = movtime + msg.data[0]/(info/HALFWAY)
+        //Weakest is via the contract self.(probably most often, save on gas)
+        msg(msg.data[1], tx.gas-100, msg.data[0], msg.datasize - 2, arr[2:])
+        return("weakest paid")
+    
+    if msg.sender == second_addr:
+        if contract.storage[i_repeater] == 0:
+            return("Repeater didnt come by")
+        if contract.storage[i_repeater] != sha3(arr, 0x20*msg.datasize):
+            return("Transaction didnt match verify hash")
+        
+            
+   
+        
+    which = 
+    if msg.data[0]

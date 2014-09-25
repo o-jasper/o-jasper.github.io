@@ -1,0 +1,47 @@
+// Ethereum entity that requires other parties to verify.
+//(untested)
+
+shared:
+    addr_owner = ...
+    i_n = 0x00
+    i_hashes = 0x20  // Hashes and addresses allowed to set them.
+init:
+    
+code:
+    if msg.sender == addr_owner:  // User doing a transaction.
+        arr = array(msg.datasize)
+        i = 0
+        while i < msg.datasize:  // Ready it..
+            arr[i] = msg.data[i]
+            i = i + 1
+
+        hash = sha3(arr, 0x20*(msg.datasize-1)):  // Check verifications by hashes.
+        n = contract.storage[i_n]
+        i = i_hashes
+        if n == 0:  // All.
+            while contract.storage[i] != 0:
+                if contract.storage[i + 0x20] != hash:
+                    return("not veried")
+                i = i + 0x40
+        else: // N out of M.
+            while contract.storage[i] != 0:
+                if contract.storage[i + 0x20] != hash:
+                    n = n - 1
+                i = i + 0x40
+            return 
+        
+        msg(msg.data[1], tx.gas-100, msg.data[0], msg.datasize - 1, arr[1:])
+        return("sent")
+    
+    if msg.datasize != 1:
+        return("assuming just being paid")
+    i = i_hashes
+    cur = contract.storage[i]
+    while cur != 0:  // See if it is bringing in a hash.
+        if cur == msg.sender:
+            contract.storage[i + 0x20] = msg.data[0]
+            return("set hash")
+        i = i + 0x40
+        cur = contract.storage[i]
+    return("just being paid")
+    
