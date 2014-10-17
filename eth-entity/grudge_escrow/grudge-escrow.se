@@ -5,39 +5,45 @@
 // * A customer accepting. It is totally open to customers.
 // * Release by customer.
 
+shared:
+    Merchant = 0x00
+    CustomerTotal = 0x20
+    CustomerBack = 0x40
+    Customer = 0x60
 init:
-    contract.storage[0x00] = msg.sender  // Merchant
-    // 0x20 total customer.
-    // 0x40 customer gets back.
-    // 0x60 customer address.
+    contract.storage[Merchant] = msg.sender  // Merchant
 code:
-    if msg.sender == contract.storage[0x00] && contract.storage[0x60] == 0:
+    if msg.sender == contract.storage[Merchant] && contract.storage[Customer] == 0:
         if msg.datasize == 2:
-            contract.storage[0x20] = msg.data[0]  // Set the price.
-            contract.storage[0x40] = msg.data[1]  // And customer holding side.
+            contract.storage[CustomerTotal] = msg.data[0]  // Set the price.
+            contract.storage[CustomerBack] = msg.data[1]  // And customer holding side.
             return("price changed")
+        if msg.datasize == 1:
+            if msg.data[0] == "suicide":
+                suicide(msg.sender)
+                return("suicided")
         return("pointless?")
 
-    if contract.storage[0x20] == 0: // No offer by merchant yet.
+    if contract.storage[CustomerTotal] == 0: // No offer by merchant yet.
         return("no offer yet")
 
-    customer = contract.storage[0x60]:
+    customer = contract.storage[Customer]:
     if customer == 0:
         // Customer coming in.
-        if contract.balance < contract.storage[0x20]:  // Not paying enough.
+        if contract.balance < contract.storage[CustomerTotal]:  // Not paying enough.
             msg(tx.gas - 100, msg.sender, msg.value, "insufficient")
             return("insufficient")
         // Sufficient, give customer releasing control.
-        contract.storage[0x60] = msg.sender
+        contract.storage[Customer] = msg.sender
         return("bought")
 
     //Customer releasing funds both ways.
     if msg.sender == customer:
-        msg(tx.gas - 100, msg.sender, contract.storage[0x40], "getback")
-        msg(tx.gas - 100, contract.storage[0x00], contract.balance, "payment")
-        contract.storage[0x20] = 0  // Reset stuff.
-        contract.storage[0x40] = 0
-        contract.storage[0x60] = 0
+        msg(tx.gas - 100, msg.sender, contract.storage[CustomerBack], "getback")
+        msg(tx.gas - 100, contract.storage[Merchant], contract.balance, "payment")
+        contract.storage[CustomerTotal] = 0  // Reset stuff.(can be reused)
+        contract.storage[CustomerBack] = 0
+        contract.storage[Customer] = 0
         return("released")
 
     return("stranger")
