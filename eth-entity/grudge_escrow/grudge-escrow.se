@@ -5,6 +5,8 @@
 // * A customer accepting. It is totally open to customers.
 // * Release by customer.
 
+//TODO feel like adding a time estimation, just so i can add pictures of
+// grumpier guys if it doesnt get paid for too long.
 shared:
     Merchant = 0x00
     CustomerTotal = 0x20
@@ -18,7 +20,7 @@ code:
             contract.storage[CustomerTotal] = msg.data[0]  // Set the price.
             contract.storage[CustomerBack] = msg.data[1]  // And customer holding side.
             return("price changed")
-        if msg.datasize == 1:
+        if msg.datasize == 1:  //TODO retracting offer
             if msg.data[0] == "suicide":
                 suicide(msg.sender)
                 return("suicided")
@@ -46,4 +48,4 @@ code:
         contract.storage[Customer] = 0
         return("released")
 
-    return("stranger")
+    return("stranger")  // Who are you? Thanks for the ethers.

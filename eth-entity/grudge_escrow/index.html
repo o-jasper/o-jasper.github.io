@@ -7,24 +7,54 @@
   </head>
   <body>
     
-    <h3>Ill-advised Grudge Based Escrow<span id="contract_addr"></span></h3>
-    
-    <button id="creator_button" onclick="createIt()">Create</button>
-    <span id="creator_state"></span>
-    
-    <table>
-      <tr><td>Merchant</td><td>address</td>
-        <td id="merchant_addr">todo</td></tr>
-      <tr><td>Customer</td><td>address</td>
-        <td id="customer_addr">todo</td></tr>
-      <tr><td>&nbsp;~~</td>     <td>pays</td>
-        <td id="customer_total">(not yet specified)</td></tr>
-      <tr><td>&nbsp;~~</td>     <td>gets returned</td>
-        <td id="customer_back">(not yet specified)</td></tr>
+    <h2>Ill-advised Grudge Based Escrow</h2>
+    <button id="find_or_create_button" hidden="true", onclick="find_or_create_set_state(true);">New/other grudge escrow</button>
+
+    <span id="find_or_create">
+      <h3>Locating/creating contract</h3>
+      <button id="creator_button" onclick="createIt()">Create (you get merchant position)</button><br>
+      <button onclick="set_from_input();">From Input</button>
+      <textarea id="addr_input" rows="1" cols="55" onchange="set_from_input();"></textarea><br>
+      TODO finding contracts where owned contracts are Merchants/customers.
+      <span id="creator_state"></span>
+    </span>
+
+    <h3>Grudge Escrow Contract: <span id="contract_addr"></span><span id="contract_state"></span></h3>
+    <table id="state_info">
+      <tr><td><b>Merchant</b></td><td>addr:</td>
+        <td id="merchant_addr">---</td></tr>
+      <tr><td></td>     <td>stake:</td>
+        <td id="merchant_stake">---</td></tr>
+      <tr><td><b>Customer</b></td><td>addr:</td>
+        <td id="customer_addr">---</td></tr>
+      <tr><td></td>     <td>price:</td>
+        <td id="customer_price">---</td></tr> 
+      <tr><td></td>     <td>stake:</td>
+        <td id="customer_back">---</td></tr>      
+      <tr><td></td>     <td>total:</td>
+        <td id="customer_total">---</td></tr>
     </table>
+
+    <span id="as_merchant" hidden="true">
+      <h3>Merchant</h3>
+      <small>(You have merchant address privkey)</small>
+      <table>
+        <tr><td>Own Stake:</td> <td><textarea id="ownstake_input" rows="1" cols="55"></textarea></td></tr>
+        <tr><td>Customer Total:</td> <td><textarea id="total_input" rows="1" cols="55"></textarea></td></tr>
+        <tr><td>Customer Back:</td> <td><textarea id="back_input" rows="1" cols="55"></textarea></td></tr>
+        <tr id="we_get_row" hidden="true"><td>We get</td> <td id="we_get"></td></tr>
+      </table>
+      <button onclick="gui_merchant_init();">Initialize</button>
+    </span>
+
+    <span id="as_customer"><h3>Customer actions</h3>
+      <button>Pay(TODO)</button>
+      Tip:<textarea id="tip_input" rows="1" cols="20">0</textarea><br>
+    </span>
     
     <script src="javascripts/common.js"></script>
     <script src="javascripts/grudge-escrow.js"></script>
+    <script src="javascripts/grudge-escrow-gui.js"></script>
     <script src="build/grudge_creator.js"></script>
     <script>start();</script>
 </body></html>
