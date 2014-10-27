@@ -15,7 +15,7 @@ shared:
 init:
     contract.storage[Merchant] = msg.sender  // Merchant
 code:
-    if msg.sender == contract.storage[Merchant] && contract.storage[Customer] == 0:
+    if msg.sender == contract.storage[Merchant] && contract.storage[CustomerTotal] == 0:
         if msg.datasize == 2:
             contract.storage[CustomerTotal] = msg.data[0]  // Set the price.
             contract.storage[CustomerBack] = msg.data[1]  // And customer holding side.

@@ -38,25 +38,28 @@ def check(a, ready=False, customer=False):
     
 def scenario_insufficient(r=True, a=1000):
     if r: reset(1000)
-    check(1000 if r else 0)
+
+    assert s.send(t.k1, c, 10, []) == [i("no offer yet")]
+    
+    check(1010 if r else 10)
     assert s.send(t.k0, c, 20 if r else 1020, [4000, 1000]) == [i("price changed")]
     assert s.block.get_storage_data(c, 0x20) == 4000
     assert s.block.get_storage_data(c, 0x40) == 1000
     assert s.block.get_storage_data(c, 0x60) == 0
-    check(1020, True)
+    check(1030, True)
 
     assert s.send(t.k1, c, 2500, []) == [i("insufficient")]
-    check(1020, True)
+    check(1030, True)
 
 def scenario_sufficient(r=True):
     scenario_insufficient(r)
-    check(1020, True)
+    check(1030, True)
 
     assert s.send(t.k2, c, 3000, []) == [i("bought")]
-    check(4020, True, t.a2)
+    check(4030, True, t.a2)
 
     assert s.send(t.k4, c, 3, []) == [i("stranger")]  # Guy meddling.
-    check(4023, True, t.a2)
+    check(4033, True, t.a2)
 
     assert s.send(t.k2, c, random.randrange(0,100), []) == [i("released")]
     check(0)
