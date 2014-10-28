@@ -8,34 +8,16 @@
   <body>
     
     <h2>Ill-advised Grudge Based Escrow</h2>
-    <button id="find_or_create_button" hidden="true", onclick="find_or_create_set_state(true);">New/other grudge escrow</button>
 
-    <span id="find_or_create">
-      <h3>Locating/creating contract</h3>
-      <button id="creator_button" onclick="createIt()">Create (you get merchant position)</button><br>
-      <button onclick="set_from_input();">From Input</button>
-      <textarea id="addr_input" rows="1" cols="55" onchange="set_from_input();"></textarea><br>
-      TODO finding contracts where owned contracts are Merchants/customers.
-      <span id="creator_state"></span>
-    </span>
+    <button id="creator_button" onclick="createIt()">Create (you get merchant position)</button><br>
+    <span id="creator_state"></span>    
 
-    <h3>Grudge Escrow Contract: <span id="contract_addr"></span></h3>
-    <span id="your_state">(no address)</span>
-    <table id="state_info">
-      <tr><td><b>Merchant</b></td>
-        <td id="merchant_addr">---</td></tr>
-      <tr>     <td>stake+tip:</td>
-        <td id="merchant_stake">---</td></tr>
-      <tr><td><b>Customer</b></td>
-        <td id="customer_addr">---</td></tr>
-      <tr>     <td>price:</td>
-        <td id="customer_price">---</td></tr> 
-      <tr>     <td>stake:</td>
-        <td id="customer_back">---</td></tr>      
-      <tr>     <td>total:</td>
-        <td id="customer_total">---</td></tr>
-    </table>
-
+    <h3>Grudge Escrow Contract:</h3>
+    <textarea id="addr_input" rows="1" cols="55" oninput="set_from_input();" onblur="setting_addr(false);"></textarea>
+    <span id="contract_addr" onclick="setting_addr(true);" hidden="true"></span>
+    
+    <p id="your_state">(no address)</p>
+    
     <span id="as_merchant" hidden="true">
       <h3>Merchant</h3>
       <small>(You have merchant address privkey)</small>
@@ -49,9 +31,27 @@
     </span>
 
     <span id="as_customer"><h3>Customer actions</h3>
-      <button>Pay(TODO)</button>
-      Tip:<textarea id="tip_input" rows="1" cols="20">0</textarea><br>
+      <button id="input_pay" onclick="gui_customer_pay();">Pay</button>
+      <button id="input_release" onclick="gui_customer_release(null);" hidden="true">Release</button>
+      <!-- Tip: <textarea id="tip_input" rows="1" cols="20">0</textarea> -->
     </span>
+
+    <h3>Full contract state info</h3>
+    Balance: <span id="contract_balance"></span>
+    <table id="state_info" style="margin-right:20px">
+      <tr><td><b>Merchant</b></td>
+        <td id="merchant_addr">---</td></tr>
+      <tr>     <td>stake+tip:</td>
+        <td id="merchant_stake">---</td></tr>
+      <tr><td><b>Customer</b></td>
+        <td id="customer_addr">---</td></tr>
+      <tr>     <td>price:</td>
+        <td id="customer_price">---</td></tr> 
+      <tr>     <td>stake:</td>
+        <td id="customer_back">---</td></tr>      
+      <tr>     <td>total:</td>
+        <td id="customer_total">---</td></tr>
+    </table>   
     
     <script src="javascripts/common.js"></script>
     <script src="javascripts/contract.js"></script>

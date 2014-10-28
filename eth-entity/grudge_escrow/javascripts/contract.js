@@ -36,18 +36,21 @@ function customer_pay(from, total, tip, callback) {
         if(customer_total() == "0x"){
             alert("Escrow not yet initialized(to be done by merchant)"); return;
         }
-        if(customer() == "0x"){ alert("someone, possibly you, already paid"); return; }
-        if(total + "" != eth.toDecimal(customer_total())) {
-            alert("You should pay the indicated price!"); return;
+        if(customer() != "0x"){ alert("someone, possibly you, already paid"); return; }
+        if(total + "" != customer_total()) {
+            alert("You should pay the indicated price!\n" +
+                  total + "!=" + customer_total()); return;
         }
     }
-    eth.transact({"from":from, "to":contract_addr, "value":total + tip}, callback);
+    //NOTE: tip disregarded.
+    eth.transact({"from":from, "to":contract_addr, "value":total}, callback);
 }
 
 function customer_release(from, more_tip, callback) {
     if(safeties) {
         if( eth.secretToAddress(from) != customer() ){
-            alert("You cannot release funds on someone elses escrow."); return;
+            alert("You cannot release funds on someone elses escrow.\n" +
+                 eth.secretToAddress(from) + " != " + customer()); return;
         }
     }
     eth.transact({"from":from, "to":contract_addr, "value":more_tip}, callback);

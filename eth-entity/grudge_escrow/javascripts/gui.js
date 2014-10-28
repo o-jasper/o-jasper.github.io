@@ -9,6 +9,9 @@ function start() {
 contract_addr = null;
 function callback_addr(addr) {
     contract_addr = addr;
+
+    eth.watch({altered: contract_addr}).changed(update);
+    
     update();
     ge("creator_state").innerText = "";
     ge("creator_state").hidden = true;
@@ -16,19 +19,20 @@ function callback_addr(addr) {
 //    ge("addr_input").hidden = true;
     //TODO
     //window.location.search = "addr=" + contract_addr;
-
-    find_or_create_set_state(false);
-}
-
-function find_or_create_set_state(which) {
-    ge("find_or_create").hidden = !which;
-    ge("find_or_create_button").hidden = which;
 }
 
 function set_from_input() {
     val = ge("addr_input").value.trim();
     if(val.substr(0,2)!="0x") { val = "0x" + val; }
     callback_addr(val);
+    ge("creator_button").hide = true;
+}
+
+function setting_addr(yes) {
+    return;
+    if(ge("addr_input").value.length == 0){ return; }
+    ge("addr_input").hidden = !yes;
+    ge("contract_addr").hidden = yes;
 }
 
 selfurl = "TODO/selfurl/";
@@ -36,30 +40,44 @@ am_merchant = false;
 am_customer = false;
 
 function update() {
+    ge("contract_balance").innerText = eth.toDecimal(eth.balanceAt(contract_addr));
+    
     url = selfurl + "?addr=" + contract_addr;
     if(contract_addr == "") {
         ge("contract_addr").innerText = "Empty contract addr";
     } else {
-        ge("contract_addr").innerHTML = " <a href= \"" + url + "\">" + contract_addr + "</a>";
+        ge("contract_addr").innerText = contract_addr;
+        ge("addr_input").value = contract_addr;
     }
     cust_addr = customer();
     mer_addr  = merchant();
 
     priv = got_privkey(mer_addr);
     am_merchant = (priv != null);
-    ge("as_merchant").hidden = !am_merchant;
+    ge("as_merchant").hidden = !am_merchant || customer_total()!="0x";
     if( am_merchant ) {
-        ge("merchant_addr").innerHTML  = "<small>(have privkey)</small>" + mer_addr;
+        ge("merchant_addr").innerHTML  = "<small>(have)</small>" + mer_addr;
     } else {
         ge("merchant_addr").innerText  = mer_addr;
     }
 
     total = eth.toDecimal(customer_total());
-    if( total != "0" ) {
+    ge("as_customer").hidden = (total == "0");
+
+    if( total == "0" ) {
+        if( customer_back() != "0x" ){ alert("Inconsistent state! Return not zeroed!"); }
+        if( customer() != "0x" ){ alert("Inconsistent state, customer address not zeroed!"); }
+
+        ge("merchant_stake").innerText = "--";
+        ge("customer_total").innerText = "--";
+        ge("customer_back").innerText  = "--";
+        ge("customer_price").innerText = "--";
+    } else {
         back  = eth.toDecimal(customer_back());
         ge("customer_total").innerText = total;
         ge("customer_back").innerText  = back;
-        ge("customer_price").innerText = "TODO"; //(num.valueOf(total) - num.valueOf(back)) + "";
+        ge("customer_price").innerText = "TODO";
+        //(num.valueOf(total) - num.valueOf(back)) + "";
 
         bal = eth.toDecimal(eth.balanceAt(contract_addr));
         if(cust_addr == "0x") {
@@ -69,7 +87,7 @@ function update() {
             ge("merchant_stake").innerText = bal + " minus TODO";
         }
     }
-    
+
     if( cust_addr == "0x" ) {
         if( total != "0" ) {
             ge("customer_addr").innerText  = "No customer yet."
@@ -79,8 +97,12 @@ function update() {
     } else {
         cust_priv = got_privkey(cust_addr);
         am_customer = (cust_priv != null);
+        
+        ge("input_pay").hidden = am_customer;
+        ge("input_release").hidden = !am_customer;
+        
         if( am_customer ) {
-            ge("customer_addr").innerHTML  = "<small>(have privkey)</small>" + cust_addr;
+            ge("customer_addr").innerHTML  = "<small>(have)</small>" + cust_addr;
         } else {
             ge("customer_addr").innerHTML  = "<small>(taken)</small>" + cust_addr;
         }
@@ -88,6 +110,12 @@ function update() {
     update_your_state();
 }
 function update_your_state() {
+    /*if( !eth.codeAt(contract_addr) ) {  //TODO dunno how to do this.
+        ge("your_state").innerHTML = "Is not a contract.";
+        return;
+        }
+        TODO want to be able to recognize it? Dunno how to do that either.
+    */
     var html = "";
     if( am_customer ){
         if(am_merchant) {
@@ -125,13 +153,12 @@ function gui_merchant_init() {
 }
 
 function gui_customer_pay(as) {
-    if(as==null) {
-        as = eth.key
-    }
+    if(as==null) { as = eth.key; }
     customer_pay(as, customer_total(), 0, update);
 }
 
-function gui_customer_release() {
-    priv = got_privkey(customer());
-    
+function gui_customer_release(from) {
+    if(from==null) { from = got_privkey(customer()); }
+    customer_release(from, 0, update);
+    update();
 }
