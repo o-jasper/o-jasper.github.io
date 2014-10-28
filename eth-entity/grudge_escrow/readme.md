@@ -24,3 +24,6 @@ actually use!
   Red letters if stake is bigger than total.
 
 * Add tipping to javascript.
+
+* Get the javascript contract launcher to actually work.
+
