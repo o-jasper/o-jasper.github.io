@@ -27,8 +27,8 @@ function merchant_init(customerTotal, customerBack, callback, ownStake, from) {
 //        }
     }
     eth.transact({"from":from, "to":contract_addr,
-                      "value":ownStake, "data":[customerBack, customer]},
-                     callback);
+                  "value":ownStake, "data":[customerTotal, customerBack]},
+                 callback);
 }
 
 function customer_pay(from, total, tip, callback) {
