@@ -22,9 +22,9 @@
       <h3>Merchant</h3>
       <small>(You have merchant address privkey)</small>
       <table>
-        <tr><td>Own Stake:</td> <td><textarea id="ownstake_input" rows="1" cols="25"></textarea></td></tr>
-        <tr><td>Customer Total:</td> <td><textarea id="total_input" rows="1" cols="25"></textarea></td></tr>
-        <tr><td>Customer Back:</td> <td><textarea id="back_input" rows="1" cols="25"></textarea></td></tr>
+        <tr><td>Own Stake:</td> <td><textarea id="ownstake_input" rows="1" cols="25">20</textarea></td></tr>
+        <tr><td>Customer Total:</td> <td><textarea id="total_input" rows="1" cols="25">100</textarea></td></tr>
+        <tr><td>Customer Back:</td> <td><textarea id="back_input" rows="1" cols="25">20</textarea></td></tr>
         <tr id="we_get_row" hidden="true"><td>We get</td> <td id="we_get"></td></tr>
       </table>
       <button onclick="gui_merchant_init();">Initialize</button>
@@ -51,7 +51,12 @@
         <td id="customer_back">---</td></tr>      
       <tr>     <td>total:</td>
         <td id="customer_total">---</td></tr>
-    </table>   
+    </table>
+
+    <h3>About</h3>
+    TODO
+
+    TODO button that shows all buttons, button to unlock safety.
     
     <script src="javascripts/common.js"></script>
     <script src="javascripts/contract.js"></script>

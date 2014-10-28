@@ -48,6 +48,9 @@ function customer_pay(from, total, tip, callback) {
 
 function customer_release(from, more_tip, callback) {
     if(safeties) {
+        if( customer() == "0x" ){
+            alert("You arent paying here, so you cant release the funds.");
+        }
         if( eth.secretToAddress(from) != customer() ){
             alert("You cannot release funds on someone elses escrow.\n" +
                  eth.secretToAddress(from) + " != " + customer()); return;

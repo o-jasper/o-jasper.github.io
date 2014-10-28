@@ -39,6 +39,7 @@ selfurl = "TODO/selfurl/";
 am_merchant = false;
 am_customer = false;
 
+// TODO.. need in-progress stages?
 function update() {
     ge("contract_balance").innerText = eth.toDecimal(eth.balanceAt(contract_addr));
     
@@ -88,6 +89,7 @@ function update() {
         }
     }
 
+    am_customer = false;    
     if( cust_addr == "0x" ) {
         if( total != "0" ) {
             ge("customer_addr").innerText  = "No customer yet."
@@ -98,15 +100,15 @@ function update() {
         cust_priv = got_privkey(cust_addr);
         am_customer = (cust_priv != null);
         
-        ge("input_pay").hidden = am_customer;
-        ge("input_release").hidden = !am_customer;
-        
         if( am_customer ) {
             ge("customer_addr").innerHTML  = "<small>(have)</small>" + cust_addr;
         } else {
             ge("customer_addr").innerHTML  = "<small>(taken)</small>" + cust_addr;
         }
     }
+    ge("input_pay").hidden = am_customer;
+    ge("input_release").hidden = !am_customer;
+    
     update_your_state();
 }
 function update_your_state() {
