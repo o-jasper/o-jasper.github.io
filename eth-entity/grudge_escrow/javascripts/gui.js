@@ -77,15 +77,13 @@ function update() {
         back  = eth.toDecimal(customer_back());
         ge("customer_total").innerText = total;
         ge("customer_back").innerText  = back;
-        ge("customer_price").innerText = "TODO";
-        //(num.valueOf(total) - num.valueOf(back)) + "";
+        ge("customer_price").innerText = (total.valueOf() - back.valueOf());
 
         bal = eth.toDecimal(eth.balanceAt(contract_addr));
         if(cust_addr == "0x") {
-            ge("merchant_stake").innerText = bal + "";
+            ge("merchant_stake").innerText = bal;
         } else {
-            //ge("merchant_stake").innerText = (bal - num.valueOf(total)) + "";
-            ge("merchant_stake").innerText = bal + " minus TODO";
+            ge("merchant_stake").innerText = (bal.valueOf() - total.valueOf(total));
         }
     }
 

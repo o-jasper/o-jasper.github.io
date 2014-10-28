@@ -21,10 +21,6 @@ function merchant_init(customerTotal, customerBack, callback, ownStake, from) {
         if(customerTotal == 0 || customerTotal=="0x" ){
             alert("Selling for nothing!"); return;
         }
-//        if(customerBack > customerTotal){
-//            alert("Customer is one with profit?!" + customerBack + " > " + customerTotal);
-//            return;
-//        }
     }
     eth.transact({"from":from, "to":contract_addr,
                   "value":ownStake, "data":[customerTotal, customerBack]},
