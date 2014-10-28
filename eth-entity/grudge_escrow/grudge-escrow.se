@@ -15,16 +15,24 @@ shared:
 init:
     contract.storage[Merchant] = msg.sender  // Merchant
 code:
-    if msg.sender == contract.storage[Merchant] && contract.storage[CustomerTotal] == 0:
-        if msg.datasize == 2:
-            contract.storage[CustomerTotal] = msg.data[0]  // Set the price.
-            contract.storage[CustomerBack] = msg.data[1]  // And customer holding side.
-            return("price changed")
-        if msg.datasize == 1:  //TODO retracting offer
-            if msg.data[0] == "suicide":
-                suicide(msg.sender)
-                return("suicided")
-        return("pointless?")
+    
+    if msg.sender == contract.storage[Merchant]:
+        // TODO handle a merchant that might try get this transaction between sneakily.
+        // think you might want to automatically set a block that disables it for a couple
+        // of blocks.
+        if contract.storage[Customer] == 0:  // If no customer yet, changes are allowed.
+            if msg.datasize == 2:
+                contract.storage[CustomerTotal] = msg.data[0]  // Set the price.
+                contract.storage[CustomerBack] = msg.data[1]  // And customer holding side.
+                return("price changed")
+                return("pointless?")
+        
+        if msg.datasize == 1 && msg.data[0] == "refund":  // Extreme case.
+            msg(tx.gas - 100, contract.storage[Customer], contract.balance, "refund")
+            contract.storage[CustomerTotal] = 0  // Reset stuff.(can be reused)
+            contract.storage[CustomerBack] = 0
+            contract.storage[Customer] = 0            
+            return("refunded")
 
     if contract.storage[CustomerTotal] == 0: // No offer by merchant yet.
         return("no offer yet")
