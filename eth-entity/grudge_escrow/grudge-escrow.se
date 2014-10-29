@@ -12,6 +12,8 @@ shared:
     CustomerTotal = 0x20
     CustomerBack = 0x40
     Customer = 0x60
+    NextTime = 0x80
+    wait_time = 300 // Wait 5 minutes
 init:
     contract.storage[Merchant] = msg.sender  // Merchant
 code:
@@ -24,27 +26,38 @@ code:
             if msg.datasize == 2:
                 contract.storage[CustomerTotal] = msg.data[0]  // Set the price.
                 contract.storage[CustomerBack] = msg.data[1]  // And customer holding side.
+                contract.storage[NextTime] = block.timestamp
                 return("price changed")
-                return("pointless?")
+            return("pointless?")
         
         if msg.datasize == 1 && msg.data[0] == "refund":  // Extreme case.
             msg(tx.gas - 100, contract.storage[Customer], contract.balance, "refund")
             contract.storage[CustomerTotal] = 0  // Reset stuff.(can be reused)
             contract.storage[CustomerBack] = 0
-            contract.storage[Customer] = 0            
+            contract.storage[Customer] = 0
+            contract.storage[NextTime] = 0
             return("refunded")
+        return("pointless?")
 
     if contract.storage[CustomerTotal] == 0: // No offer by merchant yet.
+        send(tx.gas - 100, msg.sender, msg.value)
         return("no offer yet")
 
-    customer = contract.storage[Customer]:
+    customer = contract.storage[Customer]        
     if customer == 0:
+        // Not enough time passed.
+        if block.timestamp < contract.storage[NextTime] + wait_time:
+            send(tx.gas - 100, msg.sender, msg.value)
+            return("too early")
+        
         // Customer coming in.
         if contract.balance < contract.storage[CustomerTotal]:  // Not paying enough.
             msg(tx.gas - 100, msg.sender, msg.value, "insufficient")
             return("insufficient")
         // Sufficient, give customer releasing control.
         contract.storage[Customer] = msg.sender
+        // From this point, the time is just used to make angry faces.
+        contract.storage[NextTime] = block.timestamp
         return("bought")
 
     //Customer releasing funds both ways.
@@ -54,6 +67,8 @@ code:
         contract.storage[CustomerTotal] = 0  // Reset stuff.(can be reused)
         contract.storage[CustomerBack] = 0
         contract.storage[Customer] = 0
+        contract.storage[NextTime] = 0
         return("released")
 
+    send(tx.gas - 100, msg.sender, msg.value)
     return("stranger")  // Who are you? Thanks for the ethers.
