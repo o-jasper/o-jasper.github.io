@@ -5,6 +5,9 @@ function merchant() { return eth.stateAt(contract_addr, "0x00"); }
 function customer() { return eth.stateAt(contract_addr, "0x60"); }
 function customer_total() { return eth.stateAt(contract_addr, "0x20"); }
 function customer_back() { return eth.stateAt(contract_addr, "0x40"); }
+function nexttime() { return eth.stateAt(contract_addr, "0x80"); }
+
+var angering_time = 10;
 
 // Is of course not what guards the contract behavior, prevents some
 //  pointless/inefficient transactions.
@@ -27,19 +30,19 @@ function merchant_init(customerTotal, customerBack, callback, ownStake, from) {
                  callback);
 }
 
-function customer_pay(from, total, tip, callback) {
+function customer_pay(from, pay, tip, callback) {
     if(safeties) {
         if(customer_total() == "0x"){
             alert("Escrow not yet initialized(to be done by merchant)"); return;
         }
         if(customer() != "0x"){ alert("someone, possibly you, already paid"); return; }
-        if(total + "" != customer_total()) {
-            alert("You should pay the indicated price!\n" +
-                  total + "!=" + customer_total()); return;
+        if((pay - tip) + "" != eth.toDecimal(customer_total())) {
+            alert("Tip minus total is not what we have to pay!\n" +
+                  pay + "-" + tip + "!=" + eth.toDecimal(customer_total())); return;
         }
     }
-    //NOTE: tip disregarded.
-    eth.transact({"from":from, "to":contract_addr, "value":total}, callback);
+    pay_str = "0x" + pay.toString(16);
+    eth.transact({"from":from, "to":contract_addr, "value":pay_str}, callback);
 }
 
 function customer_release(from, more_tip, callback) {

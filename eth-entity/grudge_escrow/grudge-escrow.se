@@ -13,7 +13,8 @@ shared:
     CustomerBack = 0x40
     Customer = 0x60
     NextTime = 0x80
-    wait_time = 300 // Wait 5 minutes
+// 1 seconds, basically, the next block.(probably want a bunch of blocks in reality.
+    wait_time = 1
 init:
     contract.storage[Merchant] = msg.sender  // Merchant
 code:
@@ -51,7 +52,7 @@ code:
             return("too early")
         
         // Customer coming in.
-        if contract.balance < contract.storage[CustomerTotal]:  // Not paying enough.
+        if msg.value < contract.storage[CustomerTotal]:  // Not paying enough.
             msg(tx.gas - 100, msg.sender, msg.value, "insufficient")
             return("insufficient")
         // Sufficient, give customer releasing control.

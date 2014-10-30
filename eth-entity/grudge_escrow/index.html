@@ -6,15 +6,19 @@
     <title>Ill-advised Grudge Based Escrow</title>
   </head>
   <body>
-    
+
+    <h2>You need to use an Ethereum browser to use this</h2>
+    (tested only on alethzero at the moment)
+
+    <p style="float:right;padding:2%;font-size:70%;color:#555"><img id="mood" src="pics/smiley_neutral.svg"></p>
     <h2>Ill-advised Grudge Based Escrow</h2>
 
-    <button id="creator_button" onclick="createIt()">Create (you get merchant position)</button><br>
+    <button id="creator_button" onclick="createIt();">Create (you get merchant position)</button><br>
     <span id="creator_state"></span>    
 
     <h3>Grudge Escrow Contract:</h3>
-    <textarea id="addr_input" rows="1" cols="55" oninput="set_from_input();" onblur="setting_addr(false);"></textarea>
-    <span id="contract_addr" onclick="setting_addr(true);" hidden="true"></span>
+    <textarea id="addr_input" rows="1" cols="55" oninput="set_from_input();"></textarea>
+    <span id="contract_addr" hidden="true"></span>
     
     <p id="your_state">(no address)</p>
     
@@ -33,6 +37,7 @@
     <span id="as_customer"><h3>Customer actions</h3>
       <button id="input_pay" onclick="gui_customer_pay();">Pay</button>
       <button id="input_release" onclick="gui_customer_release(null);" hidden="true">Release</button>
+      <textarea id="tip" rows="1" cols="7" onblur="update();">tip</textarea><span id="tip_note"></span>
       <!-- Tip: <textarea id="tip_input" rows="1" cols="20">0</textarea> -->
     </span>
 
@@ -40,17 +45,17 @@
     Balance: <span id="contract_balance"></span>
     <table id="state_info" style="margin-right:20px">
       <tr><td><b>Merchant</b></td>
-        <td id="merchant_addr">---</td></tr>
+        <td id="merchant_addr">---</td> <td id="merchant_addr_note"></td> </tr>
       <tr>     <td>stake+tip:</td>
-        <td id="merchant_stake">---</td></tr>
+        <td id="merchant_stake">---</td> <td id="merchant_stake_note"></td> </tr>
       <tr><td><b>Customer</b></td>
-        <td id="customer_addr">---</td></tr>
+        <td id="customer_addr">---</td> <td id="customer_addr_note"></td> </tr>
       <tr>     <td>price:</td>
-        <td id="customer_price">---</td></tr> 
+        <td id="customer_price">---</td> <td id="customer_price_note"></td> </tr> 
       <tr>     <td>stake:</td>
-        <td id="customer_back">---</td></tr>      
+        <td id="customer_back">---</td> <td id="customer_back_note"></td> </tr>      
       <tr>     <td>total:</td>
-        <td id="customer_total">---</td></tr>
+        <td id="customer_total">---</td> <td id="customer_total_note"></td> </tr>
     </table>
 
     <h3>About</h3>

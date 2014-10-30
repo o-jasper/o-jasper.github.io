@@ -28,16 +28,73 @@ function set_from_input() {
     ge("creator_button").hide = true;
 }
 
-function setting_addr(yes) {
-    return;
-    if(ge("addr_input").value.length == 0){ return; }
-    ge("addr_input").hidden = !yes;
-    ge("contract_addr").hidden = yes;
-}
-
 selfurl = "TODO/selfurl/";
 am_merchant = false;
 am_customer = false;
+
+function get_tip() {
+    r = parseInt(ge("tip").value);
+    if( r + "" == ge("tip").value ){
+        ge("tip_note").innerText = ""; //TODO
+        //ge("tip_note").class = ""; //TODO
+        return r;
+    }
+    ge("tip_note").innerText = "invalid";
+    //ge("tip_note").class = ""; //TODO
+    return 0;
+}
+
+function display_amounts(mer_stake, cust_total, cust_stake) {
+    ge("merchant_stake").innerText = mer_stake;
+    ge("merchant_stake_note").innerText = (100*mer_stake)/cust_total + "%";
+    
+    ge("customer_total").innerText = cust_total;
+    ge("customer_back").innerText  = cust_stake;
+    ge("customer_back_note").innerText  = (100*cust_stake)/cust_total + "%";
+    
+    cust_price = "--";
+    if(cust_total != "--") { cust_price = parseInt(cust_total) - parseInt(cust_stake); }
+    ge("customer_price").innerText  = cust_price;
+    
+    text = "Pay " + total;
+    tip = get_tip();
+    if( tip != 0 ){
+        ge("tip_note").innerText = (100*tip/total) + "%, Better afterwards?";
+        text += ", tip " + tip;
+    }
+    else{ ge("tip_note").innerText = ""; }
+    ge("input_pay").innerText = text;
+
+    html = "Release " + cust_stake + "(self) " + mer_stake + "(merchant)";
+    html += "<br>If product not good, remember, you're very angry!";
+    if( tip != 0 ){
+        html += "<br>tip " + tip;
+        ge("tip_note").innerText = (100*tip/total) + "%";
+    } else{ ge("tip_note").innerText = ""; }
+    
+    ge("input_release").innerHTML = html;
+}
+
+var angry_time = 300;
+function update_mood(matters, cust_addr, total) {
+    i = 0;
+    if( matters && total==0 ){ i = -1; }
+    if( nexttime()!=0 && matters && cust_addr!="0x"){
+        i  = ((new Date()).getUTCSeconds() - nexttime())/angry_time;
+//        if(i < 0){ alert("... In past?! Could be difference between Ethereum block time and your clock."); }
+    }
+    img_src = "";
+    if( i == -1) {
+        img_src = "pics/smiley_happy.svg";
+    } else if( i==0 ) {
+        img_src = "pics/smiley_neutral.svg";
+    } else if(i==1) {
+        img_src = "pics/smiley_grumpy.svg";
+    } else {
+        img_src = "pics/smiley_grumpy.svg";
+    }
+    ge("mood").src = img_src;
+}
 
 // TODO.. need in-progress stages?
 function update() {
@@ -56,35 +113,20 @@ function update() {
     priv = got_privkey(mer_addr);
     am_merchant = (priv != null);
     ge("as_merchant").hidden = !am_merchant || customer_total()!="0x";
-    if( am_merchant ) {
-        ge("merchant_addr").innerHTML  = "<small>(have)</small>" + mer_addr;
-    } else {
-        ge("merchant_addr").innerText  = mer_addr;
-    }
+    ge("merchant_addr").innerText  = mer_addr;
+    if( am_merchant ) { ge("merchant_addr_note").innerText  = "(ours)"; }
 
-    total = eth.toDecimal(customer_total());
+    total = parseInt(eth.toDecimal(customer_total()));
     ge("as_customer").hidden = (total == "0");
-
     if( total == "0" ) {
         if( customer_back() != "0x" ){ alert("Inconsistent state! Return not zeroed!"); }
         if( customer() != "0x" ){ alert("Inconsistent state, customer address not zeroed!"); }
 
-        ge("merchant_stake").innerText = "--";
-        ge("customer_total").innerText = "--";
-        ge("customer_back").innerText  = "--";
-        ge("customer_price").innerText = "--";
+        display_amounts("--", "--", "--");
     } else {
-        back  = eth.toDecimal(customer_back());
-        ge("customer_total").innerText = total;
-        ge("customer_back").innerText  = back;
-        ge("customer_price").innerText = (total.valueOf() - back.valueOf());
-
-        bal = eth.toDecimal(eth.balanceAt(contract_addr));
-        if(cust_addr == "0x") {
-            ge("merchant_stake").innerText = bal;
-        } else {
-            ge("merchant_stake").innerText = (bal.valueOf() - total.valueOf(total));
-        }
+        bal = parseInt(eth.toDecimal(eth.balanceAt(contract_addr)));
+        if(cust_addr != "0x") { mer_stake = bal - total; }
+        display_amounts(bal, total, eth.toDecimal(customer_back()));
     }
 
     am_customer = false;    
@@ -97,18 +139,18 @@ function update() {
     } else {
         cust_priv = got_privkey(cust_addr);
         am_customer = (cust_priv != null);
-        
-        if( am_customer ) {
-            ge("customer_addr").innerHTML  = "<small>(have)</small>" + cust_addr;
-        } else {
-            ge("customer_addr").innerHTML  = "<small>(taken)</small>" + cust_addr;
-        }
+
+        ge("customer_addr").innerText  = cust_addr;
+        if( am_customer ) { ge("customer_addr_note").innerHTML  = "(ours)"; }
+        else{ ge("customer_addr_note").innerText  = "(taken)"; }
     }
     ge("input_pay").hidden = am_customer;
     ge("input_release").hidden = !am_customer;
+    update_mood(am_customer || am_merchant, cust_addr, total);
     
     update_your_state();
 }
+
 function update_your_state() {
     /*if( !eth.codeAt(contract_addr) ) {  //TODO dunno how to do this.
         ge("your_state").innerHTML = "Is not a contract.";
@@ -152,13 +194,23 @@ function gui_merchant_init() {
                   ge("ownstake_input").value, priv);
 }
 
+function reset_tip() {
+    ge("tip").value = "tip"; ge("tip_note").innerText = "";
+}
+
 function gui_customer_pay(as) {
     if(as==null) { as = eth.key; }
-    customer_pay(as, customer_total(), 0, update);
+    tip = get_tip();
+    pay = parseInt(eth.toDecimal(customer_total())) + tip;
+    customer_pay(as, pay, tip, update);
+    reset_tip();
 }
 
 function gui_customer_release(from) {
     if(from==null) { from = got_privkey(customer()); }
-    customer_release(from, 0, update);
+    
+    customer_release(from, get_tip(), update);
+
+    reset_tip();    
     update();
 }
