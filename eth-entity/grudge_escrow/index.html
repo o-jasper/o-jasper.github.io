@@ -4,19 +4,25 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <title>Ill-advised Grudge Based Escrow</title>
+
+    <link rel="stylesheet" href="stylesheets/note.css">
   </head>
   <body>
 
     <h2>You need to use an Ethereum browser to use this</h2>
-    (tested only on alethzero at the moment)
+    Tested only on alethzero at the moment!
 
-    <p style="float:right;padding:2%;font-size:70%;color:#555"><img id="mood" src="pics/smiley_neutral.svg"></p>
+    Also, advise <b>against</b> using it.
+
+    (Also note that it doesnt identify the grudge escrow either!)
+
     <h2>Ill-advised Grudge Based Escrow</h2>
 
     <button id="creator_button" onclick="createIt();">Create (you get merchant position)</button><br>
     <span id="creator_state"></span>    
 
     <h3>Grudge Escrow Contract:</h3>
+    <p style="float:right;padding:2%;font-size:70%;color:#555"><img id="mood" src="pics/smiley_neutral.svg"></p>    
     <textarea id="addr_input" rows="1" cols="55" oninput="set_from_input();"></textarea>
     <span id="contract_addr" hidden="true"></span>
     

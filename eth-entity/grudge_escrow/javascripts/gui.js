@@ -36,21 +36,43 @@ function get_tip() {
     r = parseInt(ge("tip").value);
     if( r + "" == ge("tip").value ){
         ge("tip_note").innerText = ""; //TODO
-        //ge("tip_note").class = ""; //TODO
+        ge("tip_note").className = "";
         return r;
     }
     ge("tip_note").innerText = "invalid";
-    //ge("tip_note").class = ""; //TODO
+    ge("tip_note").className = "wrong"; //TODO
     return 0;
+}
+
+function amount_fraction_style(pct, f) {
+    if(f==null){ f = 1; }
+    if(f*pct < 30) {
+        return "note";
+    } else if(f*pct < 50) {
+        return "";
+    } else {
+        return "important";
+    }
+}
+
+var tip_warn_factor = 1.5;
+
+function ge_amount_fraction(into, nom, div, f) {
+    if(f==null){ f = 1; }
+    pct = (100*nom)/div;
+    el = ge(into);
+    if( el == null ){ alert("Couldnt find " + into); }
+    el.innerText = pct + "%";
+    el.className = amount_fraction_style(pct, f);
 }
 
 function display_amounts(mer_stake, cust_total, cust_stake) {
     ge("merchant_stake").innerText = mer_stake;
-    ge("merchant_stake_note").innerText = (100*mer_stake)/cust_total + "%";
+    ge_amount_fraction("merchant_stake_note", mer_stake, cust_total);
     
     ge("customer_total").innerText = cust_total;
     ge("customer_back").innerText  = cust_stake;
-    ge("customer_back_note").innerText  = (100*cust_stake)/cust_total + "%";
+    ge_amount_fraction("customer_back_note", cust_stake, cust_total);
     
     cust_price = "--";
     if(cust_total != "--") { cust_price = parseInt(cust_total) - parseInt(cust_stake); }
@@ -60,6 +82,8 @@ function display_amounts(mer_stake, cust_total, cust_stake) {
     tip = get_tip();
     if( tip != 0 ){
         ge("tip_note").innerText = (100*tip/total) + "%, Better afterwards?";
+        ge("tip_note").className = "";
+        if( 100*tip/total > 20 ){ ge("tip_note").className = "important"; }
         text += ", tip " + tip;
     }
     else{ ge("tip_note").innerText = ""; }
@@ -69,7 +93,7 @@ function display_amounts(mer_stake, cust_total, cust_stake) {
     html += "<br>If product not good, remember, you're very angry!";
     if( tip != 0 ){
         html += "<br>tip " + tip;
-        ge("tip_note").innerText = (100*tip/total) + "%";
+        ge_amount_fraction("tip_note", tip, total, tip_warn_factor);
     } else{ ge("tip_note").innerText = ""; }
     
     ge("input_release").innerHTML = html;
@@ -152,14 +176,18 @@ function update() {
 }
 
 function update_your_state() {
-    /*if( !eth.codeAt(contract_addr) ) {  //TODO dunno how to do this.
-        ge("your_state").innerHTML = "Is not a contract.";
+    var html = "";        
+    if( !eth.codeAt(contract_addr) ) {  //TODO dunno how to do this.
+        html = "Is not a contract.";
+        ge("your_state").innerHTML = html;
         return;
-        }
-        TODO want to be able to recognize it? Dunno how to do that either.
-    */
-    var html = "";
-    if( am_customer ){
+    } else if( merchant() == "0x" ) { // TODO kindah want to be able ot recognize it.
+        html = "No merchant; a state this contract is never in.<br>";
+        html += "<b>Either not contract, or of different kind.<br>";
+        html += "Cannot positively identify contracts as being of grudge escrow kind!</b>/";
+        ge("your_state").innerHTML = html;
+        return;
+    } else if( am_customer ){
         if(am_merchant) {
             html = "You have both <b>Merchant and Customer</b> privkey. You are possibly silly.";
         } else {
@@ -170,6 +198,7 @@ function update_your_state() {
     } else {
         html = "Insofar application can tell, no relation to this contract.";
     }
+    
     if( customer_total() == "0x" ) {
         html += "<br>The escrow is <b>not yet initialized</b>.";
     } else if( customer() == "0x" ) {

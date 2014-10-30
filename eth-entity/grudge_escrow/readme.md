@@ -5,7 +5,10 @@ It is called grudging escrow because if the deal fails, the rational choice if
 grudge has no value to you, is to pretend it succeeded.
 
 Also, it just destroys value if things go wrong. It is a *bad* contract to
-actually use! And the testing and such does not go as far as it aught to.
+actually use! *Dont do it*, just on the testnet with wortless things. 
+
+The testing and such does not go as far as it aught to.
+There will be TODOs left behind.
 
 ### TODO
 
@@ -13,9 +16,6 @@ actually use! And the testing and such does not go as far as it aught to.
   
 * Have images of waiting/smiling guys, and add a 'time of delivery',
   and if funds arent released have them turn grumpy.(TODO have more images)
-  
-* When setting up, show percentages of stake.
-  Red letters if stake is bigger than total. (TODO add the CSS and stuff)
 
 * Get the javascript contract launcher to actually work.
 
@@ -30,3 +30,5 @@ actually use! And the testing and such does not go as far as it aught to.
 
 * Add tipping to javascript.
 
+* When setting up, show percentages of stake.
+  Red letters if stake is bigger than total.
