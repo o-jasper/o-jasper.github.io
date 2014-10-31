@@ -109,14 +109,14 @@ function update_mood(matters, cust_addr, total) {
 //        if(i < 0){ alert("... In past?! Could be difference between Ethereum block time and your clock."); }
     }
     img_src = "";
-    if( i == -1) {
+    if( i == -1) { //TODO Moar.
         img_src = "pics/smiley_happy.svg";
     } else if( i==0 ) {
         img_src = "pics/smiley_neutral.svg";
     } else if(i==1) {
         img_src = "pics/smiley_grumpy.svg";
     } else {
-        img_src = "pics/smiley_grumpy.svg";
+        img_src = "pics/smiley_angry.svg";
     }
     ge("mood").src = img_src;
 }
@@ -194,7 +194,7 @@ function update_your_state() {
     } else if( merchant() == "0x" ) { // TODO kindah want to be able ot recognize it.
         html = "No merchant; a state this contract is never in.<br>";
         html += "<b>Either not contract, or of different kind.<br>";
-        html += "Cannot positively identify contracts as being of grudge escrow kind!</b>/";
+        html += "Cannot positively identify contracts as being of grudge escrow kind!</b>";
         ge("your_state").innerHTML = html;
         return;
     } else if( am_customer ){
