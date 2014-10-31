@@ -42,8 +42,8 @@ def scenario_insufficient(r=True, a=1000):
     assert s.send(t.k1, c, 0, []) == [i("no offer yet")]
     
     check(a if r else 0)
-    assert s.send(t.k0, c, 0 if r else a, [4000, 1000]) == [i("price changed")]
-    assert s.block.get_storage_data(c, 0x20) == 4000
+    assert s.send(t.k0, c, 0 if r else a, [3000, 1000]) == [i("price changed")]
+    assert s.block.get_storage_data(c, 0x20) == 3000
     assert s.block.get_storage_data(c, 0x40) == 1000
     assert s.block.get_storage_data(c, 0x60) == 0
     assert s.send(t.k1, c, 2500, []) == [i("too early")]
