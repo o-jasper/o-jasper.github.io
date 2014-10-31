@@ -222,6 +222,7 @@ function createIt() {
     if(contract_addr != null){ alert("Already have a contract."); return; }
     ge("creator_state").innerText = "Creating...";
     createContract(eth.key, callback_addr);
+    update();
 }
 
 function gui_merchant_init() {
@@ -252,7 +253,6 @@ function gui_customer_release(from) {
     reset_tip();    
     update();
 }
-
 
 function safety_toggle() {
     safety = !safety;
