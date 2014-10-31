@@ -14,6 +14,8 @@ var angering_time = 10;
 var safeties = true;
 
 function merchant_init(customerTotal, customerBack, callback, ownStake, from) {
+    args = {"from":from, "to":contract_addr, "value":ownStake,
+            "data":[customerTotal, customerBack]};
     if(safeties) {
         if(eth.secretToAddress(from) != merchant()){
             alert("Cannot init, you're not merchant\n" +
@@ -24,13 +26,14 @@ function merchant_init(customerTotal, customerBack, callback, ownStake, from) {
         if(customerTotal == 0 || customerTotal=="0x" ){
             alert("Selling for nothing!"); return;
         }
+        //alert(eth.call(args)); //TODO check outcomes.
     }
-    eth.transact({"from":from, "to":contract_addr,
-                  "value":ownStake, "data":[customerTotal, customerBack]},
-                 callback);
+    eth.transact(args, callback);
 }
 
 function customer_pay(from, pay, tip, callback) {
+    pay_str = "0x" + pay.toString(16);
+    args = {"from":from, "to":contract_addr, "value":pay_str};    
     if(safeties) {
         if(customer_total() == "0x"){
             alert("Escrow not yet initialized(to be done by merchant)"); return;
@@ -40,12 +43,14 @@ function customer_pay(from, pay, tip, callback) {
             alert("Tip minus total is not what we have to pay!\n" +
                   pay + "-" + tip + "!=" + eth.toDecimal(customer_total())); return;
         }
+        //alert(eth.call(args));
     }
-    pay_str = "0x" + pay.toString(16);
-    eth.transact({"from":from, "to":contract_addr, "value":pay_str}, callback);
+    eth.transact(args, callback);
 }
 
 function customer_release(from, more_tip, callback) {
+    pay_str = "0x" + pay.toString(16);
+    args = {"from":from, "to":contract_addr, "value":pay_str};    
     if(safeties) {
         if( customer() == "0x" ){
             alert("You arent paying here, so you cant release the funds.");
@@ -54,6 +59,7 @@ function customer_release(from, more_tip, callback) {
             alert("You cannot release funds on someone elses escrow.\n" +
                  eth.secretToAddress(from) + " != " + customer()); return;
         }
+        //alert(eth.call(args));
     }
     eth.transact({"from":from, "to":contract_addr, "value":more_tip}, callback);
 }
