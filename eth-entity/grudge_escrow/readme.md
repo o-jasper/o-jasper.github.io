@@ -8,7 +8,7 @@ Also, it just destroys value if things go wrong. It is a *bad* contract to
 actually use! *Dont do it*, just on the testnet with wortless things. 
 
 The testing and such does not go as far as it aught to.
-There will be TODOs left behind.
+There will be TODOs left behind. Please do not take this thing seriously.
 
 ### TODO
 

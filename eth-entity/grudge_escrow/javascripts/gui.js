@@ -120,6 +120,8 @@ function update_mood(matters, cust_addr, total) {
     ge("mood").src = img_src;
 }
 
+var show_all = false;
+
 // TODO.. need in-progress stages?
 function update() {
     ge("contract_balance").innerText = eth.toDecimal(eth.balanceAt(contract_addr));
@@ -173,6 +175,13 @@ function update() {
     update_mood(am_customer || am_merchant, cust_addr, total);
     
     update_your_state();
+
+    if(show_all) {
+        ge("as_merchant").hidden = false; 
+        ge("as_customer").hidden = false;
+        ge("input_pay").hidden = false;
+        ge("input_release").hidden = false;        
+    }
 }
 
 function update_your_state() {
@@ -241,5 +250,19 @@ function gui_customer_release(from) {
     customer_release(from, get_tip(), update);
 
     reset_tip();    
+    update();
+}
+
+
+function safety_toggle() {
+    safety = !safety;
+    if(safety){ ge("safety").innerText = "Remove safety checks"; }
+    else{ ge("safety").innerText = "Enable safety checks"; }
+}
+
+function show_toggle() {
+    show_all = !show_all;
+    if(show_all){ ge("show_all").innerText = "Show relevant"; }
+    else{ ge("show_all").innerText = "Show everything"; }
     update();
 }

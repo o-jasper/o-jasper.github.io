@@ -12,9 +12,10 @@
     <h2>You need to use an Ethereum browser to use this</h2>
     Tested only on alethzero at the moment!
 
-    Also, advise <b>against</b> using it.
+    Also, advise <b>against</b> using it. Please dont take it seriously!
 
-    (Also note that it doesnt identify the grudge escrow either!)
+    (Also note that it doesnt identify the grudge escrow contract on ethereum
+    either! Will happily send messages that remotely look like grudge escrow.)
 
     <h2>Ill-advised Grudge Based Escrow</h2>
 
@@ -65,10 +66,17 @@
     </table>
 
     <h3>About</h3>
-    TODO
+    Grudge escrow [developed here](https://github.com/o-jasper/o-jasper.github.io/tree/master/eth-entity/grudge_escrow), as first contract with some testing and a GUI
+    by me, Jasper den Ouden.(finally!)
 
-    TODO button that shows all buttons, button to unlock safety.
-    
+    There are some checks done before sending transactions.
+    They are not what enforces contracts, it just avoids messiness on your side,
+    they are also not there to imply <i>any</i> sort of safety.
+    <button id="safety" onclick="safety_toggle();">Remove safety checks</button>
+
+    Things show/dont show depending on state aswel,
+    <button id="show_all" onclick="show_toggle();">Show everything</button>.
+
     <script src="javascripts/common.js"></script>
     <script src="javascripts/contract.js"></script>
     <script src="javascripts/gui.js"></script>
