@@ -103,8 +103,9 @@ var angry_time = 300;
 function update_mood(matters, cust_addr, total) {
     i = 0;
     if( matters && total==0 ){ i = -1; }
-    if( nexttime()!=0 && matters && cust_addr!="0x"){
-        i  = ((new Date()).getUTCSeconds() - nexttime())/angry_time;
+    if( nexttime()!="0x" && matters && cust_addr!="0x"){
+        at_time = parseInt(eth.toDecimal(nexttime()));
+        i  = Math.floor(((new Date()).getTime()/1000 - at_time)/angry_time);
 //        if(i < 0){ alert("... In past?! Could be difference between Ethereum block time and your clock."); }
     }
     img_src = "";

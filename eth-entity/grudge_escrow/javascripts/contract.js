@@ -7,8 +7,6 @@ function customer_total() { return eth.stateAt(contract_addr, "0x20"); }
 function customer_back() { return eth.stateAt(contract_addr, "0x40"); }
 function nexttime() { return eth.stateAt(contract_addr, "0x80"); }
 
-var angering_time = 10;
-
 // Is of course not what guards the contract behavior, prevents some
 //  pointless/inefficient transactions.
 var safeties = true;
@@ -49,7 +47,7 @@ function customer_pay(from, pay, tip, callback) {
 }
 
 function customer_release(from, more_tip, callback) {
-    pay_str = "0x" + pay.toString(16);
+    pay_str = "0x" + more_tip.toString(16);
     args = {"from":from, "to":contract_addr, "value":pay_str};    
     if(safeties) {
         if( customer() == "0x" ){
