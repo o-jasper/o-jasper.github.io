@@ -23,13 +23,13 @@ code:
         // TODO handle a merchant that might try get this transaction between sneakily.
         // think you might want to automatically set a block that disables it for a couple
         // of blocks.
-        if contract.storage[Customer] == 0:  // If no customer yet, changes are allowed.
-            if msg.datasize == 2:
-                contract.storage[CustomerTotal] = msg.data[0]  // Set the price.
-                contract.storage[CustomerBack] = msg.data[1]  // And customer holding side.
-                contract.storage[NextTime] = block.timestamp
-                return("price changed")
-            return("pointless?")
+
+        // If no customer yet, changes are allowed.
+        if contract.storage[Customer] == 0 && msg.datasize == 2:
+            contract.storage[CustomerTotal] = msg.data[0]  // Set the price.
+            contract.storage[CustomerBack] = msg.data[1]  // And customer holding side.
+            contract.storage[NextTime] = block.timestamp
+            return("price changed")
         
         if msg.datasize == 1 && msg.data[0] == "refund":  // Extreme case.
             msg(tx.gas - 100, contract.storage[Customer], contract.balance, "refund")
@@ -38,7 +38,6 @@ code:
             contract.storage[Customer] = 0
             contract.storage[NextTime] = 0
             return("refunded")
-        return("pointless?")
 
     if contract.storage[CustomerTotal] == 0: // No offer by merchant yet.
         send(tx.gas - 100, msg.sender, msg.value)
