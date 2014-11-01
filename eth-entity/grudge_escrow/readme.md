@@ -12,6 +12,9 @@ There will be TODOs left behind. Please do not take this thing seriously.
 
 ### TODO
 
+* Automatically release after longer time if no intervention to specifically
+  deny it. (Avoid accidents)
+
 * When a transaction is already underway, the javascript doesnt send another.
   
 * Have images of waiting/smiling guys, and add a 'time of delivery',
