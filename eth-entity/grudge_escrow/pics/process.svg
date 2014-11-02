@@ -11,8 +11,8 @@
    xmlns:xlink="http://www.w3.org/1999/xlink"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="627.86749"
-   height="1016.5875"
+   width="628.362"
+   height="943.83002"
    id="svg2"
    version="1.1"
    inkscape:version="0.48.5 r10040"
@@ -128,9 +128,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.6955442"
-     inkscape:cx="191.69707"
-     inkscape:cy="136.56629"
+     inkscape:zoom="1.2643515"
+     inkscape:cx="442.33614"
+     inkscape:cy="883.37258"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -630,22 +630,22 @@
        inkscape:connector-curvature="0" />
     <text
        xml:space="preserve"
-       style="font-size:22.83908463px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
-       x="273.56995"
-       y="779.65527"
+       style="font-size:15.08446693px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="38.223709"
+       y="767.80212"
        id="text4158-2-1-1-5"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
-         x="273.56995"
-         y="779.65527"
+         x="38.223709"
+         y="767.80212"
          id="tspan5296-9">for simple money-is-utility,</tspan><tspan
          sodipodi:role="line"
-         x="273.56995"
-         y="808.2041"
-         id="tspan5344">irrational not to take stake back</tspan><tspan
+         x="38.223709"
+         y="786.65771"
+         id="tspan5344">rational choice is to always release</tspan><tspan
          sodipodi:role="line"
-         x="273.56995"
-         y="836.75299"
+         x="38.223709"
+         y="805.51331"
          id="tspan5346">at least for one-round game</tspan></text>
     <path
        sodipodi:type="arc"
@@ -803,37 +803,37 @@
          id="path3339-7"
          style="fill:#e9e9ff;fill-rule:evenodd;stroke:none"
          inkscape:box3dsidetype="11"
-         d="m 312.86855,293.90461 27.27696,-9.85897 0,15.92589 -27.27696,9.187 z" />
+         d="m 312.86855,221.1471 27.27696,-9.85897 0,15.92589 -27.27696,9.187 z" />
       <path
          sodipodi:type="inkscape:box3dside"
          id="path3329-4"
          style="fill:#353564;fill-rule:evenodd;stroke:none"
          inkscape:box3dsidetype="6"
-         d="m 296.8431,265.18985 0,17.21107 16.02545,26.75761 0,-15.25392 z" />
+         d="m 296.8431,192.43234 0,17.21108 16.02545,26.7576 0,-15.25392 z" />
       <path
          sodipodi:type="inkscape:box3dside"
          id="path3331-4"
          style="fill:#4d4d9f;fill-rule:evenodd;stroke:none"
          inkscape:box3dsidetype="5"
-         d="m 296.8431,265.18985 30.1506,-12.62252 13.15181,31.47831 -27.27696,9.85897 z" />
+         d="m 296.8431,192.43234 30.1506,-12.62252 13.15181,31.47831 -27.27696,9.85897 z" />
       <path
          sodipodi:type="inkscape:box3dside"
          id="path3337-6"
          style="fill:#afafde;fill-rule:evenodd;stroke:none"
          inkscape:box3dsidetype="13"
-         d="m 296.8431,282.40092 30.1506,-11.76218 13.15181,29.33279 -27.27696,9.187 z" />
+         d="m 296.8431,209.64342 30.1506,-11.76219 13.15181,29.33279 -27.27696,9.187 z" />
       <path
          sodipodi:type="inkscape:box3dside"
          id="path3335-0"
          style="fill:#d7d7ff;fill-rule:evenodd;stroke:none"
          inkscape:box3dsidetype="14"
-         d="m 326.9937,252.56733 0,18.07141 13.15181,29.33279 0,-15.92589 z" />
+         d="m 326.9937,179.80982 0,18.07141 13.15181,29.33279 0,-15.92589 z" />
       <path
          sodipodi:type="inkscape:box3dside"
          id="path3333-1"
          style="fill:#8686bf;fill-rule:evenodd;stroke:none"
          inkscape:box3dsidetype="3"
-         d="m 296.8431,265.18985 30.1506,-12.62252 0,18.07141 -30.1506,11.76218 z" />
+         d="m 296.8431,192.43234 30.1506,-12.62252 0,18.07141 -30.1506,11.76219 z" />
     </g>
   </g>
 </svg>
