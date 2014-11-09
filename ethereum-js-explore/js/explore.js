@@ -81,7 +81,13 @@ function fancy_list(indexes) {
             if( a != "number" && a!="block" && a!="coinbase" && a!="timestamp" ) {
                 if(first) { first = false; html += "<tr><td>\*</td>"; }
                 else{ html += "<tr><td></td>"; }
-                html += "<td>" + a + ":</td><td>" + cur[a] + "</td></tr>";
+                var value = cur[a];
+                if( (a == "from" || a=="origin") && cur["origin"] == cur["from"] ){
+                    if( a=="from" ){
+                        value = "(=o)" + value;
+                    } else{ continue; }
+                }
+                html += "<td>" + a + ":</td><td>" + value + "</td></tr>";
             }
         }
         html +=  "</table></td><td></td></tr>";
