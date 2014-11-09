@@ -4,6 +4,13 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <title>Ethereum explored(WIP)</title>
+
+    <link rel="stylesheet" href="css/explore.css">
+    
+    <datalist id="views">
+      <option value="plain">
+      <option value="fancy">
+    </datalist> 
   </head>
   <body>
     <p>Note: **WIP**.</p>
@@ -20,15 +27,16 @@
     <tr><td>from:</td>    <td><input id="from" type="text"></td></tr>
     <tr><td>to:</td>      <td><input id="to" type="text"></td></tr>    
     </table>
-    
-    <h3>Search:</h3>
-    <span id="search"></span>
 
-    <h4>Yields <span id="yields_cnt"></span></h4>
+    Style: <input id="view" type="text" list="views" value="fancy">
+    <!-- <h3>Search:</h3>
+    <span id="search"></span> -->
+
+    <h4>Yields <span id="yields_cnt"></span> messages</h4>
     <p id="output"></p>
     
-    <script src="javascripts/common.js"></script>
-    <script src="javascripts/explore.js"></script>
+    <script src="js/common.js"></script>
+    <script src="js/explore.js"></script>
     <script>update();</script>
     
 </body></html>
