@@ -1,0 +1,34 @@
+ <!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Ethereum explored(WIP)</title>
+  </head>
+  <body>
+    <p>Note: **WIP**.</p>
+
+    <button onclick="update();">Update</button> <span id="cnt">0</span>
+
+    <table>
+    <tr><td>earliest:</td><td><input id="earliest" type="text" value="0"></td></tr>
+    <tr><td>latest:</td>  <td><input id="latest" type="text" value="-1"></td></tr>
+    
+    <tr><td>max:</td>     <td><input id="max" type="text" value="100"></td></tr>
+    <tr><td>skip:</td>    <td><input id="skip" type="text" value="0"></td></tr>
+    
+    <tr><td>from:</td>    <td><input id="from" type="text"></td></tr>
+    <tr><td>to:</td>      <td><input id="to" type="text"></td></tr>    
+    </table>
+    
+    <h3>Search:</h3>
+    <span id="search"></span>
+
+    <h4>Yields <span id="yields_cnt"></span></h4>
+    <p id="output"></p>
+    
+    <script src="/home/jasper/proj/ethereum/bitvote/javascripts/common.js"></script>
+    <script src="explore.js"></script>
+    <script>update();</script>
+    
+</body></html>
