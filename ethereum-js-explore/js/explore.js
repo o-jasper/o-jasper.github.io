@@ -45,11 +45,68 @@ function plain_list(indexes) {
     return html;
 }
 
+function html_addr(addr) {
+    if( addr.substr(0,2) != "0x" ){ alert("Just accepting hex atm"); }
+    var html = "<span class=\"addr_front\">" + addr.substr(2,10) + "</span>";
+    html += "<span class=\"addr_aft\">" + addr.substr(10) + "</span>";
+    return html;
+}
+
 function fancy_non_number_block_data(cur) {
-    var html =  "<tr><td>block:</td><td>"     + cur["block"] + "</td></tr>";
-    html += "<tr><td>coinbase:</td><td>"  + cur["coinbase"] + "</td></tr>"
+    var html =  "<tr><td>block:</td><td class=\"block_hash\">";
+    html += cur["block"] + "</td></tr>";
+    html += "<tr><td>coinbase:</td><td>"  + html_addr(cur["coinbase"]) + "</td></tr>"
     html += "<tr><td>timestamp:</td><td>" + cur["timestamp"] + "</td></tr>";
     return html;
+}
+
+function data_side_by_side(data){
+    if( data.substr(0,2) != "0x" ){ alert("Just accepting hex atm"); }
+    var hex = "<tr>", dec="<tr>", ascii="<tr>";
+    for(var i=2 ; i+32 <= data.length ; i+=32){
+        var cur = data.substr(i, i + 32);
+        var dec_str = eth.toDecimal("0x" + cur);
+        var dec_val = parseInt(dec_str);
+        if( dec_val < 100000000000 ) {
+            dec += "<td>" + dec_str + "</td>";
+        } else if( dec_val < 1e32 ){
+            dec += "<td class=\"data_small\">" + dec_str + "</td>";
+        } else {
+            dec += "<td></td>";
+        }
+        ascii += "<td>" + eth.toAscii("0x" + cur); + "</td>";
+        var j = cur.length-1;
+        for( ; j>=0 ; j-=1) { if( cur[j] != '0' ){ break; } }
+        j += 2;
+        if( j < cur.length-2 ){ cur = cur.substr(0,j) + ".."; }
+        else {
+            j = 0;
+            for(; j < cur.length ; j++ ){ if( cur[j] != '0' ){ break; } }
+            cur = ".." + cur.substr(j);
+        }
+        hex   += "<td class=\"data_small\">" + cur + "</td>";
+    }
+    return hex + "</tr>" + dec + "</tr>" + ascii + "</tr>";
+}
+
+function fancy_one(cur, a) {
+    var value = cur[a];
+    if( (a == "from" || a=="origin") && cur["origin"] == cur["from"] ){
+        if( cur["path"].length != 1 ){
+            alert("MSG from contract, origin a contract!?!");
+        }
+        if( a=="from" ){
+            return "(=o)" + html_addr(value);
+        } else{ return null; }
+    } else if( a=="origin" || a=="to"){
+        return html_addr(value);
+    } else if( a == "path" ) {
+        return "(" + value.length + ")" + value;
+    } else if( a=="input" || a=="output"){
+        return "<table>" + data_side_by_side(value) + "</table>";
+    } else {
+        return value;
+    }
 }
 
 function fancy_list(indexes) {
@@ -79,15 +136,13 @@ function fancy_list(indexes) {
         var first = true;
         for(a in cur) {
             if( a != "number" && a!="block" && a!="coinbase" && a!="timestamp" ) {
-                if(first) { first = false; html += "<tr><td>\*</td>"; }
-                else{ html += "<tr><td></td>"; }
-                var value = cur[a];
-                if( (a == "from" || a=="origin") && cur["origin"] == cur["from"] ){
-                    if( a=="from" ){
-                        value = "(=o)" + value;
-                    } else{ continue; }
+                var info = fancy_one(cur, a)
+                if( info != null ) {
+                    if(first) { first = false; html += "<tr><td>\*</td>"; }
+                    else{ html += "<tr><td></td>"; }
+                    
+                    html += "<td>" + a + ":</td><td>" + info + "</td></tr>";
                 }
-                html += "<td>" + a + ":</td><td>" + value + "</td></tr>";
             }
         }
         html +=  "</table></td><td></td></tr>";

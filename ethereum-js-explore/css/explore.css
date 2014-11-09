@@ -1,3 +1,9 @@
 
 .block{background-color:#AAC;}
 .blocki{font-weight:bold;}
+.block_hash{font-size:60%}
+
+.addr_aft{font-size:60%;color:#555}
+.addr_front{}
+
+.data_small{font-size:50%}
