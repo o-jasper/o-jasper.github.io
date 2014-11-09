@@ -8,16 +8,29 @@
 // Get element.
 function ge(element_id) { return document.getElementById(element_id); }
 
-function transact_code(from, code, fun) {
+function transact_code(from, code, fun) { //This one is lazy.
     eth.transact({"from":from, "endowment":0, 
 //                  "gas":1000000, "gasPrice":eth.gasPrice,
                   "code":code}, fun);
 }
 
-function got_privkey(account, keys) { // Returns corresponding private key, if available.
-    if(keys == null) { keys = eth.keys }
+function private_keys_dict(keys) {
+    have = {}
     for(i=0 ; i < keys.length ; i++) {
-        if( eth.secretToAddress(keys[i]) == account ){ return keys[i]; }
+        have[eth.secretToAddress(keys[i])] = keys[i];
     }
-    return null;
+    return have;
+}
+
+var have_keys_dict = null;
+function got_privkey(account, keys) { // Returns corresponding private key, if available.
+    if(keys == null) {
+        if( have_keys_dict == null){ have_keys_dict = private_keys_dict(eth.keys); }
+        return have_keys_dict[account];
+    } else {
+        for(i=0 ; i < keys.length ; i++) {
+            if( eth.secretToAddress(keys[i]) == account ){ return keys[i]; }
+        }
+        return null;
+    }
 }
