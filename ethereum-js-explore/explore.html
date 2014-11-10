@@ -36,15 +36,21 @@
     TODO actually implement.
     <table>
       <tr>
-        <td>Block stuff<input id="show_block_stuff" type="checkbox"></td>
+        <td>Block stuff<input id="show_block" type="checkbox" checked="true"></td>
         <td><table>
-            <tr><td>coinbase</td> <td><input id="show_coinbase" type="checkbox"></td></tr>
-            <tr><td>hash</td>     <td><input id="show_hash" type="checkbox"></td></tr>
-            <tr><td>timestamp</td><td><input id="show_coinbase" type="checkbox"></td></tr>
+            <tr><td>coinbase</td>
+              <td><input id="show_coinbase" type="checkbox"></td></tr>
+            <tr><td>hash</td>
+              <td><input id="show_hash" type="checkbox"></td></tr>
+            <tr><td>timestamp</td>
+              <td><input id="show_coinbase" type="checkbox" checked="true"></td></tr>
             </table>
         </td>
       </tr>
-      <tr><td>From:(comma-sep, beginning)</td>
+    </table>
+    Comma separated addresses.
+    <table>
+      <tr><td>From:</td>
         <td><input id="post_from" type="text"></td></tr>
       <tr><td>To:</td><td><input id="post_to" type="text"></td></tr>
     </table>

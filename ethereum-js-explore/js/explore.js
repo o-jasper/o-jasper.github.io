@@ -67,8 +67,16 @@ function update(force_plain) {
         if(ge("view").value == "plain") {
             html += plain_list(indexes);
         } else if(ge("view").value == "fancy") {
-            var which = {block:true, block_hash:true, coinbase:true, timestamp:true}
-            html += new_fancy_display(which).html(indexes);
+            var which = {block:ge("show_block").checked,
+                         block_hash:ge("show_hash").checked,
+                         coinbase:ge("show_coinbase").checked,
+                         number:true, "on_line_timestamp":true,
+                        }
+            var display = new_fancy_display(which);
+            display.from_filter = ge("post_from").value.split(",");
+            display.to_filter = ge("post_to").value.split(",");
+
+            html += display.html(indexes);
         }
     }
     //fun = {"plain":plain_list, "fancy":fancy_list}[ge("view").value];

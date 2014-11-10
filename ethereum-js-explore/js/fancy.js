@@ -82,9 +82,16 @@ function new_fancy_display(which) {
                     this.check_coinbase = cur["coinbase"];
                     // TODO show prettier, time differences,
                     // show the bits of time relevantly different.
-                    html += "<tr class=\"block\"><td><span class=\"blocki\">Block: ";
-                    html += cur["number"] + "</span><table>";
-                    html += this.non_number_block_data(cur) + "</table></td></tr>";
+                    html += "<tr class=\"block\">";
+                    if(this.which["number"]) {
+                        html += "<td><span class=\"blocki\">Block: ";
+                        html += cur["number"] + "</span>";
+                    }
+                    if(this.which["on_line_timestamp"]) {
+                        html += "(" + cur["timestamp"] + ")";
+                    }
+                    html += "<table>" + this.non_number_block_data(cur);
+                    html += "</table></td></tr>";                    
                 } else if(this.prev_num != null) {
                     if(this.check_block != cur["block"]){
                         alert("Inconsistent reporting of block hash?");
