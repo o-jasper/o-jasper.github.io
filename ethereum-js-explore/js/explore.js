@@ -51,7 +51,7 @@ function plain_list(indexes) {
     return html;
 }
 
-function update() {
+function update(force_plain) {
     ge("cnt").innerText = parseInt(ge("cnt").innerText) + 1;
 
     var filter = create_filter();
@@ -61,10 +61,14 @@ function update() {
     ge("yields_cnt").innerText = indexes.length;
 
     var html =  "<table>";
-    if(ge("view").value == "plain") {
+    if(force_plain) {
         html += plain_list(indexes);
-    } else if(ge("view").value == "fancy") {
-        html += fancy_list(indexes);
+    } else {
+        if(ge("view").value == "plain") {
+            html += plain_list(indexes);
+        } else if(ge("view").value == "fancy") {
+            html += fancy_list(indexes);
+        }
     }
     //fun = {"plain":plain_list, "fancy":fancy_list}[ge("view").value];
     //if( fun != null ){ html += fun(indexes); }
