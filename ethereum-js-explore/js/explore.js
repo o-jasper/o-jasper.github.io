@@ -51,6 +51,12 @@ function plain_list(indexes) {
     return html;
 }
 
+function comma_separated_hex(string) {
+    string = string.trim();
+    if(string == ""){ return null; }
+    return string.split(",");
+}
+
 function update(force_plain) {
     ge("cnt").innerText = parseInt(ge("cnt").innerText) + 1;
 
@@ -73,8 +79,8 @@ function update(force_plain) {
                          number:true, "on_line_timestamp":true,
                         }
             var display = new_fancy_display(which);
-            display.from_filter = ge("post_from").value.split(",");
-            display.to_filter = ge("post_to").value.split(",");
+            display.from_filter = comma_separated_hex(ge("post_from").value);
+            display.to_filter = comma_separated_hex(ge("post_to").value);
 
             html += display.html(indexes);
         }

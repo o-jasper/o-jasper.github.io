@@ -5,10 +5,22 @@
 // by the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 
+function addr_in_list_of_partial(_addr, list) {
+    if( _addr.substr(0,2) != "0x" ){ alert("Not hex input"); }
+    var addr = _addr.substr(2);
+    for(var i=0 ; i<list.length ; i++){
+        if(list[i]==""){ continue; }
+        if( addr.substr(0, list[i].length) == list[i] ){ return true; }
+    }
+    return false;
+}
+
 function new_fancy_display(which) {
     return {
         prev_num:null, check_block:null, check_coinbase:null,
         which:which,
+
+        from_filter:[],to_filter:[],
         
         non_number_block_data:function(cur) {
             var html = "";
@@ -74,6 +86,11 @@ function new_fancy_display(which) {
         },
 
         html_1:function(i, cur) {
+            if(this.from_filter!=null &&
+               !addr_in_list_of_partial(cur["from"], this.from_filter)) { return ""; }
+            if(this.to_filter!=null &&
+               !addr_in_list_of_partial(cur["to"],   this.to_filter)) { return ""; }
+            
             var html = "";
             if( this.which["block"] ) {
                 if( cur["number"] != this.prev_num ){ // Different block, list block first.
