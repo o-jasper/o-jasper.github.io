@@ -26,7 +26,7 @@ function fancy_non_number_block_data(cur) {
 function data_side_by_side(data){
     if( data.substr(0,2) != "0x" ){ alert("Just accepting hex."); }
     var hex = "<tr>", dec="<tr>", ascii="<tr>";
-    for(var i=2 ; i+32 <= data.length ; i+=32){
+    for(var i=2 ; i+64 <= data.length ; i+=64){
         var cur = data.substr(i, i + 32);
         var dec_str = eth.toDecimal("0x" + cur);
         var dec_val = parseInt(dec_str);
