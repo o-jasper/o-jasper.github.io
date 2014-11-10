@@ -25,6 +25,9 @@ There will be TODOs left behind. Please do not take this thing seriously.
 * Yikes, max-gas-use defaults to max ability of balance right now.. Do better
   on estimating.
   
+* Registering the time in the contract might not be needed after all,
+  can go through `eth.messages(filter)` to find the relevant messages.
+  
 ### Did
 * Add time notice to ensure the merchant cannot change the deal right
   before a customers' transaction arrives.
