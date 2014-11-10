@@ -67,7 +67,8 @@ function update(force_plain) {
         if(ge("view").value == "plain") {
             html += plain_list(indexes);
         } else if(ge("view").value == "fancy") {
-            html += fancy_list(indexes);
+            var which = {block:true, block_hash:true, coinbase:true, timestamp:true}
+            html += new_fancy_display(which).html(indexes);
         }
     }
     //fun = {"plain":plain_list, "fancy":fancy_list}[ge("view").value];
