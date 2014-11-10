@@ -62,7 +62,7 @@ function fancy_one(cur, a) {
         if( a=="from" ){
             return "(=o)" + html_addr(value);
         } else{ return null; }
-    } else if( a=="origin" || a=="to"){
+    } else if( a=="origin" || a=="to" || a=="from"){
         return html_addr(value);
     } else if( a == "path" ) {
         return "(" + value.length + ")" + value;
@@ -100,7 +100,7 @@ function fancy_list(indexes) {
         }
         html += "<tr><td><table>";
         var first = true;
-        for(a in cur) {
+        for(a in cur) { //TODO doesnt recognize contract creation.
             if( a != "number" && a!="block" && a!="coinbase" && a!="timestamp" ) {
                 var info = fancy_one(cur, a)
                 if( info != null ) {

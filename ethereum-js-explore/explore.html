@@ -14,10 +14,11 @@
     </datalist> 
   </head>
   <body>
-    <p>Note: **WIP**.</p>
+    <p>Note: **WIP**. TODO make a plain version.</p>
 
     <button onclick="update();">Update</button> <span id="cnt">0</span>
 
+    <h4>eth.messages arguments</h4>
     <table>
     <tr><td>earliest:</td><td><input id="earliest" type="text" value="0"></td></tr>
     <tr><td>latest:</td>  <td><input id="latest" type="text" value="-1"></td></tr>
@@ -30,6 +31,29 @@
     </table>
 
     Style: <input id="view" type="text" list="views" value="fancy">
+
+    <h4>Post selection</h4>
+    TODO actually implement.
+    <table>
+      <tr>
+        <td>Block stuff<input id="show_block_stuff" type="checkbox"></td>
+        <td><table>
+            <tr><td>coinbase</td> <td><input id="show_coinbase" type="checkbox"></td></tr>
+            <tr><td>hash</td>     <td><input id="show_hash" type="checkbox"></td></tr>
+            <tr><td>timestamp</td><td><input id="show_coinbase" type="checkbox"></td></tr>
+            </table>
+        </td>
+      </tr>
+      <tr><td>From:(comma-sep, beginning)</td>
+        <td><input id="post_from" type="text"></td></tr>
+      <tr><td>To:</td><td><input id="post_to" type="text"></td></tr>
+    </table>
+    
+    <h4>Computations</h4>
+    TODO
+    <table>
+      <tr><td>Types:</td><td><input id="calc_values" type="text"></td></tr>
+    </table>
     <!-- <h3>Search:</h3>
     <span id="search"></span> -->
 
