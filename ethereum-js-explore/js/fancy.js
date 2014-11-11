@@ -58,8 +58,8 @@ function new_fancy_display(which) {
         data_side_by_side:function(data){
             if( data.substr(0,2) != "0x" ){ alert("Just accepting hex."); }
             var hex = "<tr>", dec="<tr>", ascii="<tr>";
-            for(var i=2 ; i < data.length ; i+=64){
-                var cur = data.substr(i, i + 32);
+            for(var i=2 ; i-1 < data.length ; i+=64){
+                var cur = data.substr(i, i + 64);
                 var dec_str = eth.toDecimal("0x" + cur);
                 var dec_val = parseInt(dec_str);
                 if( dec_val < 100000000000 ) {
