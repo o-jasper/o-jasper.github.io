@@ -6,10 +6,11 @@ def i(str):
     for i in range(len(str)):
         s += f*ord(str[len(str)-i-1])
         f *= 256
+    for i in range(32 - len(str)): # Right pad instead of left.
+        s *= 256;
     return s
 
 def stri(i):
-    s=""
     while i > 0:
         s += chr(i%256)
         i /=256

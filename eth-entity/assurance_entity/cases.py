@@ -6,6 +6,8 @@ def i(str):
     for i in range(len(str)):
         s += f*ord(str[len(str)-i-1])
         f *= 256
+    for i in range(32 - len(str)): # Right pad instead of left.
+        s *= 256;
     return s
 
 def stri(i):
@@ -24,8 +26,8 @@ def reset():
     c = s.contract('assurance_ent.se', t.k0)
 
 def check(a, n):  # TODO this would be better with 'stateless call'
-    assert s.send(t.k1, c, 0, ["balance"]) == [a]
-    assert s.send(t.k1, c, 0, ["cnt"]) == [n]
+    assert s.send(t.k1, c, 0, [i("balance")]) == [a]
+    assert s.send(t.k1, c, 0, [i("cnt")]) == [n]
     assert int(s.block.get_storage_data(c, 0x80)) == 0xC0 + 0x40*n
 
     # Check it isnt overwriting permanents
