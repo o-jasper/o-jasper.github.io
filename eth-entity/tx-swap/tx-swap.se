@@ -1,0 +1,65 @@
+
+shared:
+ // 2**(256 - 6*8) == 2**208 ==...
+ // Strips off the command "commit" from the msg slot.
+ // NOTE: since addresses dont use all bits, could do the same there.
+ // (however, really it is better to have languages be able to do this for us..)
+    COMMITSTRIP = 411376139330301510538742295639337626245683966408394965837152256
+  // 2**(256-9*8) == 2**184 ==
+    PUPPETEERSTRIP = 24519928653854221733733552434404946937899825954937634816
+init:
+    contract.storage["owner"] = msg.sender
+code:
+    // Passes along a transaction.
+    if msg.data[0]/PUPPETEERSTRIP == "puppeteer":
+        args = array(msg.datasize-1)
+        i = 1
+        while i < msg.datasize:
+            args[i-1] = msg.data[i]
+            i = i + 1
+        // _Anyone_ may trigger the transaction.. *Assumes* `msg.origin` doesnt matter!
+        // Also allows more people to mess in here..
+        // (perhaps having a specific counterparty might be wise..)
+
+        commit_release = contract.storage["commit_release"]
+        if commit_release != 0 && (commit_release/PUPPETEERSTRIP < block.timestamp):
+            //Still require hash check.
+            if sha3(msg.data[0]%PUPPETEERSTRIP) != commit_release%PUPPETEERSTRIP:
+                return("commit hash wrong")
+            if sha3(args, msg.datasize-1)%COMMITSTRIP != contract.storage["commit"]:
+                return("tx hash wrong")
+            // It has been ensured that the committed transaction is done.
+            contract.storage["commit"] = 0  // May now do preparatory again.
+            contract.storage["commit_release"] = 0
+            // ... and continue to do the message sending.
+        else:
+            // Preparatory puppeteering only by owner. (cant be done after committing.)
+            if msg.sender != contract.storage["owner"]:
+                return("not committed")
+                
+       return msg(tx.gas-100, msg.data[1], msg.value, args[1:], msg.datasize-1)
+
+    if msg.sender != contract.storage["owner"]:
+        return("denied")
+    
+    // Committing to transaction.
+    if msg.data[0]/COMMITSTRIP == "commit":
+        if msg.datasize != 2:
+            return("commit invalid args")            
+        if commit_release != 0 && (commit_release/PUPPETEERSTRIP < block.timestamp):
+            return("already committed")
+        contract.storage["commit"] = msg.data[0]%COMMITSTRIP
+        // Release two parts, %PUPPETEERSTRIP the committing hash,
+        // /PUPPETEERSTRIP, the time beyond which it may be revoked.
+        contract.storage["commit_release"] = msg.data[1]
+        return("committed")
+
+    // Allows revocation if too much time passes.
+    if msg.data[0] == "revoke":
+        if contract.storage["commit_release"]/PUPPETEERSTRIP < block.timestamp:
+            return("too early")
+        contract.storage["commit"] = 0  // May now do preparatory again.
+        contract.storage["commit_release"] = 0
+        return("revoked")
+    
+    return("invalid")
