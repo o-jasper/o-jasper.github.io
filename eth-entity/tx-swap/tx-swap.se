@@ -35,7 +35,7 @@ code:
             args[i-3] = msg.data[i]
             i = i + 1
 
-        return(msg(tx.gas-100, msg.data[1], msg.data[2], args, msg.datasize-2))
+        return(msg(tx.gas-100, msg.data[1], msg.data[2], args, msg.datasize-3))
         // (doing that manually because the 2: apparently not working)        
         //call(tx.gas - 100, msg.data[1], msg.data[2], (+ (ref args) 0x40), 0x20*msg.datasize - 0x40, (ref i), 0x20)
     
