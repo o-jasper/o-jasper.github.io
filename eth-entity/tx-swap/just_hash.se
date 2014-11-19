@@ -1,0 +1,7 @@
+args = array(msg.datasize)
+i = 0
+while i < msg.datasize:
+    args[i] = msg.data[i]
+    i = i + 1
+
+return(sha3(args, msg.datasize))

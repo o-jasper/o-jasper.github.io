@@ -1,11 +1,10 @@
 import pyethereum, random
-from pyethereum import rlp
 t = pyethereum.tester
 u = pyethereum.utils
 
-def sha3(data):
-    return i(u.sha3(rlp.encode(map(u.encode_int, data))))
-      
+#def sha3(data):
+#    return i(u.sha3(''.join(map(u.encode_int, data))))
+
 from random import randrange
 
 def i(str):
@@ -31,7 +30,6 @@ def ae(a, b, cond=None, what="N/A"):
         print(map(hex,a), "vs", map(hex,b), ":", what)
         assert False
 
-#COMMITSTRIP = 411376139330301510538742295639337626245683966408394965837152256
 STRIP = 24519928653854221733733552434404946937899825954937634816
 
 print(i("commit")/STRIP, i("puppeteer")/STRIP)
@@ -40,6 +38,7 @@ s = None
 c1 = None
 c2 = None
 echo_contract = None
+hasher = None
 
 def gs(of, index):
     global s
@@ -47,12 +46,16 @@ def gs(of, index):
         index = i(index)
     return s.block.get_storage_data(of, index)
 
+def sha3(data):
+    return s.send(t.k0, hasher, 0, data)[0]
+
 def reset():
-    global c1,c2, s, echo_contract
+    global c1,c2, s, echo_contract, hasher
     s = t.state()
     c1 = s.contract('tx-swap.se', t.k0)
     c2 = s.contract('tx-swap.se', t.k4)  
-    echo_contract = s.contract('echo-1.se', t.k0)  
+    echo_contract = s.contract('echo-1.se', t.k0)
+    hasher = s.contract("just_hash.se", t.k0)   #TODO do it myself.
   
 def check(c, owner=None, secret=None, H_secret=None, H_msg=None):
     if owner:  # Check if owner right.

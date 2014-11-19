@@ -1,10 +1,5 @@
 shared:
-    // 2**(256 - 6*8) == 2**208 ==...
-    // Strips off the command "commit" from the msg slot.
-    // NOTE: since addresses dont use all bits, could do the same there.
-    // (however, really it is better to have languages be able to do this for us..)
-    //COMMITSTRIP = 411376139330301510538742295639337626245683966408394965837152256
-    // 2**(256-9*8) == 2**184 ==
+    // Based on longest command length, "puppeteer". 2**(256-9*8) == 2**184 ==
     STRIP = 24519928653854221733733552434404946937899825954937634816
 init:
     contract.storage["owner"] = msg.sender
@@ -48,7 +43,7 @@ code:
         return("denied")
     
     // Committing to transaction.
-    if msg.data[0]/STRIP == 1834256857307602223104: // "commit", but it is different somehow :/:
+    if msg.data[0]/STRIP == 1834256857307602223104: // "commit", but it is different somehow.
         if msg.datasize != 2:
             return("commit invalid args")            
         if commit_release != 0 && (commit_release/STRIP < block.timestamp):
