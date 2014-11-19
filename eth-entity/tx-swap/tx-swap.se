@@ -11,7 +11,6 @@ init:
 code:
     // Passes along a transaction.
     if msg.data[0]/PUPPETEERSTRIP == 2074497723536345752946: //"puppeteer":
-        commit_release = contract.storage["commit_release"]
         args = array(msg.datasize-1)
         i = 1        
         while i < msg.datasize:
@@ -20,12 +19,12 @@ code:
         // _Anyone_ may trigger the transaction.. *Assumes* `msg.origin` doesnt matter!
         // Also allows more people to mess in here..
         // (perhaps having a specific counterparty might be wise..)
-
+        commit_release = contract.storage["commit_release"]
         if commit_release != 0 && (commit_release/PUPPETEERSTRIP < block.timestamp):
             //Still require hash check.
-            if sha3(msg.data[0]%PUPPETEERSTRIP) != commit_release%PUPPETEERSTRIP:
+            if sha3(msg.data[0]%PUPPETEERSTRIP)%COMMITSTRIP != contract.storage["commit"]%COMMITSTRIP:
                 return("commit hash wrong")
-            if sha3(args, msg.datasize-1)%COMMITSTRIP != contract.storage["commit"]:
+            if sha3(args, msg.datasize-1)%PUPPETEERSTRIP != commit_release%PUPPETEERSTRIP:
                 return("tx hash wrong")
             // It has been ensured that the committed transaction is done.
             contract.storage["commit"] = 0  // May now do preparatory again.

@@ -61,7 +61,7 @@ def check(c, owner=None, secret=None, H_secret=None):
     else:
         assert gs(c, "commit_release") != 0
         if H_secret:
-            gs(c, "commit_release")
+            ae([gs(c, "commit_release") % PUPPETEERSTRIP], [H_secret])
 
     check_meddling(c, owner, secret)
     if owner:
@@ -84,7 +84,7 @@ def check_meddling(c, owner=None, secret=None):
     assert s.send(key, c, 0,[i("revoke")]) == [i("denied")]
     
     # Try break in with puppeteer command.
-    ret_break_puppeteer = s.send(key, c, 0, [i("puppeteer") + randrange(0,PUPPETEERSTRIP)])
+    ret_break_puppeteer = s.send(key, c, 0, [i("puppeteer") + randrange(PUPPETEERSTRIP)])
 
     # With the correct releasing value, try modified transactions.
     secret = secret or randrange(PUPPETEERSTRIP)
@@ -120,18 +120,17 @@ def start():
     check(c1, t.k0)
 
 def commit(owner, c, H_secret, msg):
-    print(msg)
     to_time   = s.block.timestamp + randrange(200,1000)
     H_msg     = sha3(msg) % PUPPETEERSTRIP
     
-    ae(s.send(owner, c, 0, [i("commit") + H_secret,  H_msg + PUPPETEERSTRIP * to_time]),
+    ae(s.send(owner, c, 0, [i("commit") + H_secret,  H_msg]), # + PUPPETEERSTRIP * to_time]),
        [i("committed")])
     # Check not here because didnt want `commit` function to know about secret.
 
 def scenario_commit():
     start()
     
-    secret   = randrange(COMMITSTRIP)  # Known to A
+    secret   = randrange(PUPPETEERSTRIP)  # Known to A
     H_secret = sha3([secret]) % COMMITSTRIP
     msg1      = [int(echo_contract, 16), 0, randrange(2**256)]
     msg2      = [int(echo_contract, 16), 0, randrange(2**256)]
@@ -143,6 +142,5 @@ def scenario_commit():
     check(c2, t.k4, secret, H_secret)
 
     return secret, msg1, msg2
-
 
 scenario_commit()
