@@ -74,6 +74,9 @@ def check(c, owner=None, secret=None, H_secret=None, H_msg=None):
     if owner:
         check_wrong(c, owner)
 
+def randval():
+    return randrange(2**64)
+
 # Effectively committed.(committed and not expired)
 def is_committed(c):
     return gs(c, "commit") != 0 and s.block.timestamp < gs(c, "commit_release")/STRIP
@@ -96,12 +99,12 @@ def check_meddling(c, owner=None, secret=None):
     # With the correct releasing value, try modified transactions.
     if secret is None:
         secret = randrange(STRIP)
-    args = [i("puppeteer") + secret, randrange(2**255), 0]  # Correct secret.
+    args = [i("puppeteer") + secret, randval(), 0]  # Correct secret.
     for j in range(randrange(10)):  # Wrong message.
-        args.append(randrange(2**255))
+        args.append(randval())
     ret_break_tx = s.send(key, c, 0, args)
 
-    echoed = randrange(int(2**255))  # Value to echo.
+    echoed = randval()  # Value to echo.
     # As owner, should work _if_ commit time over.
     ret_owner = s.send(owner, c, 0, [i("puppeteer"), echo_contract, 0, echoed])
     # Still committed, should say no. (the timer allows revoking, not mandated)
@@ -120,7 +123,7 @@ def check_wrong(c, owner):
        [i("commit invalid args")])
     if is_committed(c):
         # Of course, it isnt just a check if it changes state. Which committing does.
-        ae(s.send(owner, c, 0, [i("commit") + randrange(STRIP), randrange(2**255)]),
+        ae(s.send(owner, c, 0, [i("commit") + randrange(STRIP), randval()]),
            [i("already committed")])
 
 def start():
@@ -141,8 +144,8 @@ def scenario_commit():
     
     secret   = randrange(STRIP)  # Known to A
     H_secret = sha3([secret%STRIP]) % STRIP
-    msg1      = [int(echo_contract, 16), 0, randrange(2**255)]
-    msg2      = [int(echo_contract, 16), 0, randrange(2**255)]
+    msg1      = [int(echo_contract, 16), 0, randval()]
+    msg2      = [int(echo_contract, 16), 0, randval()]
     
     commit(t.k0, c1, H_secret, msg1)  # 1 goes first, as he knows the secret.
     assert is_committed(c1)
