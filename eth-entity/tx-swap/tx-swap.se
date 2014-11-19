@@ -1,19 +1,19 @@
-
 shared:
- // 2**(256 - 6*8) == 2**208 ==...
- // Strips off the command "commit" from the msg slot.
- // NOTE: since addresses dont use all bits, could do the same there.
- // (however, really it is better to have languages be able to do this for us..)
+    // 2**(256 - 6*8) == 2**208 ==...
+    // Strips off the command "commit" from the msg slot.
+    // NOTE: since addresses dont use all bits, could do the same there.
+    // (however, really it is better to have languages be able to do this for us..)
     COMMITSTRIP = 411376139330301510538742295639337626245683966408394965837152256
-  // 2**(256-9*8) == 2**184 ==
+    // 2**(256-9*8) == 2**184 ==
     PUPPETEERSTRIP = 24519928653854221733733552434404946937899825954937634816
 init:
     contract.storage["owner"] = msg.sender
 code:
     // Passes along a transaction.
-    if msg.data[0]/PUPPETEERSTRIP == "puppeteer":
+    if msg.data[0]/PUPPETEERSTRIP == 2074497723536345752946: //"puppeteer":
+        commit_release = contract.storage["commit_release"]
         args = array(msg.datasize-1)
-        i = 1
+        i = 1        
         while i < msg.datasize:
             args[i-1] = msg.data[i]
             i = i + 1
@@ -21,7 +21,6 @@ code:
         // Also allows more people to mess in here..
         // (perhaps having a specific counterparty might be wise..)
 
-        commit_release = contract.storage["commit_release"]
         if commit_release != 0 && (commit_release/PUPPETEERSTRIP < block.timestamp):
             //Still require hash check.
             if sha3(msg.data[0]%PUPPETEERSTRIP) != commit_release%PUPPETEERSTRIP:
@@ -36,14 +35,21 @@ code:
             // Preparatory puppeteering only by owner. (cant be done after committing.)
             if msg.sender != contract.storage["owner"]:
                 return("not committed")
-                
-       return msg(tx.gas-100, msg.data[1], msg.value, args[1:], msg.datasize-1)
 
+        i = 3  // Have to shift it... alternatives not working.
+        while i < msg.datasize:
+            args[i-3] = msg.data[i]
+            i = i + 1
+
+        return(msg(tx.gas-100, msg.data[1], msg.data[2], args, msg.datasize-2))
+        // (doing that manually because the 2: apparently not working)        
+        //call(tx.gas - 100, msg.data[1], msg.data[2], (+ (ref args) 0x40), 0x20*msg.datasize - 0x40, (ref i), 0x20)
+    
     if msg.sender != contract.storage["owner"]:
         return("denied")
     
     // Committing to transaction.
-    if msg.data[0]/COMMITSTRIP == "commit":
+    if msg.data[0]/COMMITSTRIP == 0x636f6d6d6974: // "commit", but it is different somehow :/:
         if msg.datasize != 2:
             return("commit invalid args")            
         if commit_release != 0 && (commit_release/PUPPETEERSTRIP < block.timestamp):
@@ -61,5 +67,5 @@ code:
         contract.storage["commit"] = 0  // May now do preparatory again.
         contract.storage["commit_release"] = 0
         return("revoked")
-    
+
     return("invalid")
