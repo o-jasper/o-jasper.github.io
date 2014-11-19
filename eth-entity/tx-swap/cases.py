@@ -94,7 +94,7 @@ def check_meddling(c, owner=None, secret=None):
     ret_break_puppeteer = s.send(key, c, 0, [i("puppeteer") + randrange(STRIP)])
 
     # With the correct releasing value, try modified transactions.
-    if secret == None:
+    if secret is None:
         secret = randrange(STRIP)
     args = [i("puppeteer") + secret]  # Correct secret.
     for j in range(randrange(10)):  # Wrong message.
@@ -108,7 +108,7 @@ def check_meddling(c, owner=None, secret=None):
     if is_committed(c):
         ae(ret_break_puppeteer, [i("commit hash wrong")])
         ae(ret_break_tx, [i("tx hash wrong" if secret else "commit hash wrong")])
-        assert ret_owner == [i("not the releasing value")]
+        ae(ret_owner, [i("commit hash wrong")])  # (owner locked out due to commitment)
     else: # Not committed, expect the echo
         ae(ret_break_puppeteer, [i("not committed")])
         ae(ret_break_tx, [i("not committed")])
@@ -120,7 +120,8 @@ def check_wrong(c, owner):
        [i("commit invalid args")])
     if is_committed(c):
         # Of course, it isnt just a check if it changes state. Which committing does.
-        assert s.send(owner, c, 0, [i("commit") + randrange(STRIP), randrange(2**256)]) == [i("already committed")]
+        ae(s.send(owner, c, 0, [i("commit") + randrange(STRIP), randrange(2**256)]),
+           [i("already committed")])
         assert s.send(owner, c, 0, [i("revoke")]) == [i("too early")]
 
 def start():
@@ -147,7 +148,7 @@ def scenario_commit():
     check(c1, t.k0, secret, H_secret, sha3(msg1) % STRIP)
         
     commit(t.k4, c2, H_secret, msg2)  # Now 2 knows secret will be known for 1 to get his.
-    check(c2, t.k4, secret, H_secret, sha3(msg1) % STRIP)
+    check(c2, t.k4, secret, H_secret, sha3(msg2) % STRIP)
 
     return secret, msg1, msg2
 

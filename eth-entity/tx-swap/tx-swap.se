@@ -4,17 +4,17 @@ shared:
 init:
     contract.storage["owner"] = msg.sender
 code:
+    commit_release = contract.storage["commit_release"]
     // Passes along a transaction.
     if msg.data[0]/STRIP == 2074497723536345752946: //"puppeteer":
+        i = 1
         args = array(msg.datasize-1)
-        i = 1        
         while i < msg.datasize:
             args[i-1] = msg.data[i]
             i = i + 1
         // _Anyone_ may trigger the transaction.. *Assumes* `msg.origin` doesnt matter!
         // Also allows more people to mess in here..
         // (perhaps having a specific counterparty might be wise..)
-        commit_release = contract.storage["commit_release"]
         if commit_release != 0 && (commit_release/STRIP < block.timestamp):
             //Still require hash check.
             if sha3(msg.data[0]%STRIP)%STRIP != contract.storage["commit"]%STRIP:
