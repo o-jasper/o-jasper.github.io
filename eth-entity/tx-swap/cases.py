@@ -76,7 +76,7 @@ def check(c, owner=None, secret=None, H_secret=None, H_msg=None):
 
 # Effectively committed.(committed and not expired)
 def is_committed(c):
-    return gs(c, "commit") != 0 and gs(c, "commit_release")/STRIP < s.block.timestamp
+    return gs(c, "commit") != 0 and s.block.timestamp < gs(c, "commit_release")/STRIP
 
 # Checks some strategies for meddling at any point.
 def check_meddling(c, owner=None, secret=None):
@@ -122,11 +122,11 @@ def check_wrong(c, owner):
         # Of course, it isnt just a check if it changes state. Which committing does.
         ae(s.send(owner, c, 0, [i("commit") + randrange(STRIP), randrange(2**255)]),
            [i("already committed")])
-        assert s.send(owner, c, 0, [i("revoke")]) == [i("too early")]
 
 def start():
     reset()
     check(c1, t.k0)
+    assert not is_committed(c1)
 
 def commit(owner, c, H_secret, msg):
     to_time   = s.block.timestamp + randrange(200,1000)
@@ -145,11 +145,17 @@ def scenario_commit():
     msg2      = [int(echo_contract, 16), 0, randrange(2**255)]
     
     commit(t.k0, c1, H_secret, msg1)  # 1 goes first, as he knows the secret.
+    assert is_committed(c1)
     check(c1, t.k0, secret, H_secret, sha3(msg1) % STRIP)
         
     commit(t.k4, c2, H_secret, msg2)  # Now 2 knows secret will be known for 1 to get his.
     check(c2, t.k4, secret, H_secret, sha3(msg2) % STRIP)
+    assert is_committed(c2)    
 
     return secret, msg1, msg2
+
+def scenario_release():
+    secret, msg1, msg2 = scenario_commit()
+    
 
 scenario_commit()
