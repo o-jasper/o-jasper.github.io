@@ -156,6 +156,10 @@ def scenario_commit():
 
 def scenario_release():
     secret, msg1, msg2 = scenario_commit()
-    
 
-scenario_commit()
+    # 1 uses secret to send msg2
+    ae(s.send(t.k1, c2, 0, [i("puppeteer") + secret] + msg2), [msg2[2]])
+    # 2 sees the secret in use and does the same.
+    assert s.send(t.k2, c1, 0, [i("puppeteer") + secret] + msg1) == [msg1[2]]    
+
+scenario_release()
