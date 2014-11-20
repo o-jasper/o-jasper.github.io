@@ -1,9 +1,6 @@
-import pyethereum, random
+import pyethereum, serpent, random
 t = pyethereum.tester
-u = pyethereum.utils
-
-#def sha3(data):
-#    return i(u.sha3(''.join(map(u.encode_int, data))))
+from pyethereum import utils
 
 from random import randrange
 
@@ -32,7 +29,7 @@ def ae(a, b, cond=None, what="N/A"):
 
 STRIP = 24519928653854221733733552434404946937899825954937634816
 
-print(i("commit")/STRIP, i("puppeteer")/STRIP)
+# print(i("commit")/STRIP, i("puppeteer")/STRIP)
 
 s = None
 c1 = None
@@ -47,7 +44,7 @@ def gs(of, index):
     return s.block.get_storage_data(of, index)
 
 def sha3(data):
-    return s.send(t.k0, hasher, 0, data)[0]
+    return serpent.decode_datalist(utils.sha3(serpent.encode_datalist(*data)))[0]
 
 def reset():
     global c1,c2, s, echo_contract, hasher
@@ -59,13 +56,14 @@ def reset():
   
 def check(c, owner=None, secret=None, H_secret=None, H_msg=None):
     if owner:  # Check if owner right.
-        assert hex(gs(c, "owner"))[2:-1] == u.privtoaddr(owner)
+        assert hex(gs(c, "owner"))[2:-1] == utils.privtoaddr(owner)
     
     if gs(c, "commit") == 0:
         assert gs(c, "commit_release") == 0
     else:
         assert gs(c, "commit_release") != 0
         if H_secret:
+            assert sha3([secret])%STRIP == H_secret
             assert gs(c, "commit") % STRIP == H_secret
         if H_msg:
             assert gs(c, "commit_release") % STRIP == H_msg
@@ -99,9 +97,13 @@ def check_meddling(c, owner=None, secret=None):
     # With the correct releasing value, try modified transactions.
     if secret is None:
         secret = randrange(STRIP)
+    
     args = [i("puppeteer") + secret, randval(), 0]  # Correct secret.
     for j in range(randrange(10)):  # Wrong message.
         args.append(randval())
+    if secret is not None and is_committed(c):
+        assert secret < STRIP
+        assert sha3([secret])%STRIP == gs(c,"commit")%STRIP
     ret_break_tx = s.send(key, c, 0, args)
 
     echoed = randval()  # Value to echo.
@@ -134,8 +136,9 @@ def start():
 def commit(owner, c, H_secret, msg):
     to_time   = s.block.timestamp + randrange(200,1000)
     H_msg     = sha3(msg) % STRIP
-    
-    ae(s.send(owner, c, 0, [i("commit") + H_secret,  H_msg + STRIP * to_time]),
+
+    assert (i("commit") + H_secret)%STRIP == H_secret
+    ae(s.send(owner, c, 0, [i("commit") + H_secret,  H_msg + STRIP*to_time]),
        [i("committed")])
     # Check not here because didnt want `commit` function to know about secret.
 
@@ -143,16 +146,16 @@ def scenario_commit():
     start()
     
     secret   = randrange(STRIP)  # Known to A
-    H_secret = sha3([secret%STRIP]) % STRIP
+    H_secret = sha3([secret]) % STRIP
     msg1      = [int(echo_contract, 16), 0, randval()]
     msg2      = [int(echo_contract, 16), 0, randval()]
     
     commit(t.k0, c1, H_secret, msg1)  # 1 goes first, as he knows the secret.
     assert is_committed(c1)
-    check(c1, t.k0, secret, H_secret, sha3(msg1) % STRIP)
+    check(c1, t.k0, secret, H_secret, sha3(msg1)%STRIP)
         
     commit(t.k4, c2, H_secret, msg2)  # Now 2 knows secret will be known for 1 to get his.
-    check(c2, t.k4, secret, H_secret, sha3(msg2) % STRIP)
+    check(c2, t.k4, secret, H_secret, sha3(msg2)%STRIP)
     assert is_committed(c2)    
 
     return secret, msg1, msg2
@@ -165,4 +168,5 @@ def scenario_release():
     # 2 sees the secret in use and does the same.
     assert s.send(t.k2, c1, 0, [i("puppeteer") + secret] + msg1) == [msg1[2]]    
 
-scenario_release()
+for k in range(20):
+    scenario_release()
