@@ -1,5 +1,5 @@
 name: about Ethereum and everything else
 markdown: redcarpet
-pygments: true
+highlighter: pygments
 include: [/notes/]
 markdown_ext: markdown,mkdown,mkdn,mkd,md

@@ -5,6 +5,9 @@ date:   2014-11-21 18:00
 categories: Ethereum
 ---
 
+<small>*Note* this idea has been 
+[around for a while](https://forum.ethereum.org/discussion/649/earning-from-authorship-based-on-impact-use), i decided to put it in a blogpost.</small>
+
 If we have [Swarm](https://github.com/ethereum/cpp-ethereum/wiki/Swarm)
 functionality with Ethereum, this in effect becomes
 [more than just storage](https://o-jasper.github.io/blog/dht,/ethereum/contracts,/2014/05/08/DHTs:-more-than-just-storage.html), because Swarm magnet links in contracts
