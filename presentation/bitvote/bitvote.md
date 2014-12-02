@@ -33,12 +33,10 @@ I mean, it&#39;s not like we could just demand to see the code that&#39;s govern
 
 <small style="color:#888">(inspired from http://www.ted.com/talks/simon_sinek_how_great_leaders_inspire_action)</small>
 
-https://xkcd.com/1390/
-
 ## What we do now/before
 
 * essentially a vote by loudness. Largely it was 'spamming'
-  ('twitter storm' in SOPA)
+  ('twitter storm' over SOPA)
   
 * inefficient 
 
@@ -80,14 +78,14 @@ Otherwise:
 
 * Just not cool.
 
+## More technical bit
+
 ## Ethereum
 
 <img src="pics/browser_contract.svg">
 
 interfaces from arbitrary pages are possible any page can
 access the contract state and send transactions
-
-## More technical bit
 
 ## Ethereum contracts recap
 
@@ -139,8 +137,6 @@ Note that this is something other things might also want; 'UBI coin'('socialcoin
 
 * Ethereum!
 
-* Joris Bontje (Pikapay) for hosting this.
-
 ## Questions/Responses from the audience
 <img src="pics/bitvote_logo.png">
 
@@ -181,19 +177,10 @@ Note that this is something other things might also want; 'UBI coin'('socialcoin
   
   [o-jasper.github.io/blog/2014/06/03/hanging_blocks.html](http://o-jasper.github.io/blog/2014/06/03/hanging_blocks.html)
 
-* Treechains are interesting, havent gotten it well.
-  (but would expect to hear more if it worked..)
-
-  [mail-archive.com/bitcoin-development@lists.sourceforge.net/msg04388.html](https://www.mail-archive.com/bitcoin-development@lists.sourceforge.net/msg04388.html)
-  
-  
-  "Disentangling Crypto-Coin Mining: Timestamping, Proof-of-Publication, and Validation"
-  that links to is interesting.
-  (hanging blocks fails basically completely on proof-of-publication)
-  
-  [mail-archive.com/bitcoin-development%40lists.sourceforge.net/msg03307.html](http://www.mail-archive.com/bitcoin-development%40lists.sourceforge.net/msg03307.html)
-
-* Some other that i could easily have missed.
+* Three scalability on blog.ethereum posts
+  [1](https://blog.ethereum.org/2014/09/17/scalability-part-1-building-top/),
+  [2](https://blog.ethereum.org/2014/10/21/scalability-part-2-hypercubes/), 
+  [3](https://blog.ethereum.org/2014/11/13/scalability-part-3-metacoin-history-multichain/).
 
 ## More
 
