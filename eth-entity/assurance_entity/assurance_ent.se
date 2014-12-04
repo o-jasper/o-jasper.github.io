@@ -13,7 +13,7 @@ init:
 code:
     refund = 0  // Note: less than optimal.. Better if there was a refund function..
     
-    if msg.datasize == 1:
+    if msg.datasize == 1: // Provide info about self.
         if msg.data[0] == "balance":
             return(contract.balance)
         if msg.data[0] == "endblock":
@@ -29,7 +29,7 @@ code:
         if msg.data[0] == "funder":
             contract.storage[msg.data[1]]
     
-    if block.number > contract.storage[0x40]: //Ran out of time.
+    if block.number > contract.storage[0x40]: //Ran out of time. //TODO use time instead.
         if msg.value > 0:
             msg(tx.gas - 100, msg.sender, msg.value, "too late")
 
