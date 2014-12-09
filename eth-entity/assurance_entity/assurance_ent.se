@@ -63,7 +63,7 @@ code:
             refund = 2
     
     if !refund:
-        if msg.sender == contract.storage[RECIPIENT]: //Owner telling it to refund.
+        if msg.sender == contract.storage[CREATOR]: //Owner telling it to refund.
             if msg.datasize == 1 and msg.data[0] == "refund":
                 refund = 1
         else:  //Someone paying to it. (Adding to list)
