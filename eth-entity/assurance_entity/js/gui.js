@@ -63,11 +63,23 @@ function new_crowdfund_gui()  {
                 if( amount == null ){ alert("Not a valid amount input."); }
                 if( from == null ){ alert("Not a valid from input."); }
             }
-            this.crowdfund.do_fund(amount);
+            this.crowdfund.do_fund(from, amount);
+        }
+
+        run_release : function() {
+            var from = this.from_input();
+            if( this.safety ) {
+                if( from == null ){ alert("Not a valid from input."); }
+            }
+            this.crowdfund.do_release(from);
+        }
+
+        run_release_or_pay : function() {
+            //TODO
         }
 
         run_refund : function() {
-            this.crowdfud.do_refund();
+            this.crowdfund.do_refund(this.creator_input());;
         }
     }
 }

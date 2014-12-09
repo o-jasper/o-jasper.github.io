@@ -1,0 +1,40 @@
+ <!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Crowdfunder</title>
+
+    <link rel="stylesheet" href="css/note.css">
+  </head>
+  <body>
+
+    <h2>You need to use an Ethereum browser to use this</h2>
+    Tested only on alethzero at the moment!
+    
+    <h2>Crowdfunder</h2>
+    <table id="create">
+      <tr><td>Create with:</td><td><input type="text" id="from" oninput="gui.creator_input();"></td><td id="from_note"></td></tr>
+        <tr><td colspan="2"><button onclick="gui.run_create()">Create</button></td></tr>
+    </table>
+
+    <table id="anyone">
+      <tr><td id="anyone_txt">Pay from:</td>
+        <td><input type="text" id="from" oninput="gui.creator_input();"></td>
+        <td id="from_note"></td></tr>
+      <tr id="amount_part"><td>Amount:</td>
+        <td><input type="text" id="from" oninput="gui.amount_input();"></td>
+        <td id="amount_note"></td></tr>
+      <tr><td colspan="2"><button onclick="gui.run_fund()">Pay</button></td></tr>
+    </table>
+
+    <p id="refund"><button onclick="refund">Refund<span id="amount"></span></button>
+    </p>
+
+    <script src="/js/common.js"></script>
+    <script src="els.js"></script>    
+    <script src="js/contract.js"></script>
+    <script src="js/gui.js"></script>
+    <script src="build/creator.js"></script>
+    <script>var gui = new_crowdfund_gui();</script>
+</body></html>
