@@ -1,22 +1,33 @@
 // Pays out if funds are reached, otherwise refunds.
 // 'kickstarter'/indiegogo like.
 
-// NOTE: would be nice to suicide with return value and message sending?
-
+// NOTE: would be nice to suicide with return value and message sending? Or reset.
 init:
     contract.storage[0x00] = msg.sender
-    contract.storage[0x20] = msg.sender //Recipient of true result.
-    contract.storage[0x40] = 10
-    contract.storage[0x60] = 20000  // Amount needed.
-    contract.storage[0x80] = 0xC0
-    contract.storage[0xA0] = 30000  // Max amount we can deal with.
+//    contract.storage[0x20] = msg.sender //Recipient of true result.
+//    contract.storage[0x40] = 10     // End time.
+//    contract.storage[0x60] = 20000  // Amount needed.
+//    contract.storage[0x80] = 0xC0
+//    contract.storage[0xA0] = 30000  // Max amount we can deal with.
 code:
-    refund = 0  // Note: less than optimal.. Better if there was a refund function..
+    if msg.datasize == 6: // Initialization.
+        if msg.sender != contract.storage[0x00]:
+            return("not creator")
+        if contract.storage[0x20] != 0:
+            return("already init")    
+        i = 0
+        while i < 6:
+            contract.storage[i*0x20] = msg.data[i]
+            i = i + 1
+        return("initiated")
+
+    if contract.storage[0x20] == 0:
+        return("not ready")
     
     if msg.datasize == 1: // Provide info about self.
         if msg.data[0] == "balance":
             return(contract.balance)
-        if msg.data[0] == "endblock":
+        if msg.data[0] == "endtime":
             return(contract.storage[0x40])
         if msg.data[0] == "min":
             return(contract.storage[0x60])
@@ -28,8 +39,10 @@ code:
     if msg.datasize == 2:
         if msg.data[0] == "funder":
             contract.storage[msg.data[1]]
+
+    refund = 0  // Note: less than optimal.. Better if there was a refund function..
     
-    if block.number > contract.storage[0x40]: //Ran out of time. //TODO use time instead.
+    if block.timestamp > contract.storage[0x40]: //Ran out of time. //TODO use time instead.
         if msg.value > 0:
             msg(tx.gas - 100, msg.sender, msg.value, "too late")
 
@@ -41,7 +54,7 @@ code:
             refund = 2
     
     if !refund:
-        if msg.sender == contract.storage[0x00]: //Owner telling it to refund.
+        if msg.sender == contract.storage[0x20]: //Owner telling it to refund.
             if msg.datasize == 1 and msg.data[0] == "refund":
                 refund = 1
         else:  //Someone paying to it. (Adding to list)

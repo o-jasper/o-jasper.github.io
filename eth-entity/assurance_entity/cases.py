@@ -1,31 +1,35 @@
-import pyethereum, random
+import pyethereum
+from random import randrange
 t = pyethereum.tester
 
 def i(str):
     s,f = 0, 1
-    for i in range(len(str)):
-        s += f*ord(str[len(str)-i-1])
+    for j in range(len(str)):
+        s += f*ord(str[len(str)-j-1])
         f *= 256
-    for i in range(32 - len(str)): # Right pad instead of left.
+    for j in range(32 - len(str)): # Right pad instead of left.
         s *= 256;
     return s
 
-def stri(i):
+def stri(j):
     s=""
-    while i > 0:
-        s += chr(i%256)
-        i /=256
+    while j > 0:
+        s += chr(j%256)
+        j /=256
     return "".join(reversed(s))
 
 s = t.state()
 c = s.contract('assurance_ent.se', t.k0)
+end_time = 0
 
 def reset():
-    global c,s
+    global c,s, end_time
     s = t.state()
     c = s.contract('assurance_ent.se', t.k0)
+    end_time = s.block.timestamp  + 200
 
 def check(a, n):  # TODO this would be better with 'stateless call'
+    assert s.block.get_balance(c) == a
     assert s.send(t.k1, c, 0, [i("balance")]) == [a]
     assert s.send(t.k1, c, 0, [i("cnt")]) == [n]
     assert int(s.block.get_storage_data(c, 0x80)) == 0xC0 + 0x40*n
@@ -33,10 +37,22 @@ def check(a, n):  # TODO this would be better with 'stateless call'
     # Check it isnt overwriting permanents
     assert hex(s.block.get_storage_data(c, 0x00))[2:-1] == t.a0
     assert hex(s.block.get_storage_data(c, 0x20))[2:-1] == t.a0    
-    assert int(s.block.get_storage_data(c, 0x40)) == 10
+    assert int(s.block.get_storage_data(c, 0x40)) == end_time
     assert int(s.block.get_storage_data(c, 0x60)) == 20000
     assert int(s.block.get_storage_data(c, 0xA0)) == 30000
+
+    assert s.send(t.k0, c, 0, randargs(6)) == [i("already init")]
+
+def randargs(n):
+    return map(lambda(x):randrange(2**64), range(n))
     
+def scenario_init():
+    assert hex(s.block.get_storage_data(c, 0x00))[2:-1] == t.a0
+    reset()
+    assert s.send(t.k0, c, 0, randargs(randrange(6))) == [i("not ready")]
+    assert s.send(t.k1, c, 0, randargs(6)) == [i("not creator")]
+    assert s.send(t.k0, c, 0, [t.a0, t.a0, end_time, 20000, 0xC0, 30000]) == [i("initiated")]
+    check(0,0)
 
 def dont_reach():
     paid = [i("paid")]
@@ -54,20 +70,21 @@ def dont_reach():
     return 13000, 4
 
 def scenario_underfunded():
-    reset()
+    scenario_init()
     a, n = dont_reach()
-    s.mine(20)
+    while s.block.timestamp < end_time:
+        s.mine()
     check(a, n)
     assert s.send(t.k6, c, 0, []) == [i("underfunded")]
     check(0, n)
 
 def scenario_funded():
-    reset()
+    scenario_init()
     a,n = dont_reach()
     assert s.send(t.k6, c, 10000, []) == [i("paid")]  # One more so the limit is reached.
     check(23000, n + 1)
     s.mine(20)  # (Note expect refund on what k2 sends in value now.
-    assert s.send(t.k2, c, random.randrange(0, 100), []) == [i("funded")]
+    assert s.send(t.k2, c, randrange(0, 100), []) == [i("funded")]
     check(0, n + 1)
 
 scenario_underfunded()
