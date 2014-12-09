@@ -22,6 +22,14 @@ s = t.state()
 c = s.contract('assurance_ent.se', t.k0)
 end_time = 0
 
+CREATOR = 0
+RECIPIENT = 1
+ENDTIME = 2
+MIN = 3
+MAX = 4    
+CUR_I = 5
+FROM_I = 6
+
 def reset():
     global c,s, end_time
     s = t.state()
@@ -29,29 +37,30 @@ def reset():
     end_time = s.block.timestamp  + 200
 
 def check(a, n):  # TODO this would be better with 'stateless call'
+    print(a, s.block.get_balance(c))
     assert s.block.get_balance(c) == a
     assert s.send(t.k1, c, 0, [i("balance")]) == [a]
     assert s.send(t.k1, c, 0, [i("cnt")]) == [n]
-    assert int(s.block.get_storage_data(c, 0x80)) == 0xC0 + 0x40*n
+    assert int(s.block.get_storage_data(c, CUR_I)) == FROM_I + n*2
 
     # Check it isnt overwriting permanents
-    assert hex(s.block.get_storage_data(c, 0x00))[2:-1] == t.a0
-    assert hex(s.block.get_storage_data(c, 0x20))[2:-1] == t.a0    
-    assert int(s.block.get_storage_data(c, 0x40)) == end_time
-    assert int(s.block.get_storage_data(c, 0x60)) == 20000
-    assert int(s.block.get_storage_data(c, 0xA0)) == 30000
+    assert hex(s.block.get_storage_data(c, CREATOR))[2:-1] == t.a0
+    assert hex(s.block.get_storage_data(c, RECIPIENT))[2:-1] == t.a0    
+    assert int(s.block.get_storage_data(c, ENDTIME)) == end_time
+    assert int(s.block.get_storage_data(c, MIN)) == 20000
+    assert int(s.block.get_storage_data(c, MAX)) == 30000
 
-    assert s.send(t.k0, c, 0, randargs(6)) == [i("already init")]
+    assert s.send(t.k0, c, 0, randargs(5)) == [i("already init")]
 
 def randargs(n):
     return map(lambda(x):randrange(2**64), range(n))
     
 def scenario_init():
-    assert hex(s.block.get_storage_data(c, 0x00))[2:-1] == t.a0
+    assert hex(s.block.get_storage_data(c, CREATOR))[2:-1] == t.a0
     reset()
-    assert s.send(t.k0, c, 0, randargs(randrange(6))) == [i("not ready")]
-    assert s.send(t.k1, c, 0, randargs(6)) == [i("not creator")]
-    assert s.send(t.k0, c, 0, [t.a0, t.a0, end_time, 20000, 0xC0, 30000]) == [i("initiated")]
+    assert s.send(t.k0, c, 0, randargs(randrange(5))) == [i("not ready")]
+    assert s.send(t.k1, c, 0, randargs(5)) == [i("not creator")]
+    assert s.send(t.k0, c, 0, [t.a0, t.a0, end_time, 20000, 30000]) == [i("initiated")]
     check(0,0)
 
 def dont_reach():
