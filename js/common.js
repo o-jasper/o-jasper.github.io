@@ -23,7 +23,8 @@ function private_keys_dict(keys) {
 }
 
 var have_keys_dict = null;
-function got_privkey(account, keys) { // Returns corresponding private key, if available.
+ // Returns corresponding private key, if available.
+function got_privkey(account, keys) {
     if(keys == null) {
         if( have_keys_dict == null){ have_keys_dict = private_keys_dict(eth.keys); }
         return have_keys_dict[account];
@@ -34,6 +35,11 @@ function got_privkey(account, keys) { // Returns corresponding private key, if a
         return null;
     }
 }
+
+function is_addr() {
+    return true; //TODO
+}
+function is_int(x){ return parseInt(x).toString() == x && x!="NaN"; }
 
 // Returns text for an address, including info if it is one we have the privkey of.
 function addr_text(addr) {
@@ -46,4 +52,7 @@ function hexify(data) {
     if(data.length < 2 ){ return "0x" + data; }
     if(data.substr(0,2) != '0x'){ return "0x" + data; }
     return data;
+}
+function prep_int(x) {
+    return "0x" + x.toString(16);
 }

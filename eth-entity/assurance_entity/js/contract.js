@@ -1,66 +1,87 @@
 
 function new_crowdfund(_addr) {
-    return function(){
+    return {
         addr : _addr,
         safety : true,
         safety_min_time : 60,
-        
+
+        state : function(index){
+            var val = eth.stateAt(this.addr, index);
+            if( val == "0x" ){ return "0x0"; }
+            return val;
+        },
         // Accessing stuff.
-        balance   : function() { return eth.block.balanceOf(addr); }
-        creator   : function() { return eth.block.stateAt(addr, "0"); }
-        recipient : function() { return eth.block.stateAt(addr, "1"); }
-        endtime  : function() { return parseInt(eth.block.stateAt(addr, "2")); }
-        min       : function() { return parseInt(eth.block.stateAt(addr, "3")); }
-        max       : function() { return parseInt(eth.block.stateAt(addr, "4")); }
-        cnt       : function() { return parseInt(eth.block.stateAt(addr, "5")); }
+        balance   : function() { return eth.balanceOf(this.addr); },
+        
+        creator   : function() { return this.state(0); },
+        recipient : function() { return this.state(1); },
+        endtime   : function() { return parseInt(this.state(2)); },
+        min       : function() { return parseInt(this.state(3)); },
+        max       : function() { return parseInt(this.state(4)); },
+        cnt       : function() { return parseInt(this.state(5)); },
         
         // Doing stuff.
-        do_create : function(creator, recipient, endtime) {
+        do_create : function(creator, fun) {
             var priv = got_privkey(creator);
             if( priv == null ){ alert("Do not have private key to that"); return; }
-            if( safety && creator != recipient ){
-                alert("currently can only have creator and recipient identical.");
-                return;
-            }
-            build_create_crowdfund(priv, function(ret_addr){ this.addr = ret_addr; })
-        }
+            build_create_crowdfund(priv, function(ret_addr){ this.addr = ret_addr; fun(); })
+        },
 
-        do_init : function(recipient, end_time, minimum, maximum) {
+        contract_already : function(){
+            if(this.addr == null){ alert("no contract yet"); return true; }
+        },
+                                   
+        do_init : function(owner, recipient, end_time, minimum, maximum) {
+            if( this.contract_already() ){ return; }
+            
             var priv = got_privkey(this.creator());
-            if( priv == null ){ alert("Do not have private key to that"); return; }
+            if( priv == null ){
+                alert("Do not have private key to that(" + this.creator() +
+                      ")(" + this.addr + ")"); return;
+            }
             if( this.addr == null ){ alret("Contract not created yet"); return; }
 
-            if(safety) {
-                if( end_time < eth.block.timestamp + this.safety_min_time ){
+            if(this.safety) {
+                if( end_time < Math.floor((new Date()).getTime()/1000) + this.safety_min_time){
                     alert("End time less than " + this.safety_min_time +
                           " seconds in the future?");
                     return;
                 }
-                if( minimum < maximum ){ alert("Minimum less than maximum"); return; }
+                if( minimum > maximum ){
+                    alert("Minimum larger than maximum " + minimum + " vs " + maximum); return;
+                }
+
+                if( this.recipient() != "0x0" ){ alert("already initialized"); return; }
             }
-            data = [this.creator(), recipient, end_time, minimum, maximum];
-            eth.transact({"from":priv, "to":this.addr, "value":0, "data":data});
-        }
+            data = [owner, recipient, prep_int(end_time), prep_int(minimum), prep_int(maximum)];
+            eth.transact({"from":priv, "to":this.addr, "data":data});
+        },
 
         do_fund : function(from, amount) {
+            if( this.contract_already() ){ return; }
+        
             var priv = got_privkey(from);
             if( priv == null ){ alert("Do not have private key to that"); return; }
-            if(safety) {
+            if(this.safety) {
                 if(amount == 0){ alert("Not giving any?"); return; }
                 
                 if( amount > eth.balanceAt(from) ){ alert("Dont have the funds."); return; }
             }
-            eth.transact({"from":priv, "to":this.addr, "value":amount});
-        }
+            eth.transact({"from":priv, "to":this.addr, "value":prep_int(amount)});
+        },
 
         do_release : function(from) {
+            if( this.contract_already() ){ return; }
+            
             var priv = got_privkey(from);
             if( priv == null ){ alert("Do not have private key to that"); return; }
             eth.transaction({"from":priv, "to":this.addr, "value":0});
-        }
+        },
 
         do_refund : function(from) {
-            if( safety && from != creator() ){ alert("Only creator can refund"); return; }
+            if( this.contract_already() ){ return; }
+            
+            if( this.safety && from != creator() ){ alert("Only creator can refund"); return; }
             var priv = got_privkey(from);
             if( priv == null ){ alert("Do not have private key to that"); return; }
             eth.transaction({"from":priv, "to":this.addr, "value":0});

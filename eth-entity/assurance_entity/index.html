@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <title>Crowdfunder</title>
 
-    <link rel="stylesheet" href="css/note.css">
+    <link rel="stylesheet" href="../../css/note.css">
   </head>
   <body>
 
@@ -13,28 +13,46 @@
     Tested only on alethzero at the moment!
     
     <h2>Crowdfunder</h2>
-    <table id="create">
-      <tr><td>Create with:</td><td><input type="text" id="from" oninput="gui.creator_input();"></td><td id="from_note"></td></tr>
+    <input type="text" id="crowdfunder" oninput="gui.crowdfunder_input();" onchange="gui.crowdfunder_input();alert('u');">
+    <span id="text_note"></span>
+    <span id="create"><h4>Create</h4>
+      <table>
+      <tr><td>Create with:</td><td><input type="text" id="creator" oninput="gui.creator_input();"></td><td id="creator_note"></td></tr>
         <tr><td colspan="2"><button onclick="gui.run_create()">Create</button></td></tr>
+      </table>
+    </span>
+    <span id="init"><h4>Initiate</h4>
+    <table>
+      <tr><td>Owner:</td><td><input type="text" id="owner" oninput="gui.owner_input();"></td><td id="owner_note"></td></tr>
+      <tr><td>Recipient:</td><td><input type="text" id="recipient" oninput="gui.recipient_input();"></td><td id="recipient_note"></td></tr>
+      <tr><td>Threshhold:</td><td><input type="text" id="min" oninput="gui.min_input();"></td><td id="min_note"></td></tr>
+      <tr><td>Maximum:</td><td><input type="text" id="max" oninput="gui.max_input();"></td><td id="max_note"></td></tr>
+      <tr><td>End time</td><td><input type="text" id="endtime" oninput="gui.endtime_input();"></td><td id="endtime_note"></td></tr>
+      <!-- TODO date input style -->
+      <tr><td colspan="2"><button onclick="gui.run_init();">Initialize</button></td></tr>
     </table>
+    </span>
 
     <table id="anyone">
       <tr><td id="anyone_txt">Pay from:</td>
         <td><input type="text" id="from" oninput="gui.creator_input();"></td>
         <td id="from_note"></td></tr>
       <tr id="amount_part"><td>Amount:</td>
-        <td><input type="text" id="from" oninput="gui.amount_input();"></td>
+        <td><input type="text" id="amount" oninput="gui.amount_input();"></td>
         <td id="amount_note"></td></tr>
       <tr><td colspan="2"><button onclick="gui.run_fund()">Pay</button></td></tr>
     </table>
 
-    <p id="refund"><button onclick="refund">Refund<span id="amount"></span></button>
+    <p id="refund"><button onclick="gui.run_refund()">Refund<span id="amount"></span></button>
     </p>
 
-    <script src="/js/common.js"></script>
-    <script src="els.js"></script>    
+    <button onclick="gui.update_all();">Force Update</button>
+            
+    <script src="../../js/common.js"></script>
+    <script src="../../js/common-gui.js"></script>
+    <script src="js/els.js"></script>    
     <script src="js/contract.js"></script>
     <script src="js/gui.js"></script>
     <script src="build/creator.js"></script>
-    <script>var gui = new_crowdfund_gui();</script>
+    <script>var gui = new_crowdfund_gui(); gui.update_all();</script>
 </body></html>
