@@ -24,10 +24,11 @@ code:
             return("not creator")
         if contract.storage[RECIPIENT] != 0:
             return("already init")    
-        i = 0
-        while i < 5:
-            contract.storage[i*RECIPIENT] = msg.data[i]
-            i = i + 1
+        contract.storage[CREATOR]   = msg.data[0]
+        contract.storage[RECIPIENT] = msg.data[1]
+        contract.storage[ENDTIME] = msg.data[2] 
+        contract.storage[MIN] = msg.data[3]
+        contract.storage[MAX] = msg.data[4]
         return("initiated")
 
     if contract.storage[RECIPIENT] == 0:
