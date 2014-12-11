@@ -13,40 +13,43 @@
     Tested only on alethzero at the moment!
     
     <h2>Crowdfunder</h2>
-    <input type="text" id="crowdfunder" oninput="gui.crowdfunder_input();" onchange="gui.crowdfunder_input();alert('u');">
+    <input type="text" id="crowdfunder" onchange="gui.crowdfunder_input();"> <span id="crowdfunder_note"></span>
     <span id="text_note"></span>
     <span id="create"><h4>Create</h4>
       <table>
-      <tr><td>Create with:</td><td><input type="text" id="creator" oninput="gui.creator_input();"></td><td id="creator_note"></td></tr>
+      <tr><td>Create with:</td><td><input type="text" id="creator" onchange="gui.creator_input();"></td><td id="creator_note"></td></tr>
         <tr><td colspan="2"><button onclick="gui.run_create()">Create</button></td></tr>
       </table>
     </span>
     <span id="init"><h4>Initiate</h4>
     <table>
-      <tr><td>Owner:</td><td><input type="text" id="owner" oninput="gui.owner_input();"></td><td id="owner_note"></td></tr>
-      <tr><td>Recipient:</td><td><input type="text" id="recipient" oninput="gui.recipient_input();"></td><td id="recipient_note"></td></tr>
-      <tr><td>Threshhold:</td><td><input type="text" id="min" oninput="gui.min_input();"></td><td id="min_note"></td></tr>
-      <tr><td>Maximum:</td><td><input type="text" id="max" oninput="gui.max_input();"></td><td id="max_note"></td></tr>
-      <tr><td>End time</td><td><input type="text" id="endtime" oninput="gui.endtime_input();"></td><td id="endtime_note"></td></tr>
+      <tr><td>Owner:</td><td><input type="text" id="owner" onchange="gui.owner_input();"></td><td id="owner_note"></td></tr>
+      <tr><td>Recipient:</td><td><input type="text" id="recipient" onchange="gui.recipient_input();"></td><td id="recipient_note"></td></tr>
+      <tr><td>Threshhold:</td><td><input type="text" id="min" onchange="gui.min_input();"></td><td id="min_note"></td></tr>
+      <tr><td>Maximum:</td><td><input type="text" id="max" onchange="gui.max_input();"></td><td id="max_note"></td></tr>
+      <tr><td>End time</td><td><input type="text" id="endtime" onchange="gui.endtime_input();"></td><td id="endtime_note"></td></tr>
       <!-- TODO date input style -->
-      <tr><td colspan="2"><button onclick="gui.run_init();">Initialize</button></td></tr>
+      <tr><td colspan="2"><button id="init_button" onclick="gui.run_init();">Initialize</button></td></tr>
     </table>
     </span>
 
     <table id="anyone">
       <tr><td id="anyone_txt">Pay from:</td>
-        <td><input type="text" id="from" oninput="gui.creator_input();"></td>
+        <td><input type="text" id="from" onchange="gui.from_input();"></td>
         <td id="from_note"></td></tr>
       <tr id="amount_part"><td>Amount:</td>
-        <td><input type="text" id="amount" oninput="gui.amount_input();"></td>
+        <td><input type="text" id="amount" onchange="gui.amount_input();"></td>
         <td id="amount_note"></td></tr>
-      <tr><td colspan="2"><button onclick="gui.run_fund()">Pay</button></td></tr>
+      <tr><td colspan="2"><button id="anyone_button" onclick="gui.run_anyone()">Pay</button>
+      </td></tr>
     </table>
 
     <p id="refund"><button onclick="gui.run_refund()">Refund<span id="amount"></span></button>
     </p>
 
+    <hr>
     <button onclick="gui.update_all();">Force Update</button>
+    <!-- TODO disable hiding -->
             
     <script src="../../js/common.js"></script>
     <script src="../../js/common-gui.js"></script>

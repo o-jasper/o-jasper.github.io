@@ -51,5 +51,15 @@ els = { // Elements.
             return null;
         }
         return parseInt(string);
+    },
+
+    hide_ids : function(ids, hide) {
+        if( hide==null ){ hide = true; }
+        for(var i = 0 ; i < ids.length ; i++){ this.ge(ids[i]).hidden = hide; }
+    },
+    
+    disable_ids : function(ids, disable) {
+        if( disable==null ){ disable = true; }
+        for(var i = 0 ; i < ids.length ; i++){ this.ge(ids[i]).disabled = disable; }
     }
 }

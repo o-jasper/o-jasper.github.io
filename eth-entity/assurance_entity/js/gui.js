@@ -16,7 +16,7 @@ function new_crowdfund_gui()  {
     return {
         crowdfund : new_crowdfund(),
         // Prevent wrong inputs to passing along. (only disable for testing)
-        safety : true,
+        safety : true, hide : true,
         min_default : 2000,
         max_default : 10000,
         
@@ -35,10 +35,13 @@ function new_crowdfund_gui()  {
         crowdfunder_input : function() {
             var el = ge("crowdfunder");
             if( el.value != "" ){
-                this.crowdfund.addr = hexify(el.value);
+                this.crowdfund.addr = els.addr_note("crowdfunder", null);
                 el.value = this.crowdfund.addr;
-                this.update_contract();
-                eth.watch({altered:ge("crowdfunder").value}).changed(this.update_contract);
+                this.update_all();
+                eth.watch({altered:ge("crowdfunder").value}).changed(this.update_all);
+            } else{
+                this.crowdfund.addr = null;
+                this.update_all();
             }
         },
         
@@ -97,10 +100,37 @@ function new_crowdfund_gui()  {
             }
             this.update_inputs();
         },
+
+        update_hidden : function() {
+            if( !this.hide ){ return; }
+            
+            els.ge("create").hidden = (this.crowdfund.addr != null);
+            if(!els.ge("create").hidden) {
+                els.hide_ids(["init", "anyone", "refund"]); return;
+            }
+            var initialized = this.crowdfund.is_initialized();
+            els.ge("init").hidden = false;
+
+            els.disable_ids(["owner", "recipient", "min", "max", "endtime"]);
+            els.ge("init_button").hidden = initialized;
+            
+            els.ge("anyone").hidden = !initialized;
+            var releasable = this.crowdfund.is_timed_out();
+            els.ge("refund").hidden = !initialized && !releasable;
+            els.ge("amount_part").hidden = releasable;
+            ge("anyone_txt").innerText = (releasable ? "Release from" : "Pay from");
+            ge("anyone_button").innerText = (releasable ? "Release" : "Pay");
+        },
+
+        run_anyone : function() {
+            if(this.crowdfund.is_timed_out()){ this.run_release(); }
+            else{ this.run_fund(); }
+        },
         
         update_all : function(){
             this.update_contract();
             //this.update_inputs();
+            this.update_hidden();
         },
         
         // Doing stuff(using inputs
@@ -127,7 +157,8 @@ function new_crowdfund_gui()  {
         },
         
         run_fund : function() {
-            var amount = this.amount_input(), from = this.from_input();
+            var amount = this.amount_input();
+            var from = this.from_input();
             if( this.safety ) {
                 if( amount == null ){ alert("Not a valid amount input."); return; }
                 if( from == null ){ alert("Not a valid from input."); return; }

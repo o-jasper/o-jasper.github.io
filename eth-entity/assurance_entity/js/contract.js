@@ -19,7 +19,13 @@ function new_crowdfund(_addr) {
         min       : function() { return parseInt(this.state(3)); },
         max       : function() { return parseInt(this.state(4)); },
         cnt       : function() { return parseInt(this.state(5)); },
-        
+
+        is_initialized : function(){ return this.recipient() != "0x0"; },
+        is_timed_out   : function(time){
+            if( time == null ){ time = (new Date()).getTime()/1000; }
+            return this.endtime() < time;
+        },
+
         // Doing stuff.
         do_create : function(creator, fun) {
             var priv = got_privkey(creator);
@@ -42,18 +48,21 @@ function new_crowdfund(_addr) {
             if( this.addr == null ){ alret("Contract not created yet"); return; }
 
             if(this.safety) {
-                if( end_time < Math.floor((new Date()).getTime()/1000) + this.safety_min_time){
+                var to_time = Math.floor((new Date()).getTime()/1000) + this.safety_min_time;
+                if( end_time < to_time){
                     alert("End time less than " + this.safety_min_time +
                           " seconds in the future?");
                     return;
                 }
                 if( minimum > maximum ){
-                    alert("Minimum larger than maximum " + minimum + " vs " + maximum); return;
+                    alert("Minimum larger than maximum " + minimum + " vs " + maximum);
+                    return;
                 }
 
                 if( this.recipient() != "0x0" ){ alert("already initialized"); return; }
             }
-            data = [owner, recipient, prep_int(end_time), prep_int(minimum), prep_int(maximum)];
+            data = [owner, recipient, prep_int(end_time),
+                    prep_int(minimum), prep_int(maximum)];
             eth.transact({"from":priv, "to":this.addr, "data":data});
         },
 
@@ -81,7 +90,9 @@ function new_crowdfund(_addr) {
         do_refund : function(from) {
             if( this.contract_already() ){ return; }
             
-            if( this.safety && from != creator() ){ alert("Only creator can refund"); return; }
+            if( this.safety && from != this.creator() ){
+                alert("Only creator can refund"); return;
+            }
             var priv = got_privkey(from);
             if( priv == null ){ alert("Do not have private key to that"); return; }
             eth.transaction({"from":priv, "to":this.addr, "value":0});
