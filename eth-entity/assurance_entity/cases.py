@@ -93,10 +93,12 @@ def scenario_underfunded():
 def scenario_funded():
     scenario_init()
     a,n = dont_reach()
-    assert s.send(t.k6, c, 10000, []) == [i("paid")]  # One more so the limit is reached.
+    assert s.send(t.k6, c, 10000, []) == [i("paid")]  # One more so the threshhold is reached.
     check(23000, n + 1)
     s.mine(20)  # (Note expect refund on what k2 sends in value now.
+    pre_bal = s.block.get_balance(t.a0)
     assert s.send(t.k2, c, randrange(0, 100), []) == [i("funded")]
+    assert s.block.get_balance(t.a0) - pre_bal >= 23000
     check(0, n + 1)
 
 scenario_underfunded()

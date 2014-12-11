@@ -202,7 +202,7 @@ function new_crowdfund_gui()  {
         },
 
         run_refund : function() {
-            this.crowdfund.do_refund(this.creator_input());;
+            this.crowdfund.do_refund(this.owner_input());;
         }
     }
 }
