@@ -56,3 +56,19 @@ function hexify(data) {
 function prep_int(x) {
     return "0x" + x.toString(16);
 }
+
+function fraction_txt(x, of, html) {
+    if( x/of > 0.1 ){
+        return Math.round((100*x)/of) + "%";
+    } else if(x/of > 0.01) {
+        var y = Math.floor((100*x)/of);
+        var z = Math.round(10*(100*x/of - y));
+        return y + "." + z + "%";
+    }
+    var n = -Math.floor(Math.log(x/of)/(3*Math.log(10)))*3;
+    var seq = ["1", "m", html ? "&mu;" : "u", "n"];
+    var name;
+    if( n/3 < seq.length ){ name = seq[n/3]; }
+    else{ name = html ? "&sdot;10<sup>-" + n + "</sup>" : "E-" + n; }
+    return Math.floor((Math.pow(10, n)*x)/of) + name;
+}

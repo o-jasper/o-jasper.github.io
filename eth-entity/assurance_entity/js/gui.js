@@ -22,6 +22,8 @@ function new_crowdfund_gui()  {
         
         amount_default : 100,
 
+        watch : null,
+
         got_upto_cnt : 0,
         
         endtime_default : function(){
@@ -43,7 +45,10 @@ function new_crowdfund_gui()  {
             if( value != "" ){
                 this.crowdfund.addr = value;
                 this.update_all();
-                eth.watch({altered:value}).changed(this.update_all);
+                if( this.watch != null ){ this.watch.uninstall(); }
+                // TODO doesnt seem to be working..
+                this.watch = eth.watch({altered:value});
+                this.watch.changed(function(){ this.update_all(); });
             } else{
                 this.crowdfund.addr = null;
                 this.update_all();
@@ -76,10 +81,28 @@ function new_crowdfund_gui()  {
             els.value_default("amount", this.amount_default);
             var amount = els.int_note("amount");
             ge("anyone_button").innerText = "Pay " + amount;
+            var note = els.ge("amount_note");
+            if( note.innerText == "" ){
+                var html = fraction_txt(amount, eth.balanceAt(this.from_input()),true);
+                note.innerHTML = "(" + html + ")";
+                note.className = "note";
+            }
             return amount;
             //TODO amounts warnings.
         },
-        from_input : function() { return this.owned_w_default("from", "validity"); },
+        
+        from_input : function() {
+            els.value_default("from", eth.secretToAddress(eth.keys[1]));
+            var addr = els.addr_note("from", null, "validity");
+
+            var note = els.ge("from_note");
+            if( addr == this.crowdfund.creator() ){
+                note.innerText = "Paying with creator"; note.className = "warn";
+            } else if( addr == this.crowdfund.recipient() ){
+                note.innerText = "Paying with recipient"; note.className = "warn";
+            }
+            return addr;
+        },
 
         update_inputs : function() {
             this.creator_input();
