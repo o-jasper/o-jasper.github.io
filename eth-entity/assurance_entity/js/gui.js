@@ -69,7 +69,9 @@ function new_crowdfund_gui()  {
         // Funding:
         amount_input : function() {
             els.value_default("amount", this.amount_default);
-            return els.int_note("amount");
+            var amount = els.int_note("amount");
+            ge("anyone_button").innerText = "Pay " + amount;
+            return amount;
             //TODO amounts warnings.
         },
         from_input : function() { return this.owned_w_default("from", "validity"); },

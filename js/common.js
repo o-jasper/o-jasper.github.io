@@ -36,8 +36,8 @@ function got_privkey(account, keys) {
     }
 }
 
-function is_addr() {
-    return true; //TODO
+function is_addr(x) {
+    return /^0x[0-9a-f]*$/i.test(x) || /^0x[0-9A-F]*$/i.test(x);
 }
 function is_int(x){ return parseInt(x).toString() == x && x!="NaN"; }
 

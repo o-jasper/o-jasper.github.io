@@ -22,7 +22,7 @@ els = { // Elements.
         var note = els.ge(id + "_note");
         if( !is_addr(value) ){
             note.innerText = "Not an address"; note.className = "invalid";
-            return null;
+            return value;
         }
         if(must_own && got_privkey(value)==null) {
             note.innerText = "Dont have privkey";
@@ -39,6 +39,10 @@ els = { // Elements.
                 return value;
             }
         }
+        if( value.length < 33 ){
+            note.innerText = "Unlikely address"; note.className = "warn";
+            return value;
+        }        
         note.innerText = ""; note.className = "";
         return value;
     },
