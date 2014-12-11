@@ -77,10 +77,9 @@ code:
             contract.storage[CUR_I] = i + 2
             return("paid")
 
-        if msg.datasize == 1 and msg.data[0] == "refund":
-            if sender == contract.storage[CREATOR]:
-                refund = 1
-
+        if msg.sender == contract.storage[CREATOR] and msg.data[0] == "refund":
+            refund = 1
+    
     if refund: //Refunding.
         i = FROM_I
         t = contract.storage[CUR_I]

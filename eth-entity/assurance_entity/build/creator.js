@@ -1,4 +1,4 @@
-//From commit 9ed861958f63c98610347355cfdfdeb06ab108dc
+//From commit ad8fde60a9014833d740ad9a6d5956680d6e3b67
 maybe_creating = false;  // Whether maybe_creating already.
 
 function build_create_crowdfund(priv, fun) {

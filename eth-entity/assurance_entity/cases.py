@@ -101,5 +101,12 @@ def scenario_funded():
     assert s.block.get_balance(t.a0) - pre_bal >= 23000
     check(0, n + 1)
 
+def scenario_refunded():
+    scenario_init()
+    a, n = dont_reach()
+    assert s.send(t.k0, c, 0, [i("refund")]) == [i("refunded")]
+    # TODO check some more.
+
 scenario_underfunded()
 scenario_funded()
+scenario_refunded()
