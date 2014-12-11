@@ -49,11 +49,11 @@ els = { // Elements.
 
     int_note : function(id) {
         var string = els.ge(id).value;
-        if( !is_int(string) ){ 
-            var note = els.ge(id + "_note");
-            note.innerText = "Not an integer"; note.className = "invalid";
-            return null;
+        var note = els.ge(id + "_note");
+        if( !is_int(string) ){
+            note.innerText = "Not an integer"; note.className = "invalid"; return null;
         }
+        note.innerText = "";
         return parseInt(string);
     },
 
