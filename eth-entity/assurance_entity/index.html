@@ -6,6 +6,7 @@
     <title>Crowdfunder</title>
 
     <link rel="stylesheet" href="../../css/note.css">
+    <link rel="stylesheet" href="../../css/addr.css">    
   </head>
   <body>
 
@@ -47,6 +48,10 @@
     <p id="refund"><button onclick="gui.run_refund()">Refund<span id="amount"></span></button>
     </p>
 
+    <span id="list">
+      <h3><span id="contributor_cnt"></span> contributors, reaching <span id="balance"></span></h3>
+      <table id="list_table"></table>
+    </span>
     <hr>
     <button onclick="gui.update_all();">Force Update</button>
     <!-- TODO disable hiding -->

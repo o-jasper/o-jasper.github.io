@@ -21,6 +21,8 @@ function new_crowdfund_gui()  {
         max_default : 10000,
         
         amount_default : 100,
+
+        got_upto_cnt : 0,
         
         endtime_default : function(){
             return Math.floor((new Date()).getTime()/1000) + 31*24*3600;
@@ -33,12 +35,15 @@ function new_crowdfund_gui()  {
         },
         
         crowdfunder_input : function() {
-            var el = ge("crowdfunder");
-            if( el.value != "" ){
-                this.crowdfund.addr = els.addr_note("crowdfunder", null);
-                el.value = this.crowdfund.addr;
+            var value = els.addr_note("crowdfunder", null);
+            if( value != this.crowdfund.addr ){
+                this.got_upto_cnt = 0;
+                ge("list_table").innerHTML = "";
+            }
+            if( value != "" ){
+                this.crowdfund.addr = value;
                 this.update_all();
-                eth.watch({altered:ge("crowdfunder").value}).changed(this.update_all);
+                eth.watch({altered:value}).changed(this.update_all);
             } else{
                 this.crowdfund.addr = null;
                 this.update_all();
@@ -113,15 +118,30 @@ function new_crowdfund_gui()  {
             var initialized = this.crowdfund.is_initialized();
             els.ge("init").hidden = false;
 
-            els.disable_ids(["owner", "recipient", "min", "max", "endtime"]);
+            els.disable_ids(["owner", "recipient", "min", "max", "endtime"], initialized);
             els.ge("init_button").hidden = initialized;
             
             els.ge("anyone").hidden = !initialized;
             var releasable = this.crowdfund.is_timed_out();
             els.ge("refund").hidden = !initialized && !releasable;
             els.ge("amount_part").hidden = releasable;
-            ge("anyone_txt").innerText = (releasable ? "Release from" : "Pay from");
-            ge("anyone_button").innerText = (releasable ? "Release" : "Pay");
+            els.ge("anyone_txt").innerText = (releasable ? "Release from" : "Pay from");
+            els.ge("anyone_button").innerText = (releasable ? "Release" : "Pay");
+
+            els.ge("list").hidden = !initialized || (this.crowdfund.cnt() == 0);
+        },
+
+        update_list_table : function() {
+            var cf = this.crowdfund;
+            var cnt = cf.cnt();
+            els.ge("contributor_cnt").innerText = cnt;
+            els.ge("balance").innerText = cf.balance();
+            for( var n = this.got_upto_cnt ; n < cnt ; n++ ){
+                var html = "<tr><td>" + addr_html(cf.contributor(n)) + "</td><td>";
+                html += cf.contributor_paid(n) + "</td></tr>";
+                els.ge("list_table").innerHTML += html;
+            }
+            this.got_upto_cnt = cnt;            
         },
 
         run_anyone : function() {
@@ -133,6 +153,7 @@ function new_crowdfund_gui()  {
             this.update_contract();
             //this.update_inputs();
             this.update_hidden();
+            this.update_list_table();
         },
         
         // Doing stuff(using inputs

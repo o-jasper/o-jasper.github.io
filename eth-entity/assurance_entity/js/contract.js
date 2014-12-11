@@ -11,14 +11,17 @@ function new_crowdfund(_addr) {
             return val;
         },
         // Accessing stuff.
-        balance   : function() { return eth.balanceOf(this.addr); },
+        balance   : function() { return parseInt(eth.balanceAt(this.addr)); },
         
         creator   : function() { return this.state(0); },
         recipient : function() { return this.state(1); },
         endtime   : function() { return parseInt(this.state(2)); },
         min       : function() { return parseInt(this.state(3)); },
         max       : function() { return parseInt(this.state(4)); },
-        cnt       : function() { return parseInt(this.state(5)); },
+        cnt       : function() { return (parseInt(this.state(5))-6)/2; },
+
+        contributor      : function(i) { return this.state(6 + 2*i); },
+        contributor_paid : function(i) { return parseInt(this.state(6 + 2*i + 1)); },
 
         is_initialized : function(){ return this.recipient() != "0x0"; },
         is_timed_out   : function(time){
@@ -95,7 +98,7 @@ function new_crowdfund(_addr) {
             }
             var priv = got_privkey(from);
             if( priv == null ){ alert("Do not have private key to that"); return; }
-            eth.transaction({"from":priv, "to":this.addr, "value":0});
+            eth.transact({"from":priv, "to":this.addr, "value":0});
         }
     }
 }
