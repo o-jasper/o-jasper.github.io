@@ -37,7 +37,7 @@ def reset():
     end_time = s.block.timestamp  + 200
 
 def check(a, n):  # TODO this would be better with 'stateless call'
-    print(a, s.block.get_balance(c))
+    #print(a, s.block.get_balance(c), s.send(t.k1, c, 0, [i("balance")]))
     assert s.block.get_balance(c) == a
     assert s.send(t.k1, c, 0, [i("balance")]) == [a]
     assert s.send(t.k1, c, 0, [i("cnt")]) == [n]
@@ -85,7 +85,10 @@ def scenario_underfunded():
         s.mine()
     check(a, n)
     assert s.send(t.k6, c, 0, []) == [i("underfunded")]
-    check(0, n)
+    assert s.block.get_balance(c) == 0
+    assert hex(s.block.get_storage_data(c, CREATOR))[2:-1] == t.a0
+    for j in range(1,10):
+        assert s.block.get_storage_data(c, j) == (0 if j!=CUR_I else FROM_I)
 
 def scenario_funded():
     scenario_init()

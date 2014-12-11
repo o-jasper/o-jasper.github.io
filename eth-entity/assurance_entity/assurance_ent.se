@@ -19,21 +19,6 @@ init:
 //    contract.storage[MAX] = 30000  // Max amount we can deal with.
     contract.storage[CUR_I] = FROM_I
 code:
-    if msg.datasize == 5: // Initialization.
-        if msg.sender != contract.storage[CREATOR]:
-            return("not creator")
-        if contract.storage[RECIPIENT] != 0:
-            return("already init")    
-        contract.storage[CREATOR]   = msg.data[0]
-        contract.storage[RECIPIENT] = msg.data[1]
-        contract.storage[ENDTIME] = msg.data[2] 
-        contract.storage[MIN] = msg.data[3]
-        contract.storage[MAX] = msg.data[4]
-        return("initiated")
-
-    if contract.storage[RECIPIENT] == 0:
-        return("not ready")
-    
     if msg.datasize == 1: // Provide info about self.
         if msg.data[0] == "balance":
             return(contract.balance)
@@ -49,6 +34,21 @@ code:
     if msg.datasize == 2:
         if msg.data[0] == "funder":
             contract.storage[msg.data[1]]
+    
+    if msg.datasize == 5: // Initialization.
+        if msg.sender != contract.storage[CREATOR]:
+            return("not creator")
+        if contract.storage[RECIPIENT] != 0:
+            return("already init")    
+        contract.storage[CREATOR]   = msg.data[0]
+        contract.storage[RECIPIENT] = msg.data[1]
+        contract.storage[ENDTIME] = msg.data[2] 
+        contract.storage[MIN] = msg.data[3]
+        contract.storage[MAX] = msg.data[4]
+        return("initiated")
+
+    if contract.storage[RECIPIENT] == 0:
+        return("not ready")
 
     refund = 0  // Note: less than optimal.. Better if there was a refund function..
     
@@ -64,10 +64,8 @@ code:
             refund = 2
     
     if !refund:
-        if msg.sender == contract.storage[CREATOR]: //Owner telling it to refund.
-            if msg.datasize == 1 and msg.data[0] == "refund":
-                refund = 1
-        else:  //Someone paying to it. (Adding to list)
+        if msg.datasize == 0:
+           //Someone paying to it. (Adding to list)
             // Over what we want to accept.
             // (NOTE: balance at this point already got the value)
             if contract.balance > contract.storage[MAX]:
@@ -79,12 +77,25 @@ code:
             contract.storage[CUR_I] = i + 2
             return("paid")
 
+        if msg.datasize == 1 and msg.data[0] == "refund":
+            if sender == contract.storage[CREATOR]:
+                refund = 1
+
     if refund: //Refunding.
         i = FROM_I
         t = contract.storage[CUR_I]
         while i < t //contract.storage[i]:
-            msg(tx.gas - 100, contract.storage[i], contract.storage[i + RECIPIENT], "")
+            send(contract.storage[i], contract.storage[i + 1])
+            contract.storage[i] = 0
+            contract.storage[i+1] = 0
             i = i + 2
+
+        contract.storage[RECIPIENT] = 0  // Reset.
+        contract.storage[ENDTIME] = 0
+        contract.storage[MIN] = 0
+        contract.storage[MAX] = 0
+        contract.storage[CUR_I] = FROM_I
+           
         // NOTE: at this point _MUST_ have i == contract.storage[CUR_I]
         // suicide(contract.storage[CREATOR])
         if refund == 2:
@@ -92,4 +103,5 @@ code:
         if refund == 1:
             return("refunded")
         return("refunded, unknown")
+            
     return("error?!")
