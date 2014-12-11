@@ -62,7 +62,14 @@ function new_crowdfund_gui()  {
         
         endtime_input : function() {
             els.value_default("endtime", this.endtime_default());
-            return els.int_note("endtime");
+            var val = els.int_note("endtime");
+            var note = els.ge("endtime_note");
+            if( note.innerHTML == "" ){
+                var delta = parseInt(val) - Math.floor(((new Date()).getTime()/1000));
+                var tl = timelength_text(delta);
+                note.innerHTML = tl.substr(0, tl.length-2) + " from now";
+            }
+            return val;
             // TODO extreme time range warnings.
         },
 

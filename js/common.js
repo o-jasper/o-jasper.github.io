@@ -72,3 +72,26 @@ function fraction_txt(x, of, html) {
     else{ name = html ? "&sdot;10<sup>-" + n + "</sup>" : "E-" + n; }
     return Math.floor((Math.pow(10, n)*x)/of) + name;
 }
+
+function timelength_text(dt, cnt) {
+    var txt = "";
+    if( cnt == null ){ cnt = 2; }
+    var m=60, h=60*m, d=24*h, wk=7*d, mnth=31*d, yr=365.25*d;
+    function use(str, t){
+        if( cnt > 0 ){
+            var n = Math.floor(dt/t);
+            txt += n + str;
+            dt -= n*t;
+            cnt -= 1;
+        }
+    }
+    if( dt > yr  ){ use("years, ", yr); }
+    var did_month = (dt > mnth);
+    if( did_month ){ use("months, ", mnth); }
+    if( !did_month && dt > wk ){ use("weeks, ", wk); }
+    if( dt > d ){ use("days, ", d); }
+    if( dt > h ){ use("hours, ", h); }
+    if( dt > m  ){ use("minutes, ", m); }
+    if( dt > 1  ){ use("seconds, ", 1); }
+    return txt;
+}
