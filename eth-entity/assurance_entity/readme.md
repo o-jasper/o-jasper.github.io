@@ -46,3 +46,5 @@ and throw more random stuff at it in tests.
 
 * Show everything, and safety-off switch. NOTE: the safeties are merely some extra
   checks, do not imply safety.
+
+* Paying and refunding uses same interface, renaming stuff.. I dont like it.

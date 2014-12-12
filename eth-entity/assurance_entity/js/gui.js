@@ -35,6 +35,26 @@ function new_crowdfund_gui()  {
             els.value_default(id, _default);
             return els.addr_note(id, null, must_own);
         },
+
+        set_crowdfund_addr : function(to) {
+            this.crowdfund.addr = to;
+            var search_to = (to ? "?addr=" + to : "");
+            if( location.search != search_to ){
+                var note = els.ge("crowdfunder_note");
+                var URL = document.URL.substr(0,location.href.length - location.search.length);
+                URL += search_to;
+                var html = "DOESNT CORRESPOND TO URL ABOVE (appears i cant  set it)<br>";
+                html += "<a href=\"" + URL + "\">go there</a>";
+                note.innerHTML = html; note.className = "warn";
+            }
+        },
+
+        init_from_url : function() {
+            if(location.search.substr(0,6) == "?addr="){
+                els.ge("crowdfunder").value = location.search.substr(6);
+                this.crowdfunder_input();
+            }
+        },
         
         crowdfunder_input : function() {
             var value = els.addr_note("crowdfunder", null);
@@ -42,15 +62,16 @@ function new_crowdfund_gui()  {
                 this.got_upto_cnt = 0;
                 ge("list_table").innerHTML = "";
             }
-            if( value != "" ){
-                this.crowdfund.addr = value;
+            if( value != "" && value!="0x" ){
+                this.set_crowdfund_addr(value);
                 this.update_all();
                 if( this.watch != null ){ this.watch.uninstall(); }
                 // TODO doesnt seem to be working..
                 this.watch = eth.watch({altered:value});
                 this.watch.changed(function(){ this.update_all(); });
             } else{
-                this.crowdfund.addr = null;
+                els.ge("crowdfunder").value = "";
+                this.set_crowdfund_addr(null);
                 this.update_all();
             }
         },
@@ -143,7 +164,7 @@ function new_crowdfund_gui()  {
             
             els.ge("create").hidden = (this.crowdfund.addr != null);
             if(!els.ge("create").hidden) {
-                els.hide_ids(["init", "anyone", "refund"]); return;
+                els.hide_ids(["init", "anyone", "refund", "list"]); return;
             }
             var initialized = this.crowdfund.is_initialized();
             els.ge("init").hidden = false;
@@ -157,7 +178,10 @@ function new_crowdfund_gui()  {
             els.ge("amount_part").hidden = releasable;
             els.ge("anyone_txt").innerText = (releasable ? "Release from" : "Pay from");
             els.ge("anyone_button").innerText = (releasable ? "Release" : "Pay");
+            els.ge("anyone_title").innerText = (releasable ? "Release" : "Funding");
 
+            els.ge("refund").hidden = !initialized && got_privkey(this.crowdfund.creator());
+            els.ge("refund_button").disabled = !els.ge("refund_lock_toggle").checked;
             els.ge("list").hidden = !initialized || (this.crowdfund.cnt() == 0);
         },
 
@@ -231,8 +255,16 @@ function new_crowdfund_gui()  {
             //TODO
         },
 
+        refund_lock_toggle : function() {
+            els.ge("refund_button").disabled = !els.ge("refund_lock_toggle").checked;
+        },
+        
         run_refund : function() {
-            this.crowdfund.do_refund(this.owner_input());;
+            if(els.ge("refund_lock_toggle").checked) {
+                this.crowdfund.do_refund(this.owner_input());;
+            } else {
+                alert("Refund button locked, yet clicked");
+            }
         }
     }
 }

@@ -12,17 +12,34 @@
 
     <h2>You need to use an Ethereum browser to use this</h2>
     Tested only on alethzero at the moment!
+    <a href="https://github.com/o-jasper/o-jasper.github.io/tree/master/eth-entity/assurance_entity#assurance-ethereum-entity/">Source code here</a>.
     
-    <h2>Crowdfunder</h2>
-    <input type="text" id="crowdfunder" onchange="gui.crowdfunder_input();"> <span id="crowdfunder_note"></span>
+    <br><b style="font-size:200%">Crowdfunder</b>
+      <input type="text" id="crowdfunder" onchange="gui.crowdfunder_input();"><br>
+    <span id="crowdfunder_note"></span>
     <span id="text_note"></span>
-    <span id="create"><h4>Create</h4>
+
+    <span id="anyone">
+      <h3 id="anyone_title">Funding</h3>
+      <table>
+        <tr><td id="anyone_txt">Pay from:</td>
+          <td><input type="text" id="from" onchange="gui.from_input();"></td>
+          <td id="from_note"></td></tr>
+        <tr id="amount_part"><td>Amount:</td>
+          <td><input type="text" id="amount" onchange="gui.amount_input();"></td>
+          <td id="amount_note"></td></tr>
+        <tr><td colspan="2"><button id="anyone_button" onclick="gui.run_anyone()">Pay</button>
+        </td></tr>
+      </table>
+    </span>
+    
+    <span id="create"><h3>Create</h3>
       <table>
       <tr><td>Create with:</td><td><input type="text" id="creator" onchange="gui.creator_input();"></td><td id="creator_note"></td></tr>
         <tr><td colspan="2"><button onclick="gui.run_create()">Create</button></td></tr>
       </table>
     </span>
-    <span id="init"><h4>Initiate</h4>
+    <span id="init"><h3>Parameters</h3>
     <table>
       <tr><td>Owner:</td><td><input type="text" id="owner" onchange="gui.owner_input();"></td><td id="owner_note"></td></tr>
       <tr><td>Recipient:</td><td><input type="text" id="recipient" onchange="gui.recipient_input();"></td><td id="recipient_note"></td></tr>
@@ -34,19 +51,10 @@
     </table>
     </span>
 
-    <table id="anyone">
-      <tr><td id="anyone_txt">Pay from:</td>
-        <td><input type="text" id="from" onchange="gui.from_input();"></td>
-        <td id="from_note"></td></tr>
-      <tr id="amount_part"><td>Amount:</td>
-        <td><input type="text" id="amount" onchange="gui.amount_input();"></td>
-        <td id="amount_note"></td></tr>
-      <tr><td colspan="2"><button id="anyone_button" onclick="gui.run_anyone()">Pay</button>
-      </td></tr>
-    </table>
-
-    <p id="refund"><button onclick="gui.run_refund()">Refund<span id="amount"></span></button>
-    </p>
+    <span id="refund"><h3>Owner control</h3>
+      <input type="checkbox" id="refund_lock_toggle" onclick="gui.refund_lock_toggle()"></input>
+      <button id="refund_button" onclick="gui.run_refund()">Refund<span id="refund_amount"></span></button>
+    </span>
 
     <span id="list">
       <h3><span id="contributor_cnt"></span> contributors, reaching <span id="balance"></span></h3>
@@ -62,5 +70,5 @@
     <script src="js/contract.js"></script>
     <script src="js/gui.js"></script>
     <script src="build/creator.js"></script>
-    <script>var gui = new_crowdfund_gui(); gui.update_all();</script>
+    <script>var gui = new_crowdfund_gui(); gui.init_from_url(); gui.update_all();</script>
 </body></html>
