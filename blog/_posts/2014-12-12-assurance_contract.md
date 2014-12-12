@@ -25,7 +25,7 @@ The gui is *very* bare-bones, and for now, tests are still rudimentary,
 and no static analysis to add some restraints.
 
 Although the number of lines of code is low(448 lines), it is important to have good
-control over this too. LOC is just one aspect, the code has to be well-organized too.
+control over this too.
 Different than the earlier [grudge-escrow](/blog/ethereum/2014/11/02/grudge_escrow.html)
 the gui and contract interface are objects on themselves, and some code is shared too.
 I refrained from libraries(like react.js) in this case, for some reason none of them
