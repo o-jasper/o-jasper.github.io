@@ -39,7 +39,7 @@ els = { // Elements.
                 return value;
             }
         }
-        if( value.length < 33 ){
+        if( value.length < 33 && value.length > 0 ){
             note.innerText = "Unlikely address"; note.className = "warn";
             return value;
         }        
