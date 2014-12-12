@@ -3,8 +3,8 @@
 
 Assurance Ethereum entity.
 
-* Creator sets it up, sets recipient, sets block number it will have to
-  succeed/fail, sets minimum success amount.
+* Creator creates, then initiates, sets it up, sets recipient, sets block
+  number it will have to succeed/fail, sets minimum success amount.
 
 * Anyone can help fund.
 
@@ -25,12 +25,14 @@ being used as it is now..
 Otherwise for security, need to try think of ways to break it, analyse the code,
 and throw more random stuff at it in tests.
 
-# TODO
+# TODO (might take a while till i take it up)
 
-* HTML interface.
+* Go PoC7..
+  + Get rid of that awful `refund` variable doing control flow.
+
+* Ensure cant attack by making many tiny contributions, *later* costing too much gas.
+  (contribution minimum)
 
 * More thurrough case test.
-
-* Get rid of that awful `refund` variable doing control flow.
-
-* Ensure cant attack by making tiny contributions, *later* costing too much gas.
+  + All logical paths.
+  + Fuzz-test?
