@@ -159,30 +159,38 @@ function new_crowdfund_gui()  {
             this.update_inputs();
         },
 
+        unhide_all : function() {
+            els.hide_ids(["create", "init", "anyone", "refund", "list", "amount_part"], false);
+        },
+
+        never_hidden : false,
+        
         update_hidden : function() {
             if( !this.hide ){ return; }
             
             els.ge("create").hidden = (this.crowdfund.addr != null);
             if(!els.ge("create").hidden) {
-                els.hide_ids(["init", "anyone", "refund", "list"]); return;
+                els.hide_ids(["init", "anyone", "refund", "list"]);
+            } else {
+                var initialized = this.crowdfund.is_initialized();
+                els.ge("init").hidden = false;
+                
+                els.disable_ids(["owner", "recipient", "min", "max", "endtime"], initialized);
+                els.ge("init_button").hidden = initialized;
+                
+                els.ge("anyone").hidden = !initialized;
+                var releasable = this.crowdfund.is_timed_out();
+                els.ge("refund").hidden = !initialized && !releasable;
+                els.ge("amount_part").hidden = releasable;
+                els.ge("anyone_txt").innerText = (releasable ? "Release from" : "Pay from");
+                els.ge("anyone_button").innerText = (releasable ? "Release" : "Pay");
+                els.ge("anyone_title").innerText = (releasable ? "Release" : "Funding");
+                
+                els.ge("refund").hidden = !initialized && got_privkey(this.crowdfund.creator());
+                els.ge("refund_button").disabled = !els.ge("refund_lock_toggle").checked;
+                els.ge("list").hidden = !initialized || (this.crowdfund.cnt() == 0);
             }
-            var initialized = this.crowdfund.is_initialized();
-            els.ge("init").hidden = false;
-
-            els.disable_ids(["owner", "recipient", "min", "max", "endtime"], initialized);
-            els.ge("init_button").hidden = initialized;
-            
-            els.ge("anyone").hidden = !initialized;
-            var releasable = this.crowdfund.is_timed_out();
-            els.ge("refund").hidden = !initialized && !releasable;
-            els.ge("amount_part").hidden = releasable;
-            els.ge("anyone_txt").innerText = (releasable ? "Release from" : "Pay from");
-            els.ge("anyone_button").innerText = (releasable ? "Release" : "Pay");
-            els.ge("anyone_title").innerText = (releasable ? "Release" : "Funding");
-
-            els.ge("refund").hidden = !initialized && got_privkey(this.crowdfund.creator());
-            els.ge("refund_button").disabled = !els.ge("refund_lock_toggle").checked;
-            els.ge("list").hidden = !initialized || (this.crowdfund.cnt() == 0);
+            if(this.never_hidden){ this.unhide_all(); }
         },
 
         update_list_table : function() {
@@ -249,10 +257,6 @@ function new_crowdfund_gui()  {
                 if( from == null ){ alert("Not a valid from input."); }
             }
             this.crowdfund.do_release(from);
-        },
-
-        run_release_or_pay : function() {
-            //TODO
         },
 
         refund_lock_toggle : function() {
