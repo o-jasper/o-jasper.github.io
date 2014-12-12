@@ -87,7 +87,7 @@ function new_crowdfund(_addr) {
             
             var priv = got_privkey(from);
             if( priv == null ){ alert("Do not have private key to that"); return; }
-            eth.transaction({"from":priv, "to":this.addr, "value":0});
+            eth.transact({"from":priv, "to":this.addr, "value":0});
         },
 
         do_refund : function(from) {

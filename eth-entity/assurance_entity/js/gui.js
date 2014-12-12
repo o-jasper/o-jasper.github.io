@@ -123,7 +123,7 @@ function new_crowdfund_gui()  {
         },
 
         update_contract : function() {
-            cf = this.crowdfund;
+            var cf = this.crowdfund;
             if( cf.addr ){
                 ge("crowdfunder").value = cf.addr;
 
