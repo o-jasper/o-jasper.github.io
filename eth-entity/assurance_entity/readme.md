@@ -25,14 +25,24 @@ being used as it is now..
 Otherwise for security, need to try think of ways to break it, analyse the code,
 and throw more random stuff at it in tests.
 
-# TODO (might take a while till i take it up)
+# TODO (note: only if i take it further)
 
 * Go PoC7..
   + Get rid of that awful `refund` variable doing control flow.
+  + Some static checks.
 
 * Ensure cant attack by making many tiny contributions, *later* costing too much gas.
   (contribution minimum)
 
+* The refund button should hide if you cannot control it. Also, refunding after the
+  whole thing.
+
 * More thurrough case test.
   + All logical paths.
   + Fuzz-test?
+  + Reading well/annotating?
+
+* It is not pretty enough.
+
+* Show everything, and safety-off switch. NOTE: the safeties are merely some extra
+  checks, do not imply safety.
