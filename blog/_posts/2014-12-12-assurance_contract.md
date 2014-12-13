@@ -6,7 +6,7 @@ categories: Ethereum
 ---
 Just mentioning the
 [assurance contract](https://o-jasper.github.io/eth-entity/assurance_entity/)([readme](https://github.com/o-jasper/o-jasper.github.io/tree/master/eth-entity/assurance_entity#assurance-ethereum-entity))
-i made, it is a crowdfunder a bit like kickstarter. Such a contract
+i made(PoC6), it is a crowdfunder a bit like kickstarter. Such a contract
 goes through three stages.
 
 1. Creation, setting of parameters like minimum and maximum raised.
