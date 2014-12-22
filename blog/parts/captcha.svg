@@ -67,9 +67,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.79153846"
-     inkscape:cx="329.20038"
-     inkscape:cy="406.7107"
+     inkscape:zoom="1.5830769"
+     inkscape:cx="492.45971"
+     inkscape:cy="738.38585"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -771,8 +771,8 @@
     <rect
        style="opacity:0.95999995;fill:#cccccc;stroke:#000000;stroke-opacity:1"
        id="rect6055"
-       width="309.98627"
-       height="31.266628"
+       width="294.19424"
+       height="30.634947"
        x="314.88824"
        y="-60.473518"
        ry="9.8266544" />
@@ -787,6 +787,6 @@
          id="tspan3802-7"
          x="322.23907"
          y="-38.468876"
-         style="font-size:19px">in some consensus mechanism</tspan></text>
+         style="font-size:19px">inside consensus mechanism</tspan></text>
   </g>
 </svg>
