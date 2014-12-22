@@ -43,6 +43,9 @@ td{padding:0.1em 0.5em}
 blockquote{margin-left:2em}
 
 .small_note{font-size:70%; color:#666}
+.subtil{color:#666}
+.subtil a{color:#66F}
+.subtil a:visited{color:#96D}
 
 /* -- Site -- */
 
