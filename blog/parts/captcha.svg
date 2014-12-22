@@ -67,9 +67,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.5830769"
-     inkscape:cx="492.45971"
-     inkscape:cy="738.38585"
+     inkscape:zoom="1.1194044"
+     inkscape:cx="428.25098"
+     inkscape:cy="747.11271"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -124,14 +124,6 @@
        height="35.426746"
        x="366.88971"
        y="8.9610767"
-       ry="9.8266544" />
-    <rect
-       style="opacity:0.95999995;fill:#cccccc;stroke:#000000;stroke-opacity:1"
-       id="rect6055-9-3"
-       width="195.85333"
-       height="34.980076"
-       x="382.71823"
-       y="136.83681"
        ry="9.8266544" />
     <text
        xml:space="preserve"
@@ -229,25 +221,6 @@
            id="tspan3814-7"><tspan
    style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;font-family:Sans;-inkscape-font-specification:Sans"
    id="tspan3856">Generate</tspan> Image(Text, R, R2)</tspan></tspan></text>
-    <text
-       xml:space="preserve"
-       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
-       x="413.64111"
-       y="160.3744"
-       id="text3800-2"
-       sodipodi:linespacing="125%"><tspan
-         sodipodi:role="line"
-         id="tspan3802-0"
-         x="413.64111"
-         y="160.3744"
-         style="font-size:19px">Commit <tspan
-   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#008000;font-family:Ubuntu Mono;-inkscape-font-specification:Ubuntu Mono"
-   id="tspan3886">H(Image)</tspan></tspan></text>
-    <path
-       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-end:url(#Arrow2Mend)"
-       d="m 331.00097,154.74313 74.53839,0"
-       id="path3888"
-       inkscape:connector-curvature="0" />
     <path
        style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-end:url(#Arrow2Mend)"
        d="m 256.46258,171.79852 0,60.6414 82.75025,0"
