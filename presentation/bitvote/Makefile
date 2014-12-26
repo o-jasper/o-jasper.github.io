@@ -1,5 +1,5 @@
 
-default: index.html
+default: index.html with_notes.html
 
 %.png: %.svg
 	convert -trim $< $@ 
@@ -8,4 +8,7 @@ default: index.html
 	markdown $< > $@
 
 index.html: convert.sh bitvote.md prep.html post.html
-	sh convert.sh
+	sh convert.sh > $@
+
+with_notes.html: convert.sh bitvote.md prep.html post.html
+	sh convert.sh dont_remove_notes > $@

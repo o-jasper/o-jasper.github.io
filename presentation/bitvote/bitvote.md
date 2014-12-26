@@ -3,6 +3,8 @@
 
 <img src="pics/bitvote_logo.png">
 
+NOTES: I am jasper den Ouden, will be talking about bitvote.
+
 ## What the internet used to be
 
 * Wide open to new companies
@@ -10,6 +12,16 @@
 * Wide open to new blogs etcetera
 
 * Optimistic
+
+NOTES:
+
+* There was freedom of enterprise because opertunities were not filled.
+  Those still exist, but a big company will want to buy you, and simply copy you
+  otherwise.
+  
+* ... todo
+
+* ... because of that optimistic.
 
 ## What it has become and is in danger of becoming
 
@@ -48,15 +60,21 @@ I mean, it&#39;s not like we could just demand to see the code that&#39;s govern
 
 ## An Idea
 
-* Everyone gets vote-time, i.e. one second per second &rArr; need to:
-  + how vote&sdot;time do voters and votes have
-  + have one person - one ID
+Everyone gets vote-time, i.e. one second per second<br>
+&rArr; keep track:
 
-* If you care about a topic particularly, spend more vote-hours on it
+* vote&sdot;time of votes
+* one person &harr; one ID
 
-* Topics cover any subject matter. Usually represented with a link.
-  (random example)
-  + [http://https://www.march-against-monsanto.com](http://https://www.march-against-monsanto.com)
+NOTES:
+
+&rArr; vote time is scarce
+
+&rArr; spend according to how much you care
+
+Anyone is free to create a topic; will often be a link.
+
+* [https://www.march-against-monsanto.com](https://www.march-against-monsanto.com)
 
 ## What it looks like
 
@@ -87,9 +105,23 @@ Otherwise:
 interfaces from arbitrary pages are possible any page can
 access the contract state and send transactions
 
+NOTES: bitvote contract is like a ledger anyone can use. Anyone can write
+programs/modify ours, in order to have their own view of it.
+
 ## Ethereum contracts recap
 
-<img src="pics/contract_recap.svg">
+Contracts are programs
+
+run if they receive a message
+
+<img src="pics/contract.svg">
+
+NOTES: Messages can also send ethers.
+
+## Ethereum contracts recap(2)
+
+Transactions insert messages<br>&nbsp;
+<img src="pics/contract_recap_less.svg">
 
 ## The Bitvote contract diagram
 
@@ -99,9 +131,10 @@ access the contract state and send transactions
 
 + More people implies more voting weight
 
-+ cant say ‘tough luck’ when contract execution too expensive
++ when contract execution too expensive<br>
+  cant say ‘tough luck’
   
-Ethereum working on it, some ideas that help.
+NOTES: Ethereum working on it, some ideas that help.
 
 ## Open problem: One per ID
 
