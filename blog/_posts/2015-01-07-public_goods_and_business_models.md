@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Public goods and business models"
-date:   2015-07-01 14:10
+date:   2015-01-07 14:10
 categories: Ethereum
 ---
 
