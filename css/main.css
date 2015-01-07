@@ -13,15 +13,17 @@ h1,h2{
   text-indent:10%;
   margin-bottom: 1em; }
 
-h3, h4, h5, h6 { text-indent:5%; }
+h3, h4, h5, h6 { margin-bottom:0.5em;  text-indent:5%; }
 
-p { margin: 1em 0; }
+h4{ margin-botton:0em; text-indent:5%;  }
+
+p { margin: 0 0 1em 0; }
 
 a         { color: #00a; }
 a:hover   { color: #000; }
 a:visited { color: #a0a; }
 
-td{padding:0.1em 0.5em}
+td{padding:0.4em 0.7em ; vertical-align: text-top}
 
 /* -- Home -- */
 .posts {
@@ -132,8 +134,11 @@ text-indent:0%;
   padding: 0 .4em;
 }
 
+table{ margin-bottom:1em ; text-align:left}
+
 .post ul, .post ol {
-  margin-left: 1.35em;
+    margin-left: 2.35em;
+    margin-bottom:1em;
 }
 
 .post code {
