@@ -5,6 +5,8 @@
 
 NOTES: I am jasper den Ouden, will be talking about bitvote.
 
+In order introduce bitvote, i'll start with the reasons the idea sprung up.
+
 ## What the internet used to be
 
 * Wide open to new companies
@@ -13,13 +15,18 @@ NOTES: I am jasper den Ouden, will be talking about bitvote.
 
 * Optimistic
 
+<small style="color:#888"><a href="http://online.wsj.com/articles/peter-thiel-competition-is-for-losers-1410535536">"Competition is for losers" artikel door Peter Thiel</a></small>
+
 NOTES:
 
 * There was freedom of enterprise because opertunities were not filled.
   Those still exist, but a big company will want to buy you, and simply copy you
   otherwise.
   
-* ... todo
+* ... blogs had a chance of becoming popular on a large scale, if internet is
+  compromised your disadvantage on i.e. search engines could hurt this.
+  
+  Same for wikis etcetera.
 
 * ... because of that optimistic.
 
@@ -35,30 +42,13 @@ NOTES:
 
 <img src="pics/research_ethics.png">
 
-I mean, it&#39;s not like we could just demand to see the code that&#39;s governing our lives. What right do we have to poke around in Facebook&#39;s private affairs like that
+I mean, it&#39;s not like we could just demand to see the code that&#39;s
+governing our lives. What right do we have to poke around in Facebook&#39;s
+private affairs like that
 
 <small style="color:#888">(https://xkcd.com/1390/)</small>
 
-## What and why
-
-<img src="pics/why_how_what.svg">
-
-<small style="color:#888">(inspired from http://www.ted.com/talks/simon_sinek_how_great_leaders_inspire_action)</small>
-
-## What we do now/before
-
-* essentially a vote by loudness. Largely it was 'spamming'
-  ('twitter storm' over SOPA)
-  
-* inefficient 
-
-* insecure against manipulation (astroturf)
-
-* can the 'will of the people' be presented by something that is less 'loudness'?
-
-<!--<small style="color:#BBB">Still thank the EFF and co for what good they do get quietly!</small> (distracting)-->
-
-## An Idea
+## The idea of Bitvote
 
 Everyone gets vote-time, i.e. one second per second<br>
 &rArr; keep track:
@@ -76,6 +66,34 @@ Anyone is free to create a topic; will often be a link.
 
 * [https://www.march-against-monsanto.com](https://www.march-against-monsanto.com)
 
+## What and why
+
+<img src="pics/why_how_what.svg">
+
+<small style="color:#888">(inspired from http://www.ted.com/talks/simon_sinek_how_great_leaders_inspire_action)</small>
+
+NOTES:
+
+1. Inner ring is freedom of enterprise, freedom of speech and chance to get heard
+
+2. Second ring is the abstract approach 1votehour/hour per person + anyone can
+   create opinions to spend it on.
+   
+3. Outer ring is specific implementation of it.
+
+## What we do now/before
+
+essentially a vote by loudness. Largely it was 'spamming'<br>
+('twitter storm' over SOPA)
+  
+* inefficient 
+
+* insecure against manipulation (astroturf)
+
+&rarr; can the 'will of the people' be presented by something that is less 'loudness'?
+
+<!--<small style="color:#BBB">Still thank the EFF and co for what good they do get quietly!</small> (distracting)-->
+
 ## What it looks like
 
 <a href="http://bitvote.github.io/"><img src="pics/screen.png"></a>
@@ -90,9 +108,9 @@ Anyone is free to create a topic; will often be a link.
 
 Otherwise:
 
-* Single place to sue/threaten.
-
 * Requires trust towards the operators.
+
+* Single place to sue/threaten.
 
 * Just not cool.
 
