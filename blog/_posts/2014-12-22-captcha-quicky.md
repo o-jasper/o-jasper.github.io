@@ -12,7 +12,8 @@ captchas a useful source of information for a
 
 <img src="/blog/parts/captcha.svg" title="Diagram how to maybe do captchas">
 
-<span class="subtil">Brain from: <a href="https://openclipart.org/detail/140701/brain-by-trubinial-guru">https://openclipart.org/detail/140701/brain-by-trubinial-guru</a></span>
+<span class="subtil">Brain from:
+<a href="https://openclipart.org/detail/140701/brain-by-trubinial-guru">https://openclipart.org/detail/140701/brain-by-trubinial-guru</a></span>
 
 It is of course unclear if captchas can be effective; being human-easy enough
 and computer-hard enough. Also when an image needs challenging, computing the 
