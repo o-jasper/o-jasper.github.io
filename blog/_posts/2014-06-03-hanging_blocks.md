@@ -112,3 +112,7 @@ need to be able to tell when any part of it is not available, because a vote to
 falsely claim everything is available needs to be countered. Of course you might
 try have a "raise the alarm if a bit can't be found", but an attack of spamming
 such alarms would have to be ineffective in that case aswel.
+
+### Links
+
+[A thread on /r/ethereum](https://www.reddit.com/r/ethereum/comments/278i2c/hanging_blocks_an_idea_to_cheaply_get_more/).c
