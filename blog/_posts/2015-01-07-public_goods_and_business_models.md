@@ -5,8 +5,6 @@ date:   2015-01-07 14:10
 categories: Ethereum
 ---
 
-<p><small style="color:#666;text-align:right;">Note: i expect to make some small edits</small></p>
-
 Business models are not about supply and demand. They are about finding
 some dynamic where leverage is obtained allowing the model to get payment
 somewhere. Supply and demand is one dynamic, the leverage is that you could
@@ -212,11 +210,11 @@ from network effects and the effects from consumers having a cost on their side,
 getting used to particular products. During hat time other entrepreneurs with
 innovations that are not strategic enough can at best hope they get bought in.
 
-However, some aspects of how Ethereum works already mitigates this to an extent.
+However, some aspects of how Ethereum works already mitigate this to an extent.
 Particularly the use of public keys(and contract addresses) as accounts. One 
 should consider the pressure to find business models is to find
 leverages, and the leverage of having exclusivity is an effective one. So
-it is possible that they will reduce mitigating aspects.
+it is possible that they will find 'innovations' to reduce mitigating aspects.
 
 *Back* to the coalition DAO; it will likely have to make decisions, probably
 through a kind of voting based on weighed constituancies from the subDAOs.
