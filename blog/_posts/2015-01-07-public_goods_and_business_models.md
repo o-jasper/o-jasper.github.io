@@ -10,7 +10,7 @@ categories: Ethereum
 Business models are not about supply and demand. They are about finding
 some dynamic where leverage is obtained allowing the model to get payment
 somewhere. Supply and demand is one dynamic, the leverage is that you could
-provide the good/service, but only if you get paid. What you can ask is
+provide the good/service, but only if you get paid. The payment you can ask is
 about the extent of that leverage, which is determined by what other suppliers
 are offering. The dynamic is not always bad; for 'basic' supply and demand, 
 the dynamic is effective at getting cheap products.
@@ -23,7 +23,7 @@ a consequence of this. (although 'cost of interaction' is also a reason)
 
 The interaction for TV and on the internet is that ads are being sold, and users
 spied on. Intelligence agencies do kindah *need* to respond by getting spying
-ability aswel, however, i believe they go far beyond this. (i.e. tapping the global
+ability aswel, however, i believe they go *far* beyond this. (i.e. tapping the global
 fiber-optic network)
 
 Source code "naturally" tends to be public goods;
@@ -68,7 +68,7 @@ put buildings on the land.
 In my opinion, *most* ownership constitutes a move from common goods to private
 goods. After all, for items that you can hold in your hand, anyone can pick it up
 and run with it. Of course, used as a common good, the item could easily be
-misplaced or badly used and broken. Nevertheless, ownership is so ingrained,
+misplaced or badly used and broken. Ownership is so ingrained,
 instinctually so, probably because this notion was so important for our ancestors.
 
 Taking the view from the purpose of ownership, taking it as *absolute* 
@@ -83,7 +83,7 @@ that can convince(/are) those that own the wealth.
 An alternative to private goods is to use quota, or rationing.
 
 #### Public goods &rarr; Club goods
-This move immediately cuts in the utility of per-produced good, as immediately,
+Rules to this effect immediately cuts in the utility of per-produced good, as
 people cannot as easily use said good, the idea is that the greater production of the
 good compensates for it.
 
@@ -161,13 +161,13 @@ Note that taking game theory beyond what to expect from reality would be the
 [Ludic fallacy](https://en.wikipedia.org/wiki/Ludic_fallacy), but then,
 the Ludic fallacy doesnt cover something like the conservation of angular
 momentum; what i mean is that if some system has clear constraints, people will
-be forced operate within them. Indeed, i expect Ethereum contracts to create
-constraints, not set a single path.
+be forced operate within them. Indeed, i expect the better approaches create
+context-dependent-constraints, not set a single path.
 
 One thing where it is possibly particularly important to be careful about
 game-theory(like) approaches too seriously, is when consider what motivates
 people, and what allows them to work/interact together usefully. Larger 
-rewards can yield worse performance.<sup class="subtil">[N4]</sup>
+rewards *can* yield worse performance.<sup class="subtil">[N4]</sup>
 
 The search for business models is sometimes<sup class="subtil">[N3]</sup> the search to
 find something where other peoples' utility is increased enough so that this 
@@ -187,7 +187,7 @@ at all. They're mainly about software and the web.
 One obvious approach is to just make the stuff
 for free to people, and ... not get paid. It is what wikipedia, lots of open
 source projects do. But then i don't think that necessarily works well. It
-doesnt provide enough motivation and time spent. Lacking income, a community
+doesn't provide enough motivation and time spent. Lacking income, a community
 might not encounter developers that happen to be good at making user interfaces,
 or polishing.
 And then there are things to be done like managing expectations, popularizing 
@@ -279,7 +279,9 @@ With the exception of spying,(2) whether these are good depends on the context.
 #### Publishing DAO as example
 The [Publishing DAO](https://o-jasper.github.io/blog/ethereum/2014/11/21/publishing_dao.html)
 would presumably it would use (1), (3), (5) Its constituancies would be some
-(unclear as of yet)weighing of the donors, creators and advertisers.
+(unclear as of yet)weighing of the donors, creators and advertisers. Note that
+something like this might simply use copyright. I think for non-software, that 
+is fine.
 
 The PubDAO is the context in which i thought of (8). Tax funding is often directed
 in a bureaucratic way. By contrast, an hypothetically working publishing DAO,
