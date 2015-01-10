@@ -13,6 +13,23 @@ Assurance Ethereum entity.
 * Anything occuring after the deadline sends the funds to the project if
   success, and refunds otherwise.
 
+### Potential expansions
+Some of these might be doable by simply connecting to other contracts. But
+that might not be gas-efficient.
+
+* Stages; if funded, it goes to stage 1, stage 2 needs something to be
+  triggered. That might mean more funding, votes from existing funders or
+  just keeping the same funding, but allowing some funders to cut their losses
+  if they lose faith.
+  
+  There could be multiple stages this way.
+
+* Dividents: paying for stuff like stocks. Need some rules about how much to do 
+  dividents. 
+  
+  Not *particularly* happy with use of stocks currently, but then
+  oculus-like events suck too.
+
 ## Tests
 Just one that does a case test. 
 
