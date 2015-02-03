@@ -47,7 +47,7 @@ computer.(unless you know about it separately)
 You could simply disable the device, or try feign subtil frustrating
 malfunctions. More active is to try get the user to think they should type
 something, that the send-computer will then send. For instance the private
-key of the screen computer. With that, you can eavesdrop on all traffick
+key of the screen computer. With that, you can eavesdrop on all traffic
 towards the device.
 
 #### Note
