@@ -19,16 +19,26 @@ In order introduce bitvote, i'll start with the reasons the idea sprung up.
 
 NOTES:
 
-* There was freedom of enterprise because opertunities were not filled.
-  Those still exist, but a big company will want to buy you, and simply copy you
-  otherwise.
+... blogs had a chance of becoming popular on a large scale, if internet is
+compromised your disadvantage on i.e. search engines could hurt this.
   
-* ... blogs had a chance of becoming popular on a large scale, if internet is
-  compromised your disadvantage on i.e. search engines could hurt this.
-  
-  Same for wikis etcetera.
+Wiki pages not yet filled
 
-* ... because of that optimistic.
+Opertunities were not filled &rArr; business models
+ 
+... because of that optimistic.
+
+... Stopped because..
+
+* Wikipedia pages already written.
+
+* Businessmodels filled *and* habits & network effect
+
+  &rArr; often better to get bought
+  
+  &rArr; Peter Thiel "competition is for losers"
+
+Bitvote not a solution for every of these!
 
 ## What it has become and is in danger of becoming
 
@@ -48,13 +58,29 @@ private affairs like that
 
 <small style="color:#888">(https://xkcd.com/1390/)</small>
 
+## What we do now/before
+
+essentially a vote by loudness. Largely it was 'spamming'<br>
+('twitter storm' over SOPA)
+  
+* inefficient 
+
+* insecure against manipulation (astroturf)
+
+&rarr; can the 'will of the people' be presented by something that is less 'loudness'?
+
+## They all had to get there
+
+<img src="pics/1024px-Anti-Nuclear_Power_Plant_Rally_on_19_September_2011_at_Meiji_Shrine_Outer_Garden_03.JPG">
+
 ## The idea of Bitvote
 
 Everyone gets vote-time, i.e. one second per second<br>
 &rArr; keep track:
 
-* vote&sdot;time of votes
+* vote&sdot;time of vote topics
 * one person &harr; one ID
+  + amount of vote time available
 
 NOTES:
 
@@ -80,17 +106,6 @@ NOTES:
    create opinions to spend it on.
    
 3. Outer ring is specific implementation of it.
-
-## What we do now/before
-
-essentially a vote by loudness. Largely it was 'spamming'<br>
-('twitter storm' over SOPA)
-  
-* inefficient 
-
-* insecure against manipulation (astroturf)
-
-&rarr; can the 'will of the people' be presented by something that is less 'loudness'?
 
 <!--<small style="color:#BBB">Still thank the EFF and co for what good they do get quietly!</small> (distracting)-->
 
@@ -145,7 +160,20 @@ Transactions insert messages<br>&nbsp;
 
 <img src="pics/approach1.svg">
 
-## Open problem: Scalibility
+## Open problem 1: One per ID
+
+Each person should only be able to get one second per second.
+
+Not solid, but ideas:
+
+* Economic-network. There might be a way to go UBI &rarr; OnePerID rather than the
+  other way around.
+    
+* Reputation/trust network -like approaches.
+
+  + 'Detectives' point out doubles and 'punishing' nodes that vouched for it.
+
+## Open problem 2: Scalibility
 
 + More people implies more voting weight
 
@@ -154,22 +182,6 @@ Transactions insert messages<br>&nbsp;
   
 NOTES: Ethereum working on it, some ideas that help.
 
-## Open problem: One per ID
-
-Each person should only be able to get one second per second.
-
-Not solid, but ideas:
-
-* Do computer-hard things.
-  
-  + Synchronizing to make faking harder.
-    
-* Reputation network -like approaches
-
-  + 'Detectives' point out doubles and 'punishing' nodes that vouched for it
-    
-Note that this is something other things might also want; 'UBI coin'('socialcoin')
-
 ## To summarize
 
 * Bitvote is a project to give people a voice.
@@ -177,8 +189,9 @@ Note that this is something other things might also want; 'UBI coin'('socialcoin
 * Interface is internet-browsing-like, where the browser can read Ethereum state
 
 * Challenges:
-  + Large numbers of users &rArr; scalability
-  + One person per ID
+  1. One person per ID
+  2. Large numbers of users &rArr; scalability
+ 
 
 ## Thanks to
 

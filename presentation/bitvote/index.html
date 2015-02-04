@@ -81,27 +81,6 @@ private affairs like that</p>
 
 </section>
 <section class="slide">
-<h2>The idea of Bitvote</h2>
-
-<p>Everyone gets vote-time, i.e. one second per second<br>
-&rArr; keep track:</p>
-
-<ul>
-<li>vote&sdot;time of votes</li>
-<li>one person &harr; one ID</li>
-</ul>
-
-
-</section>
-<section class="slide">
-<h2>What and why</h2>
-
-<p><img src="pics/why_how_what.svg"></p>
-
-<p><small style="color:#888">(inspired from http://www.ted.com/talks/simon_sinek_how_great_leaders_inspire_action)</small></p>
-
-</section>
-<section class="slide">
 <h2>What we do now/before</h2>
 
 <p>essentially a vote by loudness. Largely it was &lsquo;spamming&rsquo;<br>
@@ -115,8 +94,37 @@ private affairs like that</p>
 
 <p>&rarr; can the &lsquo;will of the people&rsquo; be presented by something that is less &lsquo;loudness&rsquo;?</p>
 
-<!--<small style="color:#BBB">Still thank the EFF and co for what good they do get quietly!</small> (distracting)-->
+</section>
+<section class="slide">
+<h2>They all had to get there</h2>
 
+<p><img src="pics/1024px-Anti-Nuclear_Power_Plant_Rally_on_19_September_2011_at_Meiji_Shrine_Outer_Garden_03.JPG"></p>
+
+</section>
+<section class="slide">
+<h2>The idea of Bitvote</h2>
+
+<p>Everyone gets vote-time, i.e. one second per second<br>
+&rArr; keep track:</p>
+
+<ul>
+<li>vote&sdot;time of vote topics</li>
+<li>one person &harr; one ID
+
+<ul>
+<li>amount of vote time available</li>
+</ul>
+</li>
+</ul>
+
+
+</section>
+<section class="slide">
+<h2>What and why</h2>
+
+<p><img src="pics/why_how_what.svg"></p>
+
+<p><small style="color:#888">(inspired from http://www.ted.com/talks/simon_sinek_how_great_leaders_inspire_action)</small></p>
 
 </section>
 <section class="slide">
@@ -183,7 +191,27 @@ access the contract state and send transactions</p>
 
 </section>
 <section class="slide">
-<h2>Open problem: Scalibility</h2>
+<h2>Open problem 1: One per ID</h2>
+
+<p>Each person should only be able to get one second per second.</p>
+
+<p>Not solid, but ideas:</p>
+
+<ul>
+<li><p>Economic-network. There might be a way to go UBI &rarr; OnePerID rather than the
+other way around.</p></li>
+<li><p>Reputation/trust network -like approaches.</p>
+
+<ul>
+<li>&lsquo;Detectives&rsquo; point out doubles and &lsquo;punishing&rsquo; nodes that vouched for it.</li>
+</ul>
+</li>
+</ul>
+
+
+</section>
+<section class="slide">
+<h2>Open problem 2: Scalibility</h2>
 
 <ul>
 <li><p>More people implies more voting weight</p></li>
@@ -194,32 +222,6 @@ cant say ‘tough luck’</p></li>
 
 </section>
 <section class="slide">
-<h2>Open problem: One per ID</h2>
-
-<p>Each person should only be able to get one second per second.</p>
-
-<p>Not solid, but ideas:</p>
-
-<ul>
-<li><p>Do computer-hard things.</p>
-
-<ul>
-<li>Synchronizing to make faking harder.</li>
-</ul>
-</li>
-<li><p>Reputation network -like approaches</p>
-
-<ul>
-<li>&lsquo;Detectives&rsquo; point out doubles and &lsquo;punishing&rsquo; nodes that vouched for it</li>
-</ul>
-</li>
-</ul>
-
-
-<p>Note that this is something other things might also want; &lsquo;UBI coin&rsquo;(&lsquo;socialcoin&rsquo;)</p>
-
-</section>
-<section class="slide">
 <h2>To summarize</h2>
 
 <ul>
@@ -227,10 +229,10 @@ cant say ‘tough luck’</p></li>
 <li><p>Interface is internet-browsing-like, where the browser can read Ethereum state</p></li>
 <li><p>Challenges:</p>
 
-<ul>
-<li>Large numbers of users &rArr; scalability</li>
+<ol>
 <li>One person per ID</li>
-</ul>
+<li>Large numbers of users &rArr; scalability</li>
+</ol>
 </li>
 </ul>
 
