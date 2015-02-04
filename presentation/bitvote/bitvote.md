@@ -156,6 +156,14 @@ NOTES: Messages can also send ethers.
 Transactions insert messages<br>&nbsp;
 <img src="pics/contract_recap_less.svg">
 
+## Special positions
+
+Ethereum addresses in contract storage.
+
+Only that address can do X.
+
+However a rule can change that contract storage.
+
 ## The Bitvote contract diagram
 
 <img src="pics/approach1.svg">
@@ -213,6 +221,9 @@ NOTES: Ethereum working on it, some ideas that help.
 
 * We have a wiki on [bitvote.github.io/wiki](https://bitvote.github.io/wiki).
 
+* About special positions;
+  [attempt to create terminology](https://github.com/BitVote/bitvote.github.io/wiki/Suggested-ethereum-terminology).
+
 ## Appendix: Scaling
 
 * It is listed ontop here
@@ -239,7 +250,8 @@ NOTES: Ethereum working on it, some ideas that help.
   availability. The current approach solves it with votes, so aggegrate
   signatures matter to it!
   
-  [o-jasper.github.io/blog/2014/06/03/hanging_blocks.html](http://o-jasper.github.io/blog/2014/06/03/hanging_blocks.html)
+  [o-jasper.github.io/blog/2014/06/03/hanging_blocks.html](http://o-jasper.github.io/blog/2014/06/03/hanging_blocks.html),
+  [possible approach](http://forum.ethereum.org/discussion/1713/hanging-blocks-with-ethereum-contracts-as-they-come#latest) with general ethereum contracts.
 
 * Three scalability on blog.ethereum posts
   [1](https://blog.ethereum.org/2014/09/17/scalability-part-1-building-top/),
@@ -248,4 +260,4 @@ NOTES: Ethereum working on it, some ideas that help.
 
 ## More
 
-* Deck.js presentatie: [imakewebthings.com/deck.js/](http://imakewebthings.com/deck.js/)
+Thanks to Deck.js: [imakewebthings.com/deck.js/](http://imakewebthings.com/deck.js/)
