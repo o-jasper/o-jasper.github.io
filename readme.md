@@ -1,5 +1,2 @@
-This repo is a [Github pages](https://pages.github.com/) website.
-[Go to it](http://o-jasper.github.io/).
-
-If you have `jekyll` and `make`, `make preview` allows seeing previews,
-including drafts in progress.
+This repo used to be [Github pages](https://pages.github.com/) website.
+Now it merely redirects to [ojasper.nl](http://ojasper.nl/).
